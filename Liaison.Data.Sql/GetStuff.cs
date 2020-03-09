@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Liaison.Data.Sql
 {
-    public class GetStuff
+    public class GetStuff 
     {
         public static Unit GetItWithContext(LiaisonEntities context, int unitId)
         {

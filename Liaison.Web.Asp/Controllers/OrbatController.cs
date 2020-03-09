@@ -48,12 +48,14 @@ namespace Liaison.Web.Asp.Controllers
         {
             NewThing nn = new NewThing
             {
-                ServiceTypeOptions = new List<SelectListItem> {
-                    new SelectListItem{ Value="1", Text = "Active"},
-                    new SelectListItem{ Value="3", Text ="Reserve"},
-                    new SelectListItem{ Value="4", Text ="Volunteer"},
-                        new SelectListItem { Value = "5", Text ="State Volunteer" }},
-                
+                ServiceTypeOptions = new List<SelectListItem>
+                {
+                    new SelectListItem {Value = "1", Text = "Active"},
+                    new SelectListItem {Value = "3", Text = "Reserve"},
+                    new SelectListItem {Value = "4", Text = "Volunteer"},
+                    new SelectListItem {Value = "5", Text = "State Volunteer"}
+                },
+
                 Things = new List<NewWing>
                 {
                     new NewWing
@@ -62,50 +64,20 @@ namespace Liaison.Web.Asp.Controllers
                         Name = "Operations",
                         NewSqdrns = new List<NewSqn>
                         {
-                            new NewSqn{Code="A:S", Name="Airlift:Strat"},
-                            new NewSqn{Code="A:T", Name = "Airlift:Tac"},
-                            new NewSqn{Code = "AR", Name="Air Refueling"},
-                            new NewSqn{Code ="F", Name="Fighter"},
-                            new NewSqn {Code ="B", Name="Bomber"},
-                            new NewSqn
-                            {
-                                Code = "OPS",
-                                Name = "Operations Support",
-
-                            },
-                            new NewSqn
-                            {
-                                Code = "OS",
-                                Name = "Operations Support",
-
-                            },
-                            new NewSqn
-                            {
-                                Code = "CPT",
-                                Name = "Comptroller",
-
-                            },
-                            new NewSqn
-                            {
-                                Code = "MD",
-                                Name = "Medical",
-
-                            },
-                            new NewSqn
-                            {
-                                Code = "AMD",
-                                Name = "Aerospace Medicine",
-                            },
-                            new NewSqn
-                            {
-                                Code = "AE",
-                                Name = "Aeromedical Evacuation",
-                            },
-                            new NewSqn
-                            {
-                                Code = "AST",
-                                Name = "Aeromedical Staging",
-                            }
+                            new NewSqn {Code = "A:S", Name = "Airlift:Strat"},
+                            new NewSqn {Code = "A:T", Name = "Airlift:Tac"},
+                            new NewSqn {Code = "AR", Name = "Air Refueling"},
+                            new NewSqn {Code = "AAC", Name = "Abn Air Control"},
+                            new NewSqn {Code = "F", Name = "Fighter"},
+                            new NewSqn {Code = "B", Name = "Bomber"},
+                            new NewSqn {Code = "OPS", Name = "Operations Support"},
+                            new NewSqn {Code = "OS", Name = "Operations Support",},
+                            new NewSqn {Code = "CPT", Name = "Comptroller",},
+                            new NewSqn {Code = "MD", Name = "Medical",},
+                            new NewSqn {Code = "AMD", Name = "Aerospace Medicine",},
+                            new NewSqn {Code = "AE", Name = "Aeromedical Evacuation",},
+                            new NewSqn {Code = "AST", Name = "Aeromedical Staging",},
+                            new NewSqn {Code = "AC", Name = "Air Control"},
                         }
                     },
                     new NewWing
@@ -114,32 +86,11 @@ namespace Liaison.Web.Asp.Controllers
                         Name = "Medical",
                         NewSqdrns = new List<NewSqn>
                         {
-                            new NewSqn
-                            {
-                                Code = "AD",
-                                Name = "Aeromedical-Dental",
-                            },
-                            new NewSqn
-                            {
-                                Code = "AMD",
-                                Name = "Aerospace Medicine"
-                            },
-                            new NewSqn
-                            {
-                                Code = "D",
-                                Name = "Dental"
-                            },
-                            new NewSqn
-                            {
-                                Code = "MDO",
-                                Name = "Medical Operations",
-
-                            },
-                            new NewSqn
-                            {
-                                Code = "MDS",
-                                Name = "Medical Support",
-                            },
+                            new NewSqn {Code = "AD", Name = "Aeromedical-Dental",},
+                            new NewSqn {Code = "AMD", Name = "Aerospace Medicine"},
+                            new NewSqn {Code = "D", Name = "Dental"},
+                            new NewSqn {Code = "MDO", Name = "Medical Operations",},
+                            new NewSqn {Code = "MDS", Name = "Medical Support",},
                         },
                     },
                     new NewWing
@@ -148,36 +99,13 @@ namespace Liaison.Web.Asp.Controllers
                         Name = "Maintenance",
                         NewSqdrns = new List<NewSqn>
                         {
-                            new NewSqn
-                            {
-                                Code = "AMX",
-                                Name = "Aircraft Maintenance",
-                            },
-                            new NewSqn
-                            {
-                                Code = "CMX",
-                                Name = "Component Maintenance",
-                            },
-                            new NewSqn
-                            {
-                                Code = "EMX",
-                                Name = "Equipment Maintenance"
-                            },
-                            new NewSqn
-                            {
-                                Code = "MX",
-                                Name = "Maintenance",
-                            },
-                            new NewSqn
-                            {
-                                Code = "MUN",
-                                Name = "Munitions",
-                            },
-                            new NewSqn
-                            {
-                                Code = "MO",
-                                Name = "Maintenance Operations",
-                            },
+                            new NewSqn {Code = "AMX", Name = "Aircraft Maintenance",},
+                            new NewSqn {Code = "CM", Name = "Component Maintenance",},
+                            new NewSqn {Code = "CMX", Name = "Communications Maintenance"},
+                            new NewSqn {Code = "EMX", Name = "Equipment Maintenance"},
+                            new NewSqn {Code = "MX", Name = "Maintenance",},
+                            new NewSqn {Code = "MUN", Name = "Munitions",},
+                            new NewSqn {Code = "MO", Name = "Maintenance Operations",},
                         },
                     },
                     new NewWing
@@ -187,46 +115,14 @@ namespace Liaison.Web.Asp.Controllers
                         Name = "Mission Support",
                         NewSqdrns = new List<NewSqn>
                         {
-                            new NewSqn
-                            {
-                                Name = "Aerial Port",
-                                Code = "AP"
-                            },
-                            new NewSqn
-                            {
-                                Name = "Civil Engineer",
-                                Code = "CE",
-                            },
-                            new NewSqn
-                            {
-                                Name = "Communications",
-                                Code = "COM",
-                            },
-                            new NewSqn
-                            {
-                                Name = "Contracting",
-                                Code = "CON",
-                            },
-                            new NewSqn
-                            {
-                                Name = "Force Support",
-                                Code = "FS",
-                            },
-                            new NewSqn
-                            {
-                                Name = "Logistics Readiness",
-                                Code = "LR",
-                            },
-                            new NewSqn
-                            {
-                                Name = "Mission Support",
-                                Code = "MS",
-                            },
-                            new NewSqn
-                            {
-                                Name = "Security Forces",
-                                Code = "SF",
-                            }
+                            new NewSqn {Name = "Aerial Port", Code = "AP"},
+                            new NewSqn {Name = "Civil Engineer", Code = "CE",},
+                            new NewSqn {Name = "Communications", Code = "COM",},
+                            new NewSqn {Name = "Contracting", Code = "CON",},
+                            new NewSqn {Name = "Force Support", Code = "FS",},
+                            new NewSqn {Name = "Logistics Readiness", Code = "LR",},
+                            new NewSqn {Name = "Mission Support", Code = "MS",},
+                            new NewSqn {Name = "Security Forces", Code = "SF",}
                         },
                     }
                 }

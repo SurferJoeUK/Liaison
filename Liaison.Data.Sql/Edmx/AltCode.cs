@@ -19,5 +19,7 @@ namespace Liaison.Data.Sql.Edmx
         public string Name { get; set; }
         public string Service { get; set; }
         public Nullable<bool> Active { get; set; }
+        public string IndexCode10 { get; set; }
+        public string IndexCode20 { get; set; }
     }
 }

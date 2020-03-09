@@ -22,9 +22,9 @@ namespace Liaison.Data.Sql.Edmx
             this.MissionUnits = new HashSet<MissionUnit>();
             this.RelationshipsTo = new HashSet<Relationship>();
             this.RelationshipsFrom = new HashSet<Relationship>();
-            this.AdminCorps = new HashSet<AdminCorp>();
             this.Ships = new HashSet<Ship>();
             this.EquipmentOwners = new HashSet<EquipmentOwner>();
+            this.AdminCorps = new HashSet<AdminCorp>();
         }
     
         public int UnitId { get; set; }
@@ -61,13 +61,13 @@ namespace Liaison.Data.Sql.Edmx
         public virtual ICollection<Relationship> RelationshipsTo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Relationship> RelationshipsFrom { get; set; }
-        public virtual AdminCorp AdminCorp { get; set; }
         public virtual TaskForce TaskForce { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AdminCorp> AdminCorps { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ship> Ships { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EquipmentOwner> EquipmentOwners { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AdminCorp> AdminCorps { get; set; }
+        public virtual AdminCorp AdminCorp { get; set; }
     }
 }

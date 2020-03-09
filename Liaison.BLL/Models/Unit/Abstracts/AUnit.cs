@@ -123,12 +123,19 @@ namespace Liaison.BLL.Models.Unit.Abstracts
                 sbIndent.Append("&nbsp&nbsp&nbsp&nbsp");
             }
 
+            bool showUnitId = true;
             string relSymbol = "• ";
             string otherCommand = "";
             if (rt.RelationshipType != null)
             {
                 switch (rt.RelationshipType.RelationshipTypeId)
                 {
+                    case (int) HigherHqType.AdminCorpsChild:
+                    {
+                        relSymbol = "{} ";
+                        showUnitId = false;
+                        break;
+                    }
                     case (int) HigherHqType.OPCON:
                     {
                         relSymbol = "+ ";
@@ -178,11 +185,12 @@ namespace Liaison.BLL.Models.Unit.Abstracts
             EquipmentContainer equipment = unit.GetEquipment();
             string unitAdminCorps = unit.GetAdminCorps();
 
-
+            string unitIdDisplay = showUnitId ? "(" + unitid + ") " : "(" + unitid.ToString("D5") + ") ";
+            
 
             sb.Append(sbIndent.ToString() + relSymbol);
             sb.Append("<span class='lzRankStar'>" + unit.GetRankStar() + "</span>");
-            sb.Append(" <span class='lzUnitName'>(" + unitid + ") " + name + "</span>");
+            sb.Append(" <span class='lzUnitName'>" + unitIdDisplay + name + "</span>");
             if (!string.IsNullOrWhiteSpace(indexes))
             {
                 sb.Append(" <span class='lzIndex'>(" + indexes + ")</span>");
@@ -244,7 +252,7 @@ namespace Liaison.BLL.Models.Unit.Abstracts
 
             var rels = SortRelationships(relationshipTrackers);
 
-            int[] types = {1, 2, 4, 6};
+            int[] types = {1, 2, 4, 6, 9};
             var stuff = rels.Where(r =>
                 types.Contains(r.RelationshipType.RelationshipTypeId));
             foreach (RelationshipTracker childunit in stuff)
@@ -409,7 +417,14 @@ namespace Liaison.BLL.Models.Unit.Abstracts
                 {
                     childunits.Add(new RelationshipTracker(r.To, r.RelType));
                 }
-            }
+
+                IEnumerable<IUnit> corpsUnits = this.GetCorpsChildren(x);
+
+                foreach (var corpsUnit in corpsUnits)
+                {
+                    childunits.Add(new RelationshipTracker(corpsUnit, Relationshipper.GetCorpsChildrenRel()));
+                }
+            }            
             catch (Exception e)
             {
                 Console.WriteLine(e);
@@ -417,6 +432,27 @@ namespace Liaison.BLL.Models.Unit.Abstracts
             }
 
             return childunits;
+        }
+
+        private IEnumerable<IUnit> GetCorpsChildren(int unitid)
+        {
+            using (var entities = new LiaisonEntities())
+            {
+                var liaisonsql = new LiaisonSql();
+                var admincorps = entities.AdminCorps.Where(ac => ac.ParentUnitId == unitid);
+
+                List<int> admincorpsIds = admincorps.Select(aa => aa.AdminCorpsId).ToList();
+
+                var units = entities.Units.Where(uu => admincorpsIds.Contains(uu.AdminCorpsId.Value));
+
+                List<IUnit> returnable = new List<IUnit>();
+                foreach (var unit in units)
+                {
+                    returnable.Add(liaisonsql.ConvertUnit(unit));
+                }
+
+                return returnable;
+            }
         }
 
         //public IEnumerable<RelationshipTracker> GetParent()

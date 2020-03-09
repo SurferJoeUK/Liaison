@@ -29,11 +29,8 @@
         <AssociationConnector Association="LiaisonModel.FK_RelationshipFrom_Unit" />
         <AssociationConnector Association="LiaisonModel.FK_RelationshipTo_Unit" />
         <EntityTypeShape EntityType="LiaisonModel.SortOrder" Width="1.5" PointX="5.375" PointY="0.75" />
-        <EntityTypeShape EntityType="LiaisonModel.AdminCorp" Width="1.5" PointX="0.5" PointY="12.75" />
-        <AssociationConnector Association="LiaisonModel.FK_Unit_AdminCorps" />
-        <EntityTypeShape EntityType="LiaisonModel.TaskForce" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="LiaisonModel.TaskForce" Width="1.5" PointX="0.5" PointY="0.75" />
         <AssociationConnector Association="LiaisonModel.FK_TaskForce_Unit" />
-        <AssociationConnector Association="LiaisonModel.FK_AdminCorps_AdminCorps" />
         <EntityTypeShape EntityType="LiaisonModel.ShipPrefix" Width="1.5" PointX="8.375" PointY="16.375" />
         <EntityTypeShape EntityType="LiaisonModel.Ship" Width="1.5" PointX="4.75" PointY="16" />
         <AssociationConnector Association="LiaisonModel.FK_Ship_NewShip" />
@@ -54,6 +51,9 @@
         <AssociationConnector Association="LiaisonModel.FK_EquipmentOwner_Unit" />
         <EntityTypeShape EntityType="LiaisonModel.GroundEquipment" Width="1.5" PointX="8.375" PointY="12.5" />
         <AssociationConnector Association="LiaisonModel.FK_EquipmentOwner_GroundEquipment" />
+        <EntityTypeShape EntityType="LiaisonModel.AdminCorp" Width="1.5" PointX="2.625" PointY="12.875" />
+        <AssociationConnector Association="LiaisonModel.FK_AdminCorps_Unit" />
+        <AssociationConnector Association="LiaisonModel.FK_Unit_AdminCorps" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

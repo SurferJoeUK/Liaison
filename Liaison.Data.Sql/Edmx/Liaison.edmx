@@ -44,6 +44,8 @@
           </Key>
           <Property Name="AltCodeId" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AltCodeUse" Type="nvarchar" MaxLength="50" />
+          <Property Name="IndexCode10" Type="nvarchar" MaxLength="50" />
+          <Property Name="IndexCode20" Type="nvarchar" MaxLength="50" />
           <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Service" Type="nchar" MaxLength="10" />
           <Property Name="Active" Type="bit" />
@@ -326,7 +328,7 @@
           <Property Name="IsPlaceholder" Type="bit" Nullable="false" />
           <Property Name="DisplayOrder" Type="int" />
         </EntityType>
-        <Association Name="FK_AdminCorps_AdminCorps">
+        <Association Name="FK_AdminCorps_Unit">
           <End Role="Unit" Type="Self.Unit" Multiplicity="0..1" />
           <End Role="AdminCorps" Type="Self.AdminCorps" Multiplicity="*" />
           <ReferentialConstraint>
@@ -615,7 +617,7 @@
           <EntitySet Name="Tennant" EntityType="Self.Tennant" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UnitIndex" EntityType="Self.UnitIndex" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_AdminCorps_AdminCorps" Association="Self.FK_AdminCorps_AdminCorps">
+          <AssociationSet Name="FK_AdminCorps_Unit" Association="Self.FK_AdminCorps_Unit">
             <End Role="Unit" EntitySet="Unit" />
             <End Role="AdminCorps" EntitySet="AdminCorps" />
           </AssociationSet>
@@ -784,19 +786,10 @@
             <End Role="Relationship" EntitySet="Relationships" />
           </AssociationSet>
           <EntitySet Name="SortOrders" EntityType="LiaisonModel.SortOrder" />
-          <EntitySet Name="AdminCorps" EntityType="LiaisonModel.AdminCorp" />
-          <AssociationSet Name="FK_Unit_AdminCorps" Association="LiaisonModel.FK_Unit_AdminCorps">
-            <End Role="AdminCorp" EntitySet="AdminCorps" />
-            <End Role="Unit" EntitySet="Units" />
-          </AssociationSet>
           <EntitySet Name="TaskForces" EntityType="LiaisonModel.TaskForce" />
           <AssociationSet Name="FK_TaskForce_Unit" Association="LiaisonModel.FK_TaskForce_Unit">
             <End Role="Unit" EntitySet="Units" />
             <End Role="TaskForce" EntitySet="TaskForces" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AdminCorps_AdminCorps" Association="LiaisonModel.FK_AdminCorps_AdminCorps">
-            <End Role="Unit" EntitySet="Units" />
-            <End Role="AdminCorp" EntitySet="AdminCorps" />
           </AssociationSet>
           <EntitySet Name="ShipPrefixes" EntityType="LiaisonModel.ShipPrefix" />
           <EntitySet Name="Ships" EntityType="LiaisonModel.Ship" />
@@ -847,6 +840,15 @@
           <AssociationSet Name="FK_EquipmentOwner_GroundEquipment" Association="LiaisonModel.FK_EquipmentOwner_GroundEquipment">
             <End Role="GroundEquipment" EntitySet="GroundEquipments" />
             <End Role="EquipmentOwner" EntitySet="EquipmentOwners" />
+          </AssociationSet>
+          <EntitySet Name="AdminCorps" EntityType="LiaisonModel.AdminCorp" />
+          <AssociationSet Name="FK_AdminCorps_Unit" Association="LiaisonModel.FK_AdminCorps_Unit">
+            <End Role="Unit" EntitySet="Units" />
+            <End Role="AdminCorp" EntitySet="AdminCorps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Unit_AdminCorps" Association="LiaisonModel.FK_Unit_AdminCorps">
+            <End Role="AdminCorp" EntitySet="AdminCorps" />
+            <End Role="Unit" EntitySet="Units" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="RelationshipType">
@@ -909,9 +911,7 @@
           <NavigationProperty Name="RelationshipsTo" Relationship="LiaisonModel.FK_RelationshipFrom_Unit" FromRole="Unit" ToRole="Relationship" />
           <NavigationProperty Name="RelationshipsFrom" Relationship="LiaisonModel.FK_RelationshipTo_Unit" FromRole="Unit" ToRole="Relationship" />
           <Property Name="AdminCorpsId" Type="Int32" />
-          <NavigationProperty Name="AdminCorp" Relationship="LiaisonModel.FK_Unit_AdminCorps" FromRole="Unit" ToRole="AdminCorp" />
           <NavigationProperty Name="TaskForce" Relationship="LiaisonModel.FK_TaskForce_Unit" FromRole="Unit" ToRole="TaskForce" />
-          <NavigationProperty Name="AdminCorps" Relationship="LiaisonModel.FK_AdminCorps_AdminCorps" FromRole="Unit" ToRole="AdminCorp" />
           <NavigationProperty Name="Ships" Relationship="LiaisonModel.FK_Ship_Unit" FromRole="Unit" ToRole="Ship" />
           <Property Name="CanHide" Type="Boolean" Nullable="false" />
           <Property Name="UnitTypeVariant" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -920,6 +920,8 @@
           <Property Name="Language" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="EquipmentOwners" Relationship="LiaisonModel.FK_EquipmentOwner_Unit" FromRole="Unit" ToRole="EquipmentOwner" />
+          <NavigationProperty Name="AdminCorps" Relationship="LiaisonModel.FK_AdminCorps_Unit" FromRole="Unit" ToRole="AdminCorp" />
+          <NavigationProperty Name="AdminCorp" Relationship="LiaisonModel.FK_Unit_AdminCorps" FromRole="Unit" ToRole="AdminCorp" />
         </EntityType>
         <Association Name="FK_Unit_Rank">
           <End Type="LiaisonModel.Rank" Role="Rank" Multiplicity="1" />
@@ -1179,34 +1181,6 @@
           <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="AdminCorp">
-          <Key>
-            <PropertyRef Name="AdminCorpsId" />
-          </Key>
-          <Property Name="AdminCorpsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Units" Relationship="LiaisonModel.FK_Unit_AdminCorps" FromRole="AdminCorp" ToRole="Unit" />
-          <Property Name="ParentUnitId" Type="Int32" />
-          <NavigationProperty Name="Unit" Relationship="LiaisonModel.FK_AdminCorps_AdminCorps" FromRole="AdminCorp" ToRole="Unit" />
-          <Property Name="Lookup" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-          <Property Name="ParentAdminCorpsId" Type="Int32" />
-          <Property Name="SortName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="DisplayName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="UnitDisplayName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <Association Name="FK_Unit_AdminCorps">
-          <End Type="LiaisonModel.AdminCorp" Role="AdminCorp" Multiplicity="0..1" />
-          <End Type="LiaisonModel.Unit" Role="Unit" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AdminCorp">
-              <PropertyRef Name="AdminCorpsId" />
-            </Principal>
-            <Dependent Role="Unit">
-              <PropertyRef Name="AdminCorpsId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="TaskForce">
           <Key>
             <PropertyRef Name="UnitId" />
@@ -1229,18 +1203,6 @@
             </Principal>
             <Dependent Role="TaskForce">
               <PropertyRef Name="UnitId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AdminCorps_AdminCorps">
-          <End Type="LiaisonModel.Unit" Role="Unit" Multiplicity="0..1" />
-          <End Type="LiaisonModel.AdminCorp" Role="AdminCorp" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Unit">
-              <PropertyRef Name="UnitId" />
-            </Principal>
-            <Dependent Role="AdminCorp">
-              <PropertyRef Name="ParentUnitId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1405,6 +1367,8 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Service" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Active" Type="Boolean" />
+          <Property Name="IndexCode10" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IndexCode20" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Dictionary">
           <Key>
@@ -1502,6 +1466,46 @@
             </Principal>
             <Dependent Role="EquipmentOwner">
               <PropertyRef Name="GroundEquipmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AdminCorp">
+          <Key>
+            <PropertyRef Name="AdminCorpsId" />
+          </Key>
+          <Property Name="AdminCorpsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SortName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UnitDisplayName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ParentUnitId" Type="Int32" />
+          <Property Name="Lookup" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="ParentAdminCorpsId" Type="Int32" />
+          <NavigationProperty Name="Unit" Relationship="LiaisonModel.FK_AdminCorps_Unit" FromRole="AdminCorp" ToRole="Unit" />
+          <NavigationProperty Name="Units" Relationship="LiaisonModel.FK_Unit_AdminCorps" FromRole="AdminCorp" ToRole="Unit" />
+        </EntityType>
+        <Association Name="FK_AdminCorps_Unit">
+          <End Type="LiaisonModel.Unit" Role="Unit" Multiplicity="0..1" />
+          <End Type="LiaisonModel.AdminCorp" Role="AdminCorp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="UnitId" />
+            </Principal>
+            <Dependent Role="AdminCorp">
+              <PropertyRef Name="ParentUnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Unit_AdminCorps">
+          <End Type="LiaisonModel.AdminCorp" Role="AdminCorp" Multiplicity="0..1" />
+          <End Type="LiaisonModel.Unit" Role="Unit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminCorp">
+              <PropertyRef Name="AdminCorpsId" />
+            </Principal>
+            <Dependent Role="Unit">
+              <PropertyRef Name="AdminCorpsId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1691,21 +1695,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AdminCorps">
-            <EntityTypeMapping TypeName="LiaisonModel.AdminCorp">
-              <MappingFragment StoreEntitySet="AdminCorps">
-                <ScalarProperty Name="UnitDisplayName" ColumnName="UnitDisplayName" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="SortName" ColumnName="SortName" />
-                <ScalarProperty Name="ParentAdminCorpsId" ColumnName="ParentAdminCorpsId" />
-                <ScalarProperty Name="Lookup" ColumnName="Lookup" />
-                <ScalarProperty Name="ParentUnitId" ColumnName="ParentUnitId" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="AdminCorpsId" ColumnName="AdminCorpsId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TaskForces">
             <EntityTypeMapping TypeName="LiaisonModel.TaskForce">
               <MappingFragment StoreEntitySet="TaskForce">
@@ -1782,6 +1771,8 @@
           <EntitySetMapping Name="AltCodes">
             <EntityTypeMapping TypeName="LiaisonModel.AltCode">
               <MappingFragment StoreEntitySet="AltCode">
+                <ScalarProperty Name="IndexCode20" ColumnName="IndexCode20" />
+                <ScalarProperty Name="IndexCode10" ColumnName="IndexCode10" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="Service" ColumnName="Service" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1848,6 +1839,21 @@
                 <ScalarProperty Name="Designation" ColumnName="Designation" />
                 <ScalarProperty Name="EquipmentGuid" ColumnName="EquipmentGuid" />
                 <ScalarProperty Name="GroundEquipmentId" ColumnName="GroundEquipmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminCorps">
+            <EntityTypeMapping TypeName="LiaisonModel.AdminCorp">
+              <MappingFragment StoreEntitySet="AdminCorps">
+                <ScalarProperty Name="ParentAdminCorpsId" ColumnName="ParentAdminCorpsId" />
+                <ScalarProperty Name="Lookup" ColumnName="Lookup" />
+                <ScalarProperty Name="ParentUnitId" ColumnName="ParentUnitId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="UnitDisplayName" ColumnName="UnitDisplayName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="SortName" ColumnName="SortName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AdminCorpsId" ColumnName="AdminCorpsId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

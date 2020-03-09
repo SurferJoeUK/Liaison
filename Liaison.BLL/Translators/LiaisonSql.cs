@@ -23,7 +23,6 @@ namespace Liaison.BLL.Translators
             return order;
         }
 
-
         public IUnit GetTree(string input, int? depth, bool showAll)
         {
             _depthRequired = depth == 0 ? null : depth;
@@ -170,6 +169,10 @@ namespace Liaison.BLL.Translators
                 {
                     return new Command(sqlUnit, cont); //, includeParent);
                 }
+                if (sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.Civil)
+                {
+                    return new Directorate(sqlUnit, cont);
+                }
             }
             else if (sqlUnit.RankSymbol == "&")
             {
@@ -190,10 +193,12 @@ namespace Liaison.BLL.Translators
                         return new TacticalAirForce(sqlUnit); //, includeParent);
                     }
 
-                    if (sqlUnit.CommandName.Contains("Command")) 
+                    if (!string.IsNullOrWhiteSpace(sqlUnit.CommandName) && 
+                        sqlUnit.CommandName.Contains("Command"))
                     {
                         return new Command(sqlUnit, cont);
                     }
+
                     return new Directorate(sqlUnit, cont);
                 }
 
@@ -259,6 +264,10 @@ namespace Liaison.BLL.Translators
                     }
                     return new ExpeditionaryForce(sqlUnit);                    
                 }
+                if (sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.Civil)
+                {
+                    return new Directorate(sqlUnit, cont);
+                }
             }
             else if (sqlUnit.RankSymbol == ")")
             {
@@ -321,6 +330,10 @@ namespace Liaison.BLL.Translators
 	            {
 		            return new Command(sqlUnit, cont);
 	            }
+                if (sqlUnit.ServiceIdx==(int)Helper.Enumerators.ServicesBll.Civil)
+                {
+                    return new Directorate(sqlUnit, cont);
+                }
             }
             else if (sqlUnit.RankSymbol == "*")
             {
@@ -689,7 +702,6 @@ namespace Liaison.BLL.Translators
                                 "; Service: " +
                                 (Helper.Enumerators.ServicesBll) sqlUnit.ServiceIdx + "(" + sqlUnit.ServiceIdx + ")");
         }
-
         public  NewThing CreateAFB(NewThing newThing)
         {
             if (newThing.Number == 0)
@@ -741,6 +753,20 @@ namespace Liaison.BLL.Translators
                         ic = "AIR/" + x.Code + under;
                     }
 
+                    Mission missionWing = le.Missions.FirstOrDefault(m => m.Structure.EndsWith(":"+x.Code+":"+newThing.MissionCode+":/"));
+
+                    if (missionWing == null)
+                    {
+                        throw new Exception("no mission: x.Code: " + x.Code + ", newthing: " + newThing.MissionCode);
+                    }
+
+                    MissionUnit muWing = new MissionUnit();
+                    muWing.MissionId = missionWing.MissionId;
+                    muWing.UnitId = unit.UnitId;
+                    muWing.IsAssociate = false;
+                    le.MissionUnits.Add(muWing);
+                    le.SaveChanges();
+
                     unitIndex.IndexCode = ic;
                     unitIndex.UnitId = unit.UnitId;
                     unitIndex.IsSortIndex = true;
@@ -791,28 +817,80 @@ namespace Liaison.BLL.Translators
                     {
                         var ylookupcode = newThing.MissionCode.StartsWith("A:") ? "A" : newThing.MissionCode;
 
-                        var ylookup = x.Code == "OPS" ? ylookupcode : x.Code;
+                        var ylookup = y.Code == "OPS" ? ylookupcode : y.Code;
 
-                        var sqnAdminActive =  le.AdminCorps.First(a => a.Lookup == ylookup && a.UnitDisplayName=="RAF" ) ?? throw new ArgumentNullException("le.AdminCorps.Where(a => a.Code == x.Code).First()");
-                        var sqnAdminReserve=le.AdminCorps.First(a => a.Lookup == ylookup && a.UnitDisplayName == "RAFR") ?? throw new ArgumentNullException("le.AdminCorps.Where(a => a.Code == x.Code).First()");
-                        var sqnAdminAux = le.AdminCorps.First(a => a.Lookup == ylookup && a.UnitDisplayName == "RAuxAF") ?? throw new ArgumentNullException("le.AdminCorps.Where(a => a.Code == x.Code).First()");
+                        var sqnAdminActive =
+                            le.AdminCorps.First(a => a.Lookup == ylookup && a.UnitDisplayName == "RAF") ??
+                            throw new ArgumentNullException("le.AdminCorps.Where(a => a.Code == x.Code).First()");
+                        var sqnAdminReserve =
+                            le.AdminCorps.First(a => a.Lookup == ylookup && a.UnitDisplayName == "RAFR") ??
+                            throw new ArgumentNullException("le.AdminCorps.Where(a => a.Code == x.Code).First()");
+                        var sqnAdminAux =
+                            le.AdminCorps.First(a => a.Lookup == ylookup && a.UnitDisplayName == "RAuxAF") ??
+                            throw new ArgumentNullException("le.AdminCorps.Where(a => a.Code == x.Code).First()");
 
                         var sqn = new Unit();
                         sqn.Number = newThing.Number;
                         sqn.UseOrdinal = false;
                         sqn.MissionName = y.Name;
-                        sqn.ServiceIdx = (int)Liaison.Helper.Enumerators.ServicesBll.AirForce;
+                        sqn.ServiceIdx = (int) Liaison.Helper.Enumerators.ServicesBll.AirForce;
                         sqn.ServiceTypeIdx = newThing.ServiceType; //(int)Helper.Enumerators.ServiceTypeBLL.Active;
                         sqn.RankSymbol = "@";
                         sqn.UnitGuid = Guid.NewGuid();
                         sqn.CanHide = newThing.Mission != "Operations";
                         sqn.AdminCorpsId = SelectOne(newThing.ServiceType, sqnAdminActive.AdminCorpsId,
-                            sqnAdminReserve.AdminCorpsId, sqnAdminAux.AdminCorpsId);// sqnAdmin.AdminCorpsId;
+                            sqnAdminReserve.AdminCorpsId, sqnAdminAux.AdminCorpsId); // sqnAdmin.AdminCorpsId;
                         le.Units.Add(sqn);
                         le.SaveChanges();
 
-                        var uiSqn = new UnitIndex();                        
-                        uiSqn.IndexCode = "AIR@" + y.Code + under;
+                        string sortcode;
+                        switch (y.Code)
+                        {
+                            case "D":
+                            {
+                                sortcode = "DNT";
+                                break;
+                            }
+                            case "CMX":
+                            {
+                                sortcode = "CPM";
+                                break;
+                            }
+                            default:
+                            {
+                                sortcode = y.Code;
+                                break;
+                            }
+                        }
+
+                        string usecode = y.Code;
+                        if (y.Code == "OPS")
+                        {
+                            usecode = "OPS:FLY";
+                        }
+                        else if (y.Code == "OS")
+                        {
+                            usecode = "OPSS";
+                        }
+
+                        
+
+                    Mission missionSqn = le.Missions.FirstOrDefault(m => m.Structure.EndsWith(":" + usecode + ":" + newThing.MissionCode + ":@"));
+
+                        if (missionSqn == null)
+                        {
+                            throw new Exception("no mission: x.Code: " + usecode + ", newthing: " + newThing.MissionCode);
+                        }
+
+                        MissionUnit mu = new MissionUnit();
+                        mu.MissionId = missionSqn.MissionId;
+                        mu.UnitId = sqn.UnitId;
+                        mu.IsAssociate = false;
+                        le.MissionUnits.Add(mu);
+                        le.SaveChanges();
+
+                        var uiSqn = new UnitIndex();
+                        uiSqn.IndexCode = "AIR@" + sortcode + under;
                         uiSqn.UnitId = sqn.UnitId;
                         uiSqn.IsSortIndex = true;
                         uiSqn.IsDisplayIndex = true;
@@ -831,7 +909,7 @@ namespace Liaison.BLL.Translators
                         le.UnitIndexes.Add(uiSqn2);
                         le.SaveChanges();
 
-                        List<string> excludes = new List<string>{"A:S", "A:T", "AR", "ATK", "B", "F"};
+                        List<string> excludes = new List<string> {"A:S", "A:T", "AR", "ATK", "B", "F"};
                         if (!excludes.Contains(y.Code))
                         {
                             var uiSqn2A = new UnitIndex();
@@ -876,15 +954,16 @@ namespace Liaison.BLL.Translators
                             rgtflt.Number = newThing.Number;
                             rgtflt.UseOrdinal = false;
                             rgtflt.MissionName = null;
-                            rgtflt.ServiceIdx= (int)Liaison.Helper.Enumerators.ServicesBll.AirForce;
-                            rgtflt.ServiceTypeIdx = newThing.ServiceType; //(int)Helper.Enumerators.ServiceTypeBLL.Active;
+                            rgtflt.ServiceIdx = (int) Liaison.Helper.Enumerators.ServicesBll.AirForce;
+                            rgtflt.ServiceTypeIdx =
+                                newThing.ServiceType; //(int)Helper.Enumerators.ServiceTypeBLL.Active;
                             rgtflt.RankSymbol = "|";
                             rgtflt.UnitGuid = Guid.NewGuid();
                             rgtflt.CanHide = true;
                             rgtflt.AdminCorpsId = SelectOne(newThing.ServiceType,
-                                    (int) Helper.Enumerators.AdminCorps.RAFRegiment,
-                                    (int) Helper.Enumerators.AdminCorps.RAFRRegiment,
-                                    (int) Helper.Enumerators.AdminCorps.RAuxAFRegiment);
+                                (int) Helper.Enumerators.AdminCorps.RAFRegiment,
+                                (int) Helper.Enumerators.AdminCorps.RAFRRegiment,
+                                (int) Helper.Enumerators.AdminCorps.RAuxAFRegiment);
                             le.Units.Add(rgtflt);
                             le.SaveChanges();
 
@@ -910,7 +989,7 @@ namespace Liaison.BLL.Translators
 
                             var relRgtFlt = new Relationship();
                             relRgtFlt.RelationshipGuid = Guid.NewGuid();
-                            relRgtFlt.RelTypeIdx = (int)Helper.Enumerators.RelationshipTypeBll.Organic;
+                            relRgtFlt.RelTypeIdx = (int) Helper.Enumerators.RelationshipTypeBll.Organic;
                             relRgtFlt.RelFromUnitId = sqn.UnitId;
                             relRgtFlt.RelToUnitId = rgtflt.UnitId;
                             le.Relationships.Add(relRgtFlt);
@@ -927,15 +1006,16 @@ namespace Liaison.BLL.Translators
                             polflt.Number = newThing.Number;
                             polflt.UseOrdinal = false;
                             polflt.MissionName = null;
-                            polflt.ServiceIdx = (int)Liaison.Helper.Enumerators.ServicesBll.AirForce;
-                            polflt.ServiceTypeIdx = newThing.ServiceType;// (int)Helper.Enumerators.ServiceTypeBLL.Active;
+                            polflt.ServiceIdx = (int) Liaison.Helper.Enumerators.ServicesBll.AirForce;
+                            polflt.ServiceTypeIdx =
+                                newThing.ServiceType; // (int)Helper.Enumerators.ServiceTypeBLL.Active;
                             polflt.RankSymbol = "|";
                             polflt.UnitGuid = Guid.NewGuid();
                             polflt.CanHide = true;
-                            polflt.AdminCorpsId = SelectOne(newThing.ServiceType, 
-                                (int)Helper.Enumerators.AdminCorps.RAFPolice,
-                                (int)Helper.Enumerators.AdminCorps.RafrPolice,
-                                (int)Helper.Enumerators.AdminCorps.RAuxAFPolice);
+                            polflt.AdminCorpsId = SelectOne(newThing.ServiceType,
+                                (int) Helper.Enumerators.AdminCorps.RAFPolice,
+                                (int) Helper.Enumerators.AdminCorps.RafrPolice,
+                                (int) Helper.Enumerators.AdminCorps.RAuxAFPolice);
                             le.Units.Add(polflt);
                             le.SaveChanges();
 
@@ -959,7 +1039,7 @@ namespace Liaison.BLL.Translators
 
                             var relPolFlt = new Relationship();
                             relPolFlt.RelationshipGuid = Guid.NewGuid();
-                            relPolFlt.RelTypeIdx = (int)Helper.Enumerators.RelationshipTypeBll.Organic;
+                            relPolFlt.RelTypeIdx = (int) Helper.Enumerators.RelationshipTypeBll.Organic;
                             relPolFlt.RelFromUnitId = sqn.UnitId;
                             relPolFlt.RelToUnitId = polflt.UnitId;
                             le.Relationships.Add(relPolFlt);
@@ -979,7 +1059,6 @@ namespace Liaison.BLL.Translators
 
             return newThing;
         }
-
         public  int? SelectOne(int newThingServiceType, int active, int reserve, int volunteer)
         {
             switch (newThingServiceType)

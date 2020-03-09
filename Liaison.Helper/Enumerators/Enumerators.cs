@@ -47,6 +47,8 @@ namespace Liaison.Helper.Enumerators
         CoastGuard = 6,
         FleetAuxiliary = 7,
         Joint = 8,
+        Civil=9,
+        SpaceForce=10
     }
 
     public enum UnitType
@@ -323,7 +325,8 @@ namespace Liaison.Helper.Enumerators
         TACON = 5,
         ADCON = 6,
         Detached = 7,
-        TaskForce = 8
+        TaskForce = 8,
+        AdminCorpsChild = 9
     }
 
     public enum ServiceTypeBLL

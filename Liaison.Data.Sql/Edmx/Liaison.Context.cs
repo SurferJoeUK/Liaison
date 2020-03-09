@@ -37,7 +37,6 @@ namespace Liaison.Data.Sql.Edmx
         public virtual DbSet<MissionUnit> MissionUnits { get; set; }
         public virtual DbSet<Relationship> Relationships { get; set; }
         public virtual DbSet<SortOrder> SortOrders { get; set; }
-        public virtual DbSet<AdminCorp> AdminCorps { get; set; }
         public virtual DbSet<TaskForce> TaskForces { get; set; }
         public virtual DbSet<ShipPrefix> ShipPrefixes { get; set; }
         public virtual DbSet<Ship> Ships { get; set; }
@@ -49,5 +48,6 @@ namespace Liaison.Data.Sql.Edmx
         public virtual DbSet<Aircraft> Aircraft { get; set; }
         public virtual DbSet<EquipmentOwner> EquipmentOwners { get; set; }
         public virtual DbSet<GroundEquipment> GroundEquipments { get; set; }
+        public virtual DbSet<AdminCorp> AdminCorps { get; set; }
     }
 }

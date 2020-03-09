@@ -12,7 +12,7 @@ namespace Liaison.BLL.Translators
     {
         List<string> GetSortOrder();
         IUnit GetTree(string input, int? depth, bool showAll);
-        IUnit ConvertUnit(object sqlUnit);
+       // IUnit ConvertUnit(Unit sqlUnit);
 
         NewThing CreateAFB(NewThing newThing);
         int? SelectOne(int newThingServiceType, int active, int reserve, int volunteer);
