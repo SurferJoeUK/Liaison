@@ -106,10 +106,10 @@ namespace Liaison.BLL.Translators
 
             var cont = thisUnitRankLevel <= _depthRequired;
 
-            if (sqlUnit.MissionName != null && sqlUnit.MissionName.Contains("Directorate"))
-            {
-                return new Directorate(sqlUnit, cont);
-            }
+            //if (sqlUnit.MissionName != null && sqlUnit.MissionName.Contains("Directorate"))
+            //{
+            //    return new Directorate(sqlUnit, cont);
+            //}
 
             if (sqlUnit.RankSymbol == " ")
             {
@@ -119,27 +119,47 @@ namespace Liaison.BLL.Translators
             if (sqlUnit.RankSymbol == "'")
             {
                 // Ministry
+                if (sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.Civil)
+                {
+                    return new Directorate(sqlUnit, cont);
+                }
                 return new Command(sqlUnit, cont);
             }
             if (sqlUnit.RankSymbol == "-")
             {
                 // Department
+                if (sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.Civil)
+                {
+                    return new Directorate(sqlUnit, cont);
+                }
                 return new Command(sqlUnit, cont);
             }
             if (sqlUnit.RankSymbol == "!")
             {
+                if (sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.Civil)
+                {
+                    return new Directorate(sqlUnit, cont);
+                }
                 return new Command(sqlUnit, cont); //, includeParent);
             }
 
             if (sqlUnit.RankSymbol == "\"")
             {
+                if (sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.Civil)
+                {
+                    return new Directorate(sqlUnit, cont);
+                }
                 return new Command(sqlUnit, cont); //, includeParent);
             }
 
 	        if (sqlUnit.RankSymbol == "#")
 	        {
-		        //try
-		        //{
+                //try
+	            //{
+	            if (sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.Civil)
+	            {
+	                return new Directorate(sqlUnit, cont);
+	            }
 			        return new Command(sqlUnit, cont); //, includeParent);
 		        //}
 		        //catch (Exception x)
@@ -151,6 +171,10 @@ namespace Liaison.BLL.Translators
 
 	        if (sqlUnit.RankSymbol == "$")
             {
+                if (sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.Civil)
+                {
+                    return new Directorate(sqlUnit, cont);
+                }
                 return new Command(sqlUnit, cont); //, includeParent);
             }
 
