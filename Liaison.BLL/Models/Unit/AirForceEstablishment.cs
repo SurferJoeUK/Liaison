@@ -13,15 +13,10 @@ namespace Liaison.BLL.Models.Unit
         public override string GetName()
         {
             StringBuilder sb = new StringBuilder();
-
-            if (!string.IsNullOrWhiteSpace(this.CommissionedName))
-            {
-                sb.Append(this.CommissionedName);
-            }
-
+            
             if (this.Number != null)
             {
-                sb.Append(" / ");
+               
                 sb.Append("No. " + this.Number + " ");
 
                 //string basetype = "Air Force Base";
@@ -36,9 +31,16 @@ namespace Liaison.BLL.Models.Unit
                    // basetype = "Auxiliary ";
                 }
 
-                sb.Append(this.MissionName + " Force HQ");
+                sb.Append(this.MissionName + " Centre");
                 sb.Append(ResourceStrings.Seperator + this.AdminCorps?.UnitDisplayName);
             }
+
+            if (!string.IsNullOrWhiteSpace(this.CommissionedName))
+            {
+                sb.Append(" / ");
+                sb.Append(this.CommissionedName);
+            }
+
 
             return sb.ToString();
         }

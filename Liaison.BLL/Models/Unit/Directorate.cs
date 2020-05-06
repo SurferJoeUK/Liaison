@@ -9,7 +9,7 @@ namespace Liaison.BLL.Models.Unit
     public class Directorate : AUnit, IUnit
     {
         
-        public Directorate(Data.Sql.Edmx.Unit sqlUnit, bool cont)
+        public Directorate(Data.Sql.Edmx.Unit sqlUnit)
         {
             this.UnitId = sqlUnit.UnitId;        
             this.MissionName = sqlUnit.MissionName;
@@ -29,11 +29,16 @@ namespace Liaison.BLL.Models.Unit
             var relt = sqlUnit.RelationshipsTo.ToList();
             relMain.AddRange(relt);
             this.Relationships = new BLLRelationships(sqlUnit.UnitId, relt);
-            //string a = "b";
+            this.UnitObject = sqlUnit.UnitObject;
+            if (string.IsNullOrWhiteSpace(sqlUnit.UnitObject))
+            {
+                Liaison.Data.Sql.GetStuff.SetUnitObject(sqlUnit.UnitId, this.GetType().ToString());
+            }
         }
 
         public string GetName()
         {
+
             return this.MissionName;
         }
 

@@ -41,6 +41,11 @@ namespace Liaison.BLL.Models.Unit
             relMain.AddRange(relt);
             this.Relationships = new BLLRelationships(sqlUnit.UnitId, relt);
 
+            this.UnitObject = sqlUnit.UnitObject;
+            if (string.IsNullOrWhiteSpace(sqlUnit.UnitObject))
+            {
+                Liaison.Data.Sql.GetStuff.SetUnitObject(sqlUnit.UnitId, this.GetType().ToString());
+            }
         }
 
         public string CommandName { get; set; }

@@ -35,6 +35,11 @@ namespace Liaison.BLL.Models.Unit
 
             relMain.AddRange(relt);
             this.Relationships = new BLLRelationships(sqlUnit.UnitId, relt);
+            this.UnitObject = sqlUnit.UnitObject;
+            if (string.IsNullOrWhiteSpace(sqlUnit.UnitObject))
+            {
+                Liaison.Data.Sql.GetStuff.SetUnitObject(sqlUnit.UnitId, this.GetType().ToString());
+            }
         }
 
         public string CommissionedName { get; set; }
@@ -76,7 +81,14 @@ namespace Liaison.BLL.Models.Unit
             }
             else
             {
-                sb.Append(this.MissionName + " Force HQ");
+                if (this.MissionName == "Maintenance"|| this.MissionName == "Training" )
+                {
+                    sb.Append(this.MissionName + " Centre");
+                }
+                else
+                {
+                    sb.Append(this.MissionName + " Force HQ");
+                }                
                 sb.Append(ResourceStrings.Seperator + this.AdminCorps?.UnitDisplayName);
             }
 

@@ -26,6 +26,10 @@ namespace Liaison.Data.Sql
 
             return GetUnit(context, xxxx.UnitId);
         }
+        public static IEnumerable<Unit> GetUnits(LiaisonEntities context)
+        {
+            return context.Units;
+        }
 
         public static Unit GetUnit(LiaisonEntities context, int unitId)
         {
@@ -85,6 +89,7 @@ namespace Liaison.Data.Sql
             }
         }
 
+    
         //private static List<Tuple<string, string, string>> _dictionary = null;
         //public static Dictionary<string, string> GetDictionary(string dicttype)
         //{
@@ -115,6 +120,16 @@ namespace Liaison.Data.Sql
 
         //    return returnable;
         //}
+        public static void SetUnitObject(int unitid, string unitobject)
+        {
+            using (var context = new LiaisonEntities())
+            {
+                var sqlunit = context.Units.First(u => u.UnitId == unitid);
+                sqlunit.UnitObject = unitobject;
+                context.SaveChanges();
+            }
+
+        }
         public static Dictionary<string, string> GetDictionary(string dicttype)
         {
             using (var context = new LiaisonEntities())

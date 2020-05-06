@@ -305,6 +305,7 @@
           <Property Name="UnitTypeVariant" Type="nvarchar" MaxLength="255" />
           <Property Name="ServiceIdx" Type="int" Nullable="false" />
           <Property Name="ServiceTypeIdx" Type="int" Nullable="false" />
+          <Property Name="UnitObject" Type="nvarchar" MaxLength="255" />
           <Property Name="TerritorialDesignation" Type="nvarchar" MaxLength="255" />
           <Property Name="UnitGuid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="RankSymbol" Type="nvarchar" MaxLength="1" Nullable="false" />
@@ -922,6 +923,7 @@
           <NavigationProperty Name="EquipmentOwners" Relationship="LiaisonModel.FK_EquipmentOwner_Unit" FromRole="Unit" ToRole="EquipmentOwner" />
           <NavigationProperty Name="AdminCorps" Relationship="LiaisonModel.FK_AdminCorps_Unit" FromRole="Unit" ToRole="AdminCorp" />
           <NavigationProperty Name="AdminCorp" Relationship="LiaisonModel.FK_Unit_AdminCorps" FromRole="Unit" ToRole="AdminCorp" />
+          <Property Name="UnitObject" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Unit_Rank">
           <End Type="LiaisonModel.Rank" Role="Rank" Multiplicity="1" />
@@ -1567,6 +1569,7 @@
           <EntitySetMapping Name="Units">
             <EntityTypeMapping TypeName="LiaisonModel.Unit">
               <MappingFragment StoreEntitySet="Unit">
+                <ScalarProperty Name="UnitObject" ColumnName="UnitObject" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="Letter" ColumnName="Letter" />

@@ -22,6 +22,7 @@ namespace Liaison.BLL.Models.Unit
             this.UseOrdinal = sqlUnit.UseOrdinal;
             this.RankLevel = sqlUnit.Rank.RankLevel;
             this.RankStar = sqlUnit.Rank.Rank1;
+            
             this.Service = (ServicesBll)sqlUnit.ServiceIdx;
             this.ServiceType = (ServiceTypeBLL)sqlUnit.ServiceTypeIdx;
             this.RankSymbol = sqlUnit.RankSymbol.ToCharArray()[0];
@@ -33,22 +34,17 @@ namespace Liaison.BLL.Models.Unit
                 .Select(x => x.IndexCode).ToList();
             this.SortIndex = GetSortIndex(sqlUnit.UnitIndexes);          
 
-            //if (sqlUnit.AdminCorp != null)
-            //{
-                // this.AdminCorpsName = sqlUnit.AdminCorp.Name;
-                // this.AdminCorpsCode = sqlUnit.AdminCorp.Code;
-                //this.AdminCorps = new BLLAdminCorps(sqlUnit.AdminCorp);
-                //this.AdminCorps = new AdminCorps(sqlUnit.AdminCorp.Code, sqlUnit.AdminCorp.Name, sqlUnit.AdminCorp.AdminCorpsId);
-            //}
-
             var relMain = sqlUnit.RelationshipsFrom.ToList();
             var relt = sqlUnit.RelationshipsTo.ToList();
 
             relMain.AddRange(relt);
             this.Relationships = new BLLRelationships(sqlUnit.UnitId, relt);
-            //this.Parents = relMain.Where(p => p.RelationshipsTo.UnitId == UnitId);
-            //this.Parents2 = relMain.Where(p => p.RelToUnitId == UnitId).ToList();
-            //this.Parents1 = relMain.Where(p => p.RelToUnitId == UnitId).ToList().Select(r=>r.RelFromUnitId).ToList();
+
+            this.UnitObject = sqlUnit.UnitObject;
+            if (string.IsNullOrWhiteSpace(sqlUnit.UnitObject))
+            {
+                Liaison.Data.Sql.GetStuff.SetUnitObject(sqlUnit.UnitId, this.GetType().ToString());
+            }
         }
         public override string GetName()
         {

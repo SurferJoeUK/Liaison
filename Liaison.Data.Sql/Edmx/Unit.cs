@@ -47,6 +47,7 @@ namespace Liaison.Data.Sql.Edmx
         public string Letter { get; set; }
         public string Language { get; set; }
         public string Notes { get; set; }
+        public string UnitObject { get; set; }
     
         public virtual Rank Rank { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

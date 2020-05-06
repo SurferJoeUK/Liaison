@@ -24,6 +24,7 @@ namespace Liaison.BLL.Models.Unit.Abstracts
         internal int? Number;
         internal string NickName;
         internal string MissionName;
+        internal string UnitObject;
         internal string SortIndex;
         internal bool CanHide;
         internal string Language;
@@ -101,7 +102,7 @@ namespace Liaison.BLL.Models.Unit.Abstracts
             var isTaskForce = rt.Unit.IsTaskForce;
             var numbRl = rt.Unit.GetRankLevel();
             var name = rt.Unit.GetName();
-            var relationships = unit.GetRelationships();
+            var relationships = rt?.RelationshipType?.RelationshipTypeId == 9 ? new List<RelationshipTracker>() : unit.GetRelationships();
             string taskforceMainName = "";
 
             var relationshipTrackers = relationships.ToList();
@@ -321,6 +322,18 @@ namespace Liaison.BLL.Models.Unit.Abstracts
         {
             return this.Indices == null ? string.Empty : string.Join(",", this.Indices);
         }
+
+        //public void DoObjectName(Data.Sql.Edmx.Unit sqlUnit)
+        //{
+        //    var liaisonSql = new LiaisonSql();
+        //    liaisonSql
+        //    if (string.IsNullOrWhiteSpace(sqlUnit.UnitObject))
+        //    {
+        //        var objectType = this.GetType().ToString();
+        //        sqlUnit.UnitObject = objectType;
+                
+        //    }
+        //}
 
         public string GetMission()
         {
