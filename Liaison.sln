@@ -29,10 +29,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Liaison.Converter.CurrentOp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{F04C078F-60E8-4DD0-8BC3-86F9008D86DF}"
 	ProjectSection(SolutionItems) = preProject
+		Documents\A-Znumbers.xlsx = Documents\A-Znumbers.xlsx
+		Documents\Book1.xlsx = Documents\Book1.xlsx
+		Documents\ChangeDBTableIdValue.sql = Documents\ChangeDBTableIdValue.sql
 		Documents\Combat Arms.docx = Documents\Combat Arms.docx
+		Documents\hcs.docx = Documents\hcs.docx
 		Documents\lcstemplate.xlsx = Documents\lcstemplate.xlsx
 		C:\Users\surfe\Downloads\NATO_ORDER_OF_BATTLE_mod_8.doc = C:\Users\surfe\Downloads\NATO_ORDER_OF_BATTLE_mod_8.doc
 		Documents\organisation.docx = Documents\organisation.docx
+		Documents\SQLtemplates.xlsx = Documents\SQLtemplates.xlsx
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Liaison.Data.Files", "Liaison.Data.Files", "{2A3CA591-E7FF-4199-A4FE-2285FE2D0F90}"
