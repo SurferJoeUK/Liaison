@@ -22,14 +22,14 @@ namespace Liaison.BLL.Models.Unit
             return this.AdminCorps == null ? string.Empty : this.AdminCorps.DisplayName;
         }
         public string TerritorialDesignation { get; set; }
-        private int ThreeBarTab = 11;
-        private int TwoBarTab = 12;
-        private int OneBarTab = 13;
-        private int ThreeBlobTab = 14;
-        private string ThreeBar = "|||";
-        private string TwoBar = "||";
-        private string OneBar = "|";
-        private string ThreeBlob = "•••";
+        private const int ThreeBarTab = 11;
+        private const int TwoBarTab = 12;
+        private const int OneBarTab = 13;
+        private const int ThreeBlobTab = 14;
+        private const string ThreeBar = "|||";
+        private const string TwoBar = "||";
+        private const string OneBar = "|";
+        private const string ThreeBlob = "•••";
 
         public DetachmentBll(Data.Sql.Edmx.Unit sqlUnit)
         {
@@ -279,12 +279,6 @@ namespace Liaison.BLL.Models.Unit
 
         public int GetRankLevel()
         {
-            if (RankLevel == null)
-            {
-                var x = this.CommandName;
-                //string a = "b";
-            }
-
 			if (this.MissionName == ResourceStrings.HQHQ)
             {
                 return OneBarTab;

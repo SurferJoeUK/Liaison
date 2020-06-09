@@ -43,6 +43,11 @@ namespace Liaison.BLL.Models.Unit
 
             relMain.AddRange(relt);
             this.Relationships = new BLLRelationships(sqlUnit.UnitId, relt);
+            if (string.IsNullOrWhiteSpace(sqlUnit.UnitObject))
+            {
+                Liaison.Data.Sql.GetStuff.SetUnitObject(sqlUnit.UnitId, this.GetType().ToString());
+            }
+
 
         }
 
@@ -99,6 +104,10 @@ namespace Liaison.BLL.Models.Unit
                 //{
                 //    sb.Append("(" + this.UnitTypeVariant + ") ");
                 //}
+                if (!string.IsNullOrWhiteSpace(this.NickName))
+                {
+                    sb.Append("(" + this.NickName + ") ");
+                }
 
                 if (!string.IsNullOrWhiteSpace(this.MissionName))
                 {

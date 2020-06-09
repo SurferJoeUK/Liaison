@@ -28,7 +28,8 @@ namespace Liaison.BLL.Models.Unit.Abstracts
         internal string SortIndex;
         internal bool CanHide;
         internal string Language;
-
+        internal IList<string> ConcsHigher;
+        internal IList<string> ConcsLow;
         internal List<BLLRelationship> Relationships;
 
         //public List<Relationship> Parents2 { get; set; }
@@ -50,7 +51,31 @@ namespace Liaison.BLL.Models.Unit.Abstracts
         //{
         //    return this.AdminCorps == null ? string.Empty : this.AdminCorps.DisplayName;
         //}
-
+        public string GetConcurrentsLower()
+        {
+            StringBuilder sb = new StringBuilder();
+            if (this.ConcsLow != null)
+            {
+                foreach (var unit in ConcsLow)
+                {
+                    sb.Append(" (" + unit + ")");
+                }
+            }
+            return sb.ToString();
+        }
+    
+        public string GetConcurrentsHigher()
+        {
+            StringBuilder sb = new StringBuilder();
+            if (this.ConcsHigher!=null)
+            {
+                foreach (var unit in ConcsHigher)
+                {
+                    sb.Append(" (" + unit + ")");
+                }
+            }
+            return sb.ToString();
+        }
         public IEnumerable<RelationshipTracker> GetParents(int unitId, HigherHqType type)
         {
             List<RelationshipTracker> list;
@@ -60,6 +85,10 @@ namespace Liaison.BLL.Models.Unit.Abstracts
 
                 var parents = entities.Relationships.Where(r => r.RelToUnitId == unitId)
                     .Include(r => r.RelationshipType)
+                    .Include(r=>r.RelationshipsTo)
+                    .Include(r=>r.RelationshipsTo.TaskForce)
+                    .Include(r=>r.RelationshipsTo.Rank)
+                    .Include(r=>r.RelationshipsTo.AdminCorp)
                     .Include(r => r.RelationshipsFrom)
                     .Include(r => r.RelationshipsFrom.TaskForce)
                     .Include(r => r.RelationshipsFrom.Rank)
@@ -102,20 +131,25 @@ namespace Liaison.BLL.Models.Unit.Abstracts
             var isTaskForce = rt.Unit.IsTaskForce;
             var numbRl = rt.Unit.GetRankLevel();
             var name = rt.Unit.GetName();
-            var relationships = rt?.RelationshipType?.RelationshipTypeId == 9 ? new List<RelationshipTracker>() : unit.GetRelationships();
+            var relationships = rt?.RelationshipType?.RelationshipTypeId == 9 ? 
+                new List<RelationshipTracker>() : unit.GetRelationships();
             string taskforceMainName = "";
 
             var relationshipTrackers = relationships.ToList();
+            string relSymbol = "• ";
             //var relParents = unit.GetParents();
             if (isTaskForce)
             {
-                var tfMainUnit = relationshipTrackers.FirstOrDefault(c =>
-                    c.RelationshipType.RelationshipTypeId == (int) HigherHqType.TaskForce);
-                if (tfMainUnit != null)
-                {
-                    numbRl = tfMainUnit.Unit.GetRankLevel();
-                    taskforceMainName = tfMainUnit.Unit.GetName();
-                }
+                relSymbol = "^ ";
+                //var taskforce
+
+                //var tfMainUnit = rt.RelationshipType.RelationshipTypeId==(int)HigherHqType.TaskForce ?
+                //    unit.GetName():null;
+                //if (tfMainUnit != null)
+                //{
+                //    //numbRl = tfMainUnit.Unit.GetRankLevel();
+                //    //taskforceMainName = tfMainUnit.Unit.GetName();
+                //}
             }
 
             StringBuilder sbIndent = new StringBuilder();
@@ -125,7 +159,7 @@ namespace Liaison.BLL.Models.Unit.Abstracts
             }
 
             bool showUnitId = true;
-            string relSymbol = "• ";
+            
             string otherCommand = "";
             if (rt.RelationshipType != null)
             {
@@ -137,6 +171,11 @@ namespace Liaison.BLL.Models.Unit.Abstracts
                         showUnitId = false;
                         break;
                     }
+                    case (int)HigherHqType.Organic:
+                        {
+                            relSymbol = "() ";
+                            break;
+                        }
                     case (int) HigherHqType.OPCON:
                     {
                         relSymbol = "+ ";
@@ -177,7 +216,19 @@ namespace Liaison.BLL.Models.Unit.Abstracts
                 }
             }
 
-            var name2 = unit.GetName();
+            //var name2 = unit.GetName();
+            var rtConcurrents = relationshipTrackers.Where(r => (r.RelationshipType.RelationshipTypeId == (int)RelationshipTypeBll.Concurrent));
+
+            List<string> concHigh = new List<string>();
+            List<string> concLow = new List<string>();
+
+            foreach (var concurrent in rtConcurrents)
+            {
+                //if (concurrent)
+            }
+
+            string concurrentslower = unit.GetConcurrentsLower();
+            string concurrentshigher = unit.GetConcurrentsHigher();
 
             var unitid = unit.GetId();
 
@@ -195,6 +246,14 @@ namespace Liaison.BLL.Models.Unit.Abstracts
             if (!string.IsNullOrWhiteSpace(indexes))
             {
                 sb.Append(" <span class='lzIndex'>(" + indexes + ")</span>");
+            }
+            if (!string.IsNullOrWhiteSpace(concurrentshigher))
+            {
+                sb.Append(" <span class='lzConcurrentHigher'>++" + concurrentshigher+"</span>");
+            }
+            if (!string.IsNullOrWhiteSpace(concurrentslower))
+            {
+                sb.Append(" <span class='lzConcurrentLower'>--" + concurrentslower + "</span>");
             }
 
             if (!string.IsNullOrWhiteSpace(otherCommand))
@@ -253,7 +312,7 @@ namespace Liaison.BLL.Models.Unit.Abstracts
 
             var rels = SortRelationships(relationshipTrackers);
 
-            int[] types = {1, 2, 4, 6, 9};
+            int[] types = { 1, 2, 4, 6 };
             var stuff = rels.Where(r =>
                 types.Contains(r.RelationshipType.RelationshipTypeId));
             foreach (RelationshipTracker childunit in stuff)

@@ -60,9 +60,7 @@ namespace Liaison.BLL.Models
                 return;
             }
             this.City = facility.City;
-            this.Iso3166 = facility.ISO3166;
-
-            var a = facility.ShipId;
+            this.Iso3166 = facility.ISO3166;            
             this.CommissionedName = facility.CommissionedName;
             this.IsHost = false;
             this.Prefix = facility.Prefix;

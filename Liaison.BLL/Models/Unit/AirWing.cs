@@ -24,9 +24,9 @@ namespace Liaison.BLL.Models.Unit
             this.UseOrdinal = sqlUnit.UseOrdinal;
             this.RankLevel = sqlUnit.Rank.RankLevel;
             this.RankStar = sqlUnit.Rank.Rank1;
-            
-            this.Service = (ServicesBll) sqlUnit.ServiceIdx;
-            this.ServiceType = (ServiceTypeBLL) sqlUnit.ServiceTypeIdx;
+
+            this.Service = (ServicesBll)sqlUnit.ServiceIdx;
+            this.ServiceType = (ServiceTypeBLL)sqlUnit.ServiceTypeIdx;
             this.RankSymbol = sqlUnit.RankSymbol.ToCharArray()[0];
             this.CanHide = sqlUnit.CanHide;
             this.Decommissioned = sqlUnit.Decommissioned ?? false;
@@ -44,12 +44,12 @@ namespace Liaison.BLL.Models.Unit
                 // this.AdminCorps = new AdminCorps(sqlUnit.AdminCorp.Code, sqlUnit.AdminCorp.Name, sqlUnit.AdminCorp.AdminCorpsId);
                 this.AdminCorps = new BLLAdminCorps(sqlUnit.AdminCorp, this.UnitId);
             }
-
             var relMain = sqlUnit.RelationshipsFrom.ToList();
             var relt = sqlUnit.RelationshipsTo.ToList();
 
             relMain.AddRange(relt);
             this.Relationships = new BLLRelationships(sqlUnit.UnitId, relt);
+
             this.UnitObject = sqlUnit.UnitObject;
             if (string.IsNullOrWhiteSpace(sqlUnit.UnitObject))
             {

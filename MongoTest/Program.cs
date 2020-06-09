@@ -13,7 +13,7 @@ namespace MongoTest
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var connectionString = "mongodb+srv://surferjoeuk:surfl3v14th4n@livecluster-4vmcd.mongodb.net/sample_airbnb";
             var client = new MongoClient(connectionString);

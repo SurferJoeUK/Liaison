@@ -43,6 +43,12 @@ textarea {
 .lzUnitName {
     color: darkorchid;
 }
+.lzConcurrentHigher {
+    color: indianred;
+}
+.lzConcurrentLower {
+    color: mediumvioletred;
+}
 .lzEquipment {
     font-style: italic;
     color: darkblue;

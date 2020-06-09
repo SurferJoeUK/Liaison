@@ -6,6 +6,7 @@ namespace Liaison.BLL.Models.Unit.Abstracts
     public abstract class FiveStar : AUnit, IUnit
     {
         public abstract string GetName();
+
         public string GetAdminCorps()
         {
             return "";

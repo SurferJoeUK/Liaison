@@ -26,7 +26,7 @@ namespace Liaison.BLL.Models.Unit
         public TaskForceBll(Data.Sql.Edmx.Unit sqlUnit)
         {
             this.UnitId = sqlUnit.UnitId;
-            this.TaskForceName = sqlUnit.TaskForce.TaskForceName;
+            this.TaskForceName = sqlUnit.TaskForce.TaskForceName.Replace("_", "");
             this.TaskForceNo = sqlUnit.TaskForce.TaskForceNo;
             this.TaskGroup = sqlUnit.TaskForce.TaskGroup;
             this.TaskUnit = sqlUnit.TaskForce.TaskUnit;
@@ -45,22 +45,66 @@ namespace Liaison.BLL.Models.Unit
             this.Base = new BLLBase(sqlUnit.Bases.FirstOrDefault());
             this.Indices = sqlUnit.UnitIndexes.OrderBy(x => x.DisplayOrder).Where(x => x.IsDisplayIndex).Select(x => x.IndexCode).ToList();
             this.SortIndex = GetSortIndex(sqlUnit.UnitIndexes);
-
             var relMain = sqlUnit.RelationshipsFrom.ToList();
+            //var relt = doRelTos ? sqlUnit.RelationshipsTo.ToList() : new List<Relationship>();             
             var relt = sqlUnit.RelationshipsTo.ToList();
 
             relMain.AddRange(relt);
             this.Relationships = new BLLRelationships(sqlUnit.UnitId, relt);
+
+            var concurrents = relMain.Where(c => c.RelationshipType.RelationshipTypeId == (int)HigherHqType.Concurrent);
+            foreach (var ch in concurrents)
+            {
+                if (this.UnitId == ch.RelFromUnitId)
+                {
+                    if (this.ConcsLow == null)
+                    {
+                        this.ConcsLow = new List<string>();
+                    }
+
+                    string index = ch.RelationshipsTo.UnitIndexes.Where(i => i.DisplayOrder == 30).FirstOrDefault()?.IndexCode;
+                    if (index == null)
+                    {
+                        index = ch.RelationshipsTo.UnitIndexes.Where(i => i.DisplayOrder == 20).FirstOrDefault()?.IndexCode;
+                    }
+                    if (index == null)
+                    {
+                        index = "NO IDX: " + ch.RelationshipsTo.UnitId;
+                    }
+
+                    this.ConcsLow.Add(index.Replace("_", ""));
+                }
+
+                else
+                {
+                    if (this.ConcsHigher == null)
+                    {
+                        this.ConcsHigher = new List<string>();
+                    }
+                    string index = ch.RelationshipsFrom.UnitIndexes.Where(i => i.DisplayOrder == 30).FirstOrDefault()?.IndexCode;
+                    if (index == null)
+                    {
+                        index = ch.RelationshipsFrom.UnitIndexes.Where(i => i.DisplayOrder == 20).FirstOrDefault()?.IndexCode;
+                    }
+                    if (index == null)
+                    {
+                        index = "No IDX: " + ch.RelationshipsFrom.UnitId;
+                    }
+                    this.ConcsHigher.Add(index.Replace("_", ""));
+
+                }
+            }
+
         }
 
 
         public string GetName()
         {
             string mission = string.Empty;
-            if (!string.IsNullOrWhiteSpace(this.MissionName))
-            {
-                mission = " (" + this.MissionName + ")";
-            }
+            //if (!string.IsNullOrWhiteSpace(this.MissionName))
+            //{
+            //    mission = " (" + this.MissionName + ")";
+            //}
 
             if (!string.IsNullOrWhiteSpace(this.TaskForceName))
             {

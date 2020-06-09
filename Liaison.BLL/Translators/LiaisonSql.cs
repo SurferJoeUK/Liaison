@@ -120,8 +120,10 @@ namespace Liaison.BLL.Translators
 
             if (sqlUnit.RankSymbol == "?")
             {
-                var detachment = new DetachmentBll(sqlUnit);
-                detachment.UnitObject = sqlUnit.UnitObject;
+                var detachment = new DetachmentBll(sqlUnit)
+                {
+                    UnitObject = sqlUnit.UnitObject
+                };
                 return detachment.GetRankLevel() > _depthRequired ? (IUnit) new DefaultUnit() : detachment;
             }
 
@@ -211,11 +213,12 @@ namespace Liaison.BLL.Translators
                     return new ArmyGroup(sqlUnit); //, includeParent);
                 }
 
-                if (sqlUnit.ServiceIdx == (int) Helper.Enumerators.ServicesBll.Joint ||
-                    sqlUnit.ServiceIdx == (int) Helper.Enumerators.ServicesBll.Army ||
-                    sqlUnit.ServiceIdx == (int) Helper.Enumerators.ServicesBll.AirForce ||
-                    sqlUnit.ServiceIdx == (int) Helper.Enumerators.ServicesBll.Navy||
-                    sqlUnit.ServiceIdx == (int) Helper.Enumerators.ServicesBll.Marines)
+                if (sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.Joint ||
+                    sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.Army ||
+                    sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.AirForce ||
+                    sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.Navy ||
+                    sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.FleetAuxiliary ||
+                    sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.Marines)
                 {
                     return new Command(sqlUnit); //, includeParent);
                 }
@@ -259,7 +262,8 @@ namespace Liaison.BLL.Translators
                     return new Directorate(sqlUnit);
                 }
 
-                if (sqlUnit.ServiceIdx == (int) Helper.Enumerators.ServicesBll.Navy)
+                if (sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.Navy ||
+                    sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.FleetAuxiliary)
                 {
                     if (sqlUnit.Number == null)
                     {
@@ -303,7 +307,8 @@ namespace Liaison.BLL.Translators
                     return new NumberedAirForce(sqlUnit);
                 }
 
-                if (sqlUnit.ServiceIdx == (int) Helper.Enumerators.ServicesBll.Navy)
+                if (sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.Navy
+                    || sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.FleetAuxiliary)
                 {
                     if (sqlUnit.Number == null)
                     {
@@ -348,17 +353,18 @@ namespace Liaison.BLL.Translators
 	                return new AirGroup(sqlUnit);
 	            }
 
-	            if (sqlUnit.ServiceIdx == (int) Helper.Enumerators.ServicesBll.Navy)
-	            {
-		            if (sqlUnit.Number == null)
-		            {
-			            return new Command(sqlUnit); //, includeParent);
-		            }
-		            else
-		            {
-			            return new NavalGroup(sqlUnit);
-		            }
-	            }
+                if (sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.Navy ||
+                    sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.FleetAuxiliary)
+                {
+                    if (sqlUnit.Number == null)
+                    {
+                        return new Command(sqlUnit); //, includeParent);
+                    }
+                    else
+                    {
+                        return new NavalGroup(sqlUnit);
+                    }
+                }
 
 	            if (sqlUnit.ServiceIdx == (int) Helper.Enumerators.ServicesBll.Marines)
 	            {
@@ -425,9 +431,10 @@ namespace Liaison.BLL.Translators
                     return new Brigade(sqlUnit); //, includeParent);
                 }
 
-                if (sqlUnit.ServiceIdx == (int) Helper.Enumerators.ServicesBll.Navy)
+                if (sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.Navy ||
+                    sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.FleetAuxiliary)
                 {
-                    if (sqlUnit.MissionName!=null && sqlUnit.MissionName.Contains("Strike"))
+                    if (sqlUnit.MissionName != null && sqlUnit.MissionName.Contains("Strike"))
                     {
                         return new NavalGroup(sqlUnit);
                     }
@@ -471,7 +478,8 @@ namespace Liaison.BLL.Translators
                     }
                     return new Regiment(sqlUnit);
                 }
-                if (sqlUnit.ServiceIdx == (int) Helper.Enumerators.ServicesBll.Navy)
+                if (sqlUnit.ServiceIdx == (int) Helper.Enumerators.ServicesBll.Navy||
+                    sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.FleetAuxiliary)
                 {
                     var f = sqlUnit.CommandName;
                     if (sqlUnit.Ships != null && sqlUnit.Ships.Any())
@@ -602,7 +610,8 @@ namespace Liaison.BLL.Translators
                     return new AirSquadron(sqlUnit);
                 }
 
-                if (sqlUnit.ServiceIdx == (int) Helper.Enumerators.ServicesBll.Navy)
+                if (sqlUnit.ServiceIdx == (int) Helper.Enumerators.ServicesBll.Navy ||
+                    sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.FleetAuxiliary)
                 {                    
                     if (sqlUnit.AdminCorp?.ParentAdminCorpsId == (int) Helper.Enumerators.AdminCorps.NavalAviation
                         ||sqlUnit.AdminCorp?.ParentAdminCorpsId==(int)Helper.Enumerators.AdminCorps.FleetArmArm)
@@ -670,7 +679,8 @@ namespace Liaison.BLL.Translators
                     return new Flight(sqlUnit);
                 }
 
-                if (sqlUnit.ServiceIdx == (int) Helper.Enumerators.ServicesBll.Navy)
+                if (sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.Navy ||
+                    sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.FleetAuxiliary)
                 {
                     if (sqlUnit.AdminCorp?.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.RoyalNavalMedicalService)
                     {
@@ -785,18 +795,20 @@ namespace Liaison.BLL.Translators
                     var wingAdminAux = le.AdminCorps.First(a => a.Lookup == lookup && a.UnitDisplayName == "RAuxAF") ?? throw new ArgumentNullException("le.AdminCorps.Where(a => a.Code == x.Code).First()  a.UnitDisplayName == RAuxAF");
 
 
-                    var unit = new Unit();
-                    unit.Number = newThing.Number;
-                    unit.UseOrdinal = false;
-                    unit.MissionName = x.Name;
-                    unit.ServiceIdx = (int) Liaison.Helper.Enumerators.ServicesBll.AirForce;
-                    unit.ServiceTypeIdx = newThing.ServiceType;// (int) Helper.Enumerators.ServiceTypeBLL.Active;
-                    unit.RankSymbol = "/" ;
-                    unit.UnitGuid = Guid.NewGuid();
-                    unit.CanHide = newThing.Mission != "Operations";
-                    //unit.AdminCorpsId = wingAdmin.AdminCorpsId;
-                    unit.AdminCorpsId =
-                        SelectOne(newThing.ServiceType, wingAdminActive.AdminCorpsId, wingAdminReserve.AdminCorpsId, wingAdminAux.AdminCorpsId);
+                    var unit = new Unit
+                    {
+                        Number = newThing.Number,
+                        UseOrdinal = false,
+                        MissionName = x.Name,
+                        ServiceIdx = (int)Liaison.Helper.Enumerators.ServicesBll.AirForce,
+                        ServiceTypeIdx = newThing.ServiceType,// (int) Helper.Enumerators.ServiceTypeBLL.Active;
+                        RankSymbol = "/",
+                        UnitGuid = Guid.NewGuid(),
+                        CanHide = newThing.Mission != "Operations",
+                        //unit.AdminCorpsId = wingAdmin.AdminCorpsId;
+                        AdminCorpsId =
+                        SelectOne(newThing.ServiceType, wingAdminActive.AdminCorpsId, wingAdminReserve.AdminCorpsId, wingAdminAux.AdminCorpsId)
+                    };
                     le.Units.Add(unit);
                     le.SaveChanges();
 
@@ -836,13 +848,15 @@ namespace Liaison.BLL.Translators
                     le.UnitIndexes.Add(unitIndex);
                     le.SaveChanges();
 
-                    unitIndex=new UnitIndex();
-                    unitIndex.IndexCode = under + " " + x.Code + "W/RAF";
-                    unitIndex.UnitId = unit.UnitId;
-                    unitIndex.IsSortIndex = false;
-                    unitIndex.IsDisplayIndex = true;
-                    unitIndex.IsAlt = false;
-                    unitIndex.DisplayOrder = 20;
+                    unitIndex = new UnitIndex
+                    {
+                        IndexCode = under + " " + x.Code + "W/RAF",
+                        UnitId = unit.UnitId,
+                        IsSortIndex = false,
+                        IsDisplayIndex = true,
+                        IsAlt = false,
+                        DisplayOrder = 20
+                    };
                     le.UnitIndexes.Add(unitIndex);
                     le.SaveChanges();
 
@@ -1097,18 +1111,22 @@ namespace Liaison.BLL.Translators
                             le.UnitIndexes.Add(uiPolFlt2);
                             le.SaveChanges();
 
-                            var relPolFlt = new Relationship();
-                            relPolFlt.RelationshipGuid = Guid.NewGuid();
-                            relPolFlt.RelTypeIdx = (int) Helper.Enumerators.RelationshipTypeBll.Organic;
-                            relPolFlt.RelFromUnitId = sqn.UnitId;
-                            relPolFlt.RelToUnitId = polflt.UnitId;
+                            var relPolFlt = new Relationship
+                            {
+                                RelationshipGuid = Guid.NewGuid(),
+                                RelTypeIdx = (int)Helper.Enumerators.RelationshipTypeBll.Organic,
+                                RelFromUnitId = sqn.UnitId,
+                                RelToUnitId = polflt.UnitId
+                            };
                             le.Relationships.Add(relPolFlt);
                             le.SaveChanges();
 
-                            var tennantPolFlt = new Tennant();
-                            tennantPolFlt.BaseId = newThing.BaseId;
-                            tennantPolFlt.UnitId = polflt.UnitId;
-                            tennantPolFlt.IsHost = false;
+                            var tennantPolFlt = new Tennant
+                            {
+                                BaseId = newThing.BaseId,
+                                UnitId = polflt.UnitId,
+                                IsHost = false
+                            };
                             le.Tennants.Add(tennantPolFlt);
                             le.SaveChanges();
                         }

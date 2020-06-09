@@ -34,7 +34,9 @@ namespace Liaison.Helper.Enumerators
         Tacon = 5,
         Adcon = 6,
         Detached = 7,
-        TaskForce = 8
+        //TaskForce = 8,
+        //CorpsParent=9,
+        Concurrent=10
     }
 
     public enum ServicesBll
@@ -326,7 +328,8 @@ namespace Liaison.Helper.Enumerators
         ADCON = 6,
         Detached = 7,
         TaskForce = 8,
-        AdminCorpsChild = 9
+        AdminCorpsChild = 9,
+        Concurrent=10,
     }
 
     public enum ServiceTypeBLL

@@ -13,8 +13,10 @@ namespace Liaison.Web.Asp.Controllers
             var liaisonSql = new LiaisonSql();
             var model = liaisonSql.GetTree(input, depth, showAll==true);
 
-            var returnable = new ViewModel();
-            returnable.TheTree = model;
+            var returnable = new ViewModel
+            {
+                TheTree = model
+            };
 
             return View(returnable);
         }

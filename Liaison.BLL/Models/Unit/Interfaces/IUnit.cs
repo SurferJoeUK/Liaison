@@ -27,6 +27,7 @@ namespace Liaison.BLL.Models.Unit.Interfaces
 
         bool GetIsHostUnit();
         string GetAdminCorps();
-        
+		string GetConcurrentsLower();
+        string GetConcurrentsHigher();
     }
 }
