@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Liaison.BLL.Models.Objects;
 using Liaison.BLL.Models.Unit.Abstracts;
 using Liaison.BLL.Models.Unit.Interfaces;
@@ -29,6 +30,49 @@ namespace Liaison.BLL.Models.Unit
             var relt = sqlUnit.RelationshipsTo.ToList();
             relMain.AddRange(relt);
             this.Relationships = new BLLRelationships(sqlUnit.UnitId, relt);
+            var concurrents = relMain.Where(c => c.RelationshipType.RelationshipTypeId == (int)HigherHqType.Concurrent);
+            foreach (var ch in concurrents)
+            {
+                if (this.UnitId == ch.RelFromUnitId)
+                {
+                    if (this.ConcsLow == null)
+                    {
+                        this.ConcsLow = new List<string>();
+                    }
+
+                    string index = ch.RelationshipsTo.UnitIndexes.Where(i => i.DisplayOrder == 30).FirstOrDefault()?.IndexCode;
+                    if (index == null)
+                    {
+                        index = ch.RelationshipsTo.UnitIndexes.Where(i => i.DisplayOrder == 20).FirstOrDefault()?.IndexCode;
+                    }
+                    if (index == null)
+                    {
+                        index = "NO IDX: " + ch.RelationshipsTo.UnitId;
+                    }
+
+                    this.ConcsLow.Add(index.Replace("_", ""));
+                }
+
+                else
+                {
+                    if (this.ConcsHigher == null)
+                    {
+                        this.ConcsHigher = new List<string>();
+                    }
+                    string index = ch.RelationshipsFrom.UnitIndexes.Where(i => i.DisplayOrder == 30).FirstOrDefault()?.IndexCode;
+                    if (index == null)
+                    {
+                        index = ch.RelationshipsFrom.UnitIndexes.Where(i => i.DisplayOrder == 20).FirstOrDefault()?.IndexCode;
+                    }
+                    if (index == null)
+                    {
+                        index = "No IDX: " + ch.RelationshipsFrom.UnitId;
+                    }
+                    this.ConcsHigher.Add(index.Replace("_", ""));
+
+                }
+            }
+
             this.UnitObject = sqlUnit.UnitObject;
             if (string.IsNullOrWhiteSpace(sqlUnit.UnitObject))
             {

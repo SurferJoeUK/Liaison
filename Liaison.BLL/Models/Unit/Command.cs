@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using Liaison.Helper.Enumerators;
 using System.Linq;
-using Liaison.Data.Sql.Edmx;
-using System.Threading.Tasks;
 using Liaison.BLL.Models.Objects;
 using Liaison.BLL.Models.Unit.Abstracts;
 using Liaison.BLL.Models.Unit.Interfaces;
@@ -105,7 +103,13 @@ namespace Liaison.BLL.Models.Unit
         {
             if (!string.IsNullOrWhiteSpace(this.UniqueName))
             {
-                return this.UniqueName;
+                string returnable = this.UniqueName.Replace("_", "");
+                if (returnable.Contains("##"))
+                {
+                    var pref = returnable.Substring(returnable.IndexOf("##") + 2);
+                    returnable = pref + " " + returnable.Substring(0, returnable.IndexOf("##"));
+                }
+                return returnable;
             }
             if (!string.IsNullOrWhiteSpace(this.MissionName))
             {

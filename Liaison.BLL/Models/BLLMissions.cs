@@ -12,6 +12,10 @@ namespace Liaison.BLL.Models
             {
                 throw new System.Exception("Admin Corps for UnitId " + unitid + " is null.");
             }
+            if (unitid==0)
+            {
+                throw new System.Exception("UnitId " + unitid + " is 0.");
+            }
             this.AdminCorpsId = admincorps.AdminCorpsId;
             this.ParentAdminCorpsId = admincorps.ParentAdminCorpsId;
             this.Name = admincorps.Name;

@@ -1,10 +1,10 @@
 use liaison
 
---begin tran tran1
+begin tran tran1
 
 declare  @unitid int
 set @unitid = 
-1093
+80184
 --36715
 --36716
 --36717
@@ -25,4 +25,4 @@ delete from relationship where RelFromUnitId=@unitid
 
 delete from unit where unitid=@unitid
 
---rollback tran tran1
+rollback tran tran1

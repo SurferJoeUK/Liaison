@@ -1,3 +1,5 @@
+
+begin tran tran1
 use Liaison 
 go
 
@@ -156,3 +158,6 @@ insert into Relationship (RelTypeIdx, RelFromUnitId, RelToUnitId, DoNotUse) valu
 insert into Tennant (BaseId, UnitId, IsHost, Notes) values (@baseid, @newid, @ishost, null) 
 
 select @newid
+
+
+rollback tran tran1

@@ -75,11 +75,11 @@ namespace Liaison.BLL.Models.Unit
 
                 if (this.ServiceType == ServiceTypeBLL.Reserve)
                 {
-                    sb.Append("(R) ");
+                    sb.Append("(R)");
                 }
                 else if (this.ServiceType == ServiceTypeBLL.Volunteer)
                 {
-                    sb.Append("(V) (" + this.TerritorialDesignation + ") ");
+                    sb.Append("(V) (" + this.TerritorialDesignation + ")");
                 }
             }
 
@@ -90,11 +90,12 @@ namespace Liaison.BLL.Models.Unit
                 {
                     if (this.Number == null)
                     {
-                        sb.Append(this.MissionName + " ");
+                        sb.Append(" " + this.MissionName);
                     }
                     else
                     {
                         if (missions.Contains(this.MissionName)
+                            || this.AdminCorps.AdminCorpsId==(int)Helper.Enumerators.AdminCorps.RoyalArmyPayCorps
                             || this.AdminCorps.AdminCorpsId == (int) Helper.Enumerators.AdminCorps.RoyalMarineLogistics
                             || this.AdminCorps.AdminCorpsId == (int) Helper.Enumerators.AdminCorps.RoyalMarinesReserveLogistics
                             || this.AdminCorps.AdminCorpsId == (int) Helper.Enumerators.AdminCorps.RoyalNavalMedicalService
@@ -108,15 +109,11 @@ namespace Liaison.BLL.Models.Unit
                             || this.AdminCorps.AdminCorpsId == (int) Helper.Enumerators.AdminCorps.RoyalMarineCavalryReserve
                             || this.AdminCorps.AdminCorpsId == (int) Helper.Enumerators.AdminCorps.RoyalMarinesEngineersReserve)
                         {
-                            sb.Append(this.MissionName);
-                            //if (this.MissionName != "Commando")
-                            //{
-                            sb.Append(" ");
-                            //}
+                            sb.Append(" " + this.MissionName);
                         }
                         else
                         {
-                            sb.Append("(" + this.MissionName + ") ");
+                            sb.Append(" (" + this.MissionName + ")");
                         }
                     }
                 }
@@ -125,19 +122,28 @@ namespace Liaison.BLL.Models.Unit
             {
                 if (!string.IsNullOrWhiteSpace(this.UniqueName))
                 {
-                    sb.Append("(" + this.UniqueName + ") ");
+                    sb.Append(" (" + this.UniqueName + ")");
                 }
 
-                sb.Append(this.MissionName + " ");
+                sb.Append(" "+this.MissionName);
             }
 
-
-	        if (this.AdminCorps?.AdminCorpsId != (int) Helper.Enumerators.AdminCorps.RoyalMarineCommando)
-	        {
-		        sb.Append("Bn.");
-	        }
-
-	        if (!string.IsNullOrWhiteSpace(this.UnitTypeVariant))
+            if (this.AdminCorps?.AdminCorpsId != (int)Helper.Enumerators.AdminCorps.RoyalMarineCommando)
+            {
+                if (this.MissionName == null)
+                {
+                    sb.Append(" Bn.");
+                }
+                else
+                {
+                    if (!this.MissionName.EndsWith("Unit"))
+                    {
+                        sb.Append(" Bn.");
+                    }
+                }
+            }
+            
+            if (!string.IsNullOrWhiteSpace(this.UnitTypeVariant))
             {
                 sb.Append(" (" + this.UnitTypeVariant + ")");
             }

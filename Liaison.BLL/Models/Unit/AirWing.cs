@@ -63,7 +63,7 @@ namespace Liaison.BLL.Models.Unit
         {
             return this.AdminCorps == null ? string.Empty : this.AdminCorps.DisplayName;
         }
-
+        
         public override string GetName()
         {
 	        if (this.Number==null && (!string.IsNullOrWhiteSpace(this.CommandName)))
@@ -87,6 +87,10 @@ namespace Liaison.BLL.Models.Unit
             else if (this.ServiceType == ServiceTypeBLL.Volunteer)
             {
                 sb.Append("(V) (" + this.TerritorialDesignation + ") ");
+            }
+            else if (this.ServiceType==ServiceTypeBLL.Expeditionary)
+            {
+                sb.Append("Expeditionary ");
             }
 
 	        if (this.Service == ServicesBll.AirForce)

@@ -67,6 +67,10 @@ namespace Liaison.BLL.Models.Unit
                 sb.Append("(V) (" + this.TerritorialDesignation + ") ");
                 basetype = "Auxiliary Air Base";
             }
+            else if (this.ServiceType==ServiceTypeBLL.Expeditionary)
+            {
+                basetype = "Expeditionary Air Base";
+            }
 
             if (string.IsNullOrWhiteSpace(this.MissionName))
             {

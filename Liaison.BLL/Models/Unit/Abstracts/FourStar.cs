@@ -14,7 +14,7 @@ namespace Liaison.BLL.Models.Unit.Abstracts
 
         public string PrintTree()
         {
-            return "printtree";
+            return AUnit.PrintAnyTree(this);
         }
 
         public abstract int GetRankLevel();

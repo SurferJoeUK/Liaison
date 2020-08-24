@@ -13,6 +13,7 @@ namespace Liaison.BLL.Models.Unit
             this.Number = sqlUnit.Number;
             this.UseOrdinal = sqlUnit.UseOrdinal;
             this.MissionName = sqlUnit.MissionName;
+            this.CommandName = sqlUnit.CommandName;
             this.RankLevel = sqlUnit.Rank.RankLevel;
             this.RankStar = sqlUnit.Rank.Rank1;
             this.Service = (ServicesBll)sqlUnit.ServiceIdx;
@@ -29,7 +30,17 @@ namespace Liaison.BLL.Models.Unit
 
             relMain.AddRange(relt);
             this.Relationships = new BLLRelationships(sqlUnit.UnitId, relt);
+
+            AUnit.GetConcurrents(this, relMain);
+
+            if (string.IsNullOrWhiteSpace(sqlUnit.UnitObject))
+            {
+                Liaison.Data.Sql.GetStuff.SetUnitObject(sqlUnit.UnitId, this.GetType().ToString());
+            }
         }
+
+        public string CommandName { get; private set; }
+
         public override string GetAdminCorps()
         {
             return string.Empty;
@@ -39,12 +50,17 @@ namespace Liaison.BLL.Models.Unit
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(this.Number.ToOrdinal(this.UseOrdinal) + " ");
+            if (!string.IsNullOrWhiteSpace(this.CommandName))
+            {
+                sb.Append(this.CommandName);
+            }
             if (!string.IsNullOrWhiteSpace(this.MissionName))
             {
                 sb.Append(this.MissionName + " ");
+                sb.Append("Group");
             }
 
-            sb.Append("Group");
+            
 
 
             return sb.ToString();

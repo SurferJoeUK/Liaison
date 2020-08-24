@@ -43,7 +43,11 @@ namespace Liaison.BLL.Models.Unit
             relMain.AddRange(relt);
             this.Relationships = new BLLRelationships(sqlUnit.UnitId, relt);
             //string a = "b";
-
+            this.UnitObject = sqlUnit.UnitObject;
+            if (string.IsNullOrWhiteSpace(sqlUnit.UnitObject))
+            {
+                Liaison.Data.Sql.GetStuff.SetUnitObject(sqlUnit.UnitId, this.GetType().ToString());
+            }
         }
 
 
@@ -108,6 +112,10 @@ namespace Liaison.BLL.Models.Unit
                 {
                     sb.Append("Group");
                     //isRgt = false;
+                }
+                else if (this.MissionName== "Financial Management Support")
+                {
+                    sb.Append("Centre");
                 }
                 else
                 {

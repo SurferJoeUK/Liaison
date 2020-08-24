@@ -51,6 +51,21 @@ namespace Liaison.BLL.Models.Unit.Abstracts
         //{
         //    return this.AdminCorps == null ? string.Empty : this.AdminCorps.DisplayName;
         //}
+//        public string GetQuickName()
+//        {
+//            string qn = null;
+//            using (var entities = new LiaisonEntities())
+//            {
+//                entities.Configuration.LazyLoadingEnabled = false;
+
+//                qn = entities.UnitIndexes.Where(r => r.UnitId == this.UnitId).Where(x => x.DisplayOrder == 60).FirstOrDefault()?.IndexCode;
+//=           }
+
+//            if (qn==null)
+//            {
+//                return this.get
+//            }
+//        }
         public string GetConcurrentsLower()
         {
             StringBuilder sb = new StringBuilder();
@@ -63,7 +78,53 @@ namespace Liaison.BLL.Models.Unit.Abstracts
             }
             return sb.ToString();
         }
-    
+
+        protected static void GetConcurrents(AUnit unit, List<Relationship> relMain)
+        {     
+            var concurrents = relMain.Where(c => c.RelationshipType.RelationshipTypeId == (int)HigherHqType.Concurrent);
+            foreach (var ch in concurrents)
+            {
+                if (unit.UnitId == ch.RelFromUnitId)
+                {
+                    if (unit.ConcsLow == null)
+                    {
+                        unit.ConcsLow = new List<string>();
+                    }
+
+                    string index = ch.RelationshipsTo.UnitIndexes.Where(i => i.DisplayOrder == 30).FirstOrDefault()?.IndexCode;
+                    if (index == null)
+                    {
+                        index = ch.RelationshipsTo.UnitIndexes.Where(i => i.DisplayOrder == 20).FirstOrDefault()?.IndexCode;
+                    }
+                    if (index == null)
+                    {
+                        index = "NO IDX: " + ch.RelationshipsTo.UnitId;
+                    }
+
+                    unit.ConcsLow.Add(index.Replace("_", ""));
+                }
+
+                else
+                {
+                    if (unit.ConcsHigher == null)
+                    {
+                        unit.ConcsHigher = new List<string>();
+                    }
+                    string index = ch.RelationshipsFrom.UnitIndexes.Where(i => i.DisplayOrder == 30).FirstOrDefault()?.IndexCode;
+                    if (index == null)
+                    {
+                        index = ch.RelationshipsFrom.UnitIndexes.Where(i => i.DisplayOrder == 20).FirstOrDefault()?.IndexCode;
+                    }
+                    if (index == null)
+                    {
+                        index = "No IDX: " + ch.RelationshipsFrom.UnitId;
+                    }
+                    unit.ConcsHigher.Add(index.Replace("_", ""));
+
+                }
+            }
+        }
+
         public string GetConcurrentsHigher()
         {
             StringBuilder sb = new StringBuilder();
@@ -122,7 +183,7 @@ namespace Liaison.BLL.Models.Unit.Abstracts
             if (rt.Unit.GetType() == typeof(DefaultUnit))
             {
                 return;
-            
+
             }
 
 
@@ -131,7 +192,7 @@ namespace Liaison.BLL.Models.Unit.Abstracts
             var isTaskForce = rt.Unit.IsTaskForce;
             var numbRl = rt.Unit.GetRankLevel();
             var name = rt.Unit.GetName();
-            var relationships = rt?.RelationshipType?.RelationshipTypeId == 9 ? 
+            var relationships = rt?.RelationshipType?.RelationshipTypeId == 9 ?
                 new List<RelationshipTracker>() : unit.GetRelationships();
             string taskforceMainName = "";
 
@@ -159,60 +220,60 @@ namespace Liaison.BLL.Models.Unit.Abstracts
             }
 
             bool showUnitId = true;
-            
+
             string otherCommand = "";
             if (rt.RelationshipType != null)
             {
                 switch (rt.RelationshipType.RelationshipTypeId)
                 {
-                    case (int) HigherHqType.AdminCorpsChild:
-                    {
-                        relSymbol = "{} ";
-                        showUnitId = false;
-                        break;
-                    }
+                    case (int)HigherHqType.AdminCorpsChild:
+                        {
+                            relSymbol = "{} ";
+                            showUnitId = false;
+                            break;
+                        }
                     case (int)HigherHqType.Organic:
                         {
                             relSymbol = "() ";
                             break;
                         }
-                    case (int) HigherHqType.OPCON:
-                    {
-                        relSymbol = "+ ";
+                    case (int)HigherHqType.OPCON:
+                        {
+                            relSymbol = "+ ";
 
 
-                        var x = (HigherHqType) rt.RelationshipType.RelationshipTypeId;
-                        //var relSix1 = rt.Unit.GetParents(unit.GetId(), x);
-                        //var relSix2 = relSix1.Where(r =>
-                        //    r.RelationshipType.RelationshipTypeId == (int) HigherHqType.ADCON);
-                        //var relSix3 = relSix2.Select(r => r.Unit.GetName());
+                            var x = (HigherHqType)rt.RelationshipType.RelationshipTypeId;
+                            //var relSix1 = rt.Unit.GetParents(unit.GetId(), x);
+                            //var relSix2 = relSix1.Where(r =>
+                            //    r.RelationshipType.RelationshipTypeId == (int) HigherHqType.ADCON);
+                            //var relSix3 = relSix2.Select(r => r.Unit.GetName());
 
 
-                        List<string> relSix = rt.Unit.GetParents(unit.GetId(), x)
-                            .Where(r => r.RelationshipType.RelationshipTypeId == (int) HigherHqType.ADCON)                         
-                            .Select(r => r.Unit.GetName()).ToList();
-                        //   var relSix = relationshipTrackers.Where(r =>
-                        //    r.RelationshipType.RelationshipTypeId == (int) Helper.Enumerators.HigherHqType.ADCON)
-                        // .Select(r => r.Unit.GetName());
-                        otherCommand = string.Join(",", relSix);
-                        otherCommand = " <span class='lzRelOpcon'>" + otherCommand + "</span>";
-                        break;
-                    }
-                    case (int) HigherHqType.ADCON:
-                    {
-                        relSymbol = "- ";
-                        var x = (HigherHqType)rt.RelationshipType.RelationshipTypeId;
+                            List<string> relSix = rt.Unit.GetParents(unit.GetId(), x)
+                                .Where(r => r.RelationshipType.RelationshipTypeId == (int)HigherHqType.ADCON)
+                                .Select(r => r.Unit.GetName()).ToList();
+                            //   var relSix = relationshipTrackers.Where(r =>
+                            //    r.RelationshipType.RelationshipTypeId == (int) Helper.Enumerators.HigherHqType.ADCON)
+                            // .Select(r => r.Unit.GetName());
+                            otherCommand = string.Join(",", relSix);
+                            otherCommand = " <span class='lzRelOpcon'>" + otherCommand + "</span>";
+                            break;
+                        }
+                    case (int)HigherHqType.ADCON:
+                        {
+                            relSymbol = "- ";
+                            var x = (HigherHqType)rt.RelationshipType.RelationshipTypeId;
                             //var relFour = relationshipTrackers
                             //  .Where(r => r.RelationshipType.RelationshipTypeId == (int) HigherHqType.OPCON)
                             // .Select(r => r.Unit.GetName());
-                        var relFourA = rt.Unit.GetParents(unit.GetId(), x);
-                        var relFourB = relFourA.Where(r => r.RelationshipType.RelationshipTypeId == (int) HigherHqType.OPCON);
-                        var relFour = relFourB.Select(r => r.Unit.GetName()).ToList();
+                            var relFourA = rt.Unit.GetParents(unit.GetId(), x);
+                            var relFourB = relFourA.Where(r => r.RelationshipType.RelationshipTypeId == (int)HigherHqType.OPCON);
+                            var relFour = relFourB.Select(r => r.Unit.GetName()).ToList();
 
-                        otherCommand = string.Join(",", relFour);
-                        otherCommand = " <span class='lzRelAdcon'>" + otherCommand + "</span>";
-                        break;
-                    }
+                            otherCommand = string.Join(",", relFour);
+                            otherCommand = " <span class='lzRelAdcon'>" + otherCommand + "</span>";
+                            break;
+                        }
                 }
             }
 
@@ -238,7 +299,7 @@ namespace Liaison.BLL.Models.Unit.Abstracts
             string unitAdminCorps = unit.GetAdminCorps();
 
             string unitIdDisplay = showUnitId ? "(" + unitid + ") " : "(" + unitid.ToString("D5") + ") ";
-            
+
 
             sb.Append(sbIndent.ToString() + relSymbol);
             sb.Append("<span class='lzRankStar'>" + unit.GetRankStar() + "</span>");
@@ -249,11 +310,11 @@ namespace Liaison.BLL.Models.Unit.Abstracts
             }
             if (!string.IsNullOrWhiteSpace(concurrentshigher))
             {
-                sb.Append(" <span class='lzConcurrentHigher'>++" + concurrentshigher+"</span>");
+                sb.Append(" <span class='lzConcurrentHigher'>--&gt;" + concurrentshigher + "</span>");
             }
             if (!string.IsNullOrWhiteSpace(concurrentslower))
             {
-                sb.Append(" <span class='lzConcurrentLower'>--" + concurrentslower + "</span>");
+                sb.Append(" <span class='lzConcurrentLower'>&lt;--" + concurrentslower + "</span>");
             }
 
             if (!string.IsNullOrWhiteSpace(otherCommand))
@@ -310,9 +371,10 @@ namespace Liaison.BLL.Models.Unit.Abstracts
 
             sb.Append(Environment.NewLine);
 
-            var rels = SortRelationships(relationshipTrackers);
+            //var rels = unit.GetId() == 74143 ? relationshipTrackers : SortRelationships(relationshipTrackers);
+            var rels =  SortRelationships(relationshipTrackers);
 
-            int[] types = { 1, 2, 4, 6 };
+            int[] types = { 1, 2, 4, 6, 9 };
             var stuff = rels.Where(r =>
                 types.Contains(r.RelationshipType.RelationshipTypeId));
             foreach (RelationshipTracker childunit in stuff)
@@ -394,7 +456,7 @@ namespace Liaison.BLL.Models.Unit.Abstracts
         //    }
         //}
 
-        public string GetMission()
+        public virtual string GetMission()
         {
             if (this.Mission == null)
             {
@@ -515,7 +577,7 @@ namespace Liaison.BLL.Models.Unit.Abstracts
 
                 List<int> admincorpsIds = admincorps.Select(aa => aa.AdminCorpsId).ToList();
 
-                var units = entities.Units.Where(uu => admincorpsIds.Contains(uu.AdminCorpsId.Value));
+                var units = entities.Units.Where(uu => admincorpsIds.Contains(uu.AdminCorpsId.Value)).OrderBy(u=>u.UniqueName);
 
                 List<IUnit> returnable = new List<IUnit>();
                 foreach (var unit in units)

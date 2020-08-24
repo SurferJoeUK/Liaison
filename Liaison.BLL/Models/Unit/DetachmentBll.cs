@@ -35,7 +35,10 @@ namespace Liaison.BLL.Models.Unit
         {
             List<int> threeBarDetachments = HttpContext.Current.Session["Detachment|||UnitIds"] as List<int>;
             List<int> oneBarDetachments = HttpContext.Current.Session["Detachment|UnitIds"] as List<int>;
-            this.AdminCorps = new BLLAdminCorps(sqlUnit.AdminCorp, this.UnitId);
+            if (sqlUnit.AdminCorp != null)
+            {
+                this.AdminCorps = new BLLAdminCorps(sqlUnit.AdminCorp, sqlUnit.UnitId);
+            }
             this.UnitId = sqlUnit.UnitId;
             this.UnitGuid = sqlUnit.UnitGuid;
             this.Number = sqlUnit.Number;
@@ -75,7 +78,8 @@ namespace Liaison.BLL.Models.Unit
 				this.RankStar = OneBar;
 			}
 			else if (this.AdminCorps?.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.RoyalMarinesAirArm
-				|| this.AdminCorps?.ParentAdminCorpsId == (int)Helper.Enumerators.AdminCorps.NavalAviation)
+				|| this.AdminCorps?.ParentAdminCorpsId == (int)Helper.Enumerators.AdminCorps.NavalAviation
+                || this.AdminCorps?.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.RoyalArmyPayCorps)
 			{
 				this.RankLevel = OneBarTab;
 				this.RankStar = OneBar;
@@ -154,7 +158,11 @@ namespace Liaison.BLL.Models.Unit
 
             relMain.AddRange(relt);
             this.Relationships = new BLLRelationships(sqlUnit.UnitId, relt);
-
+            this.UnitObject = sqlUnit.UnitObject;
+            if (string.IsNullOrWhiteSpace(sqlUnit.UnitObject))
+            {
+                Liaison.Data.Sql.GetStuff.SetUnitObject(sqlUnit.UnitId, this.GetType().ToString());
+            }
         }
 
         public string CommandName { get; set; }
@@ -181,13 +189,14 @@ namespace Liaison.BLL.Models.Unit
                 string missionname = this.MissionName;
                 if (this.MissionName == ResourceStrings.HQHQ)
                 {
-                    missionname = "HHQ";
-                    sb.Append(missionname + " ");
-                    sb.Append(ResourceStrings.Det + " ");
+                    missionname = "HHD";
+                    sb.Append(missionname);
+                    //sb.Append(ResourceStrings.Det + " ");
                     if (ServiceType == ServiceTypeBLL.Volunteer)
                     {
-                        sb.Append("(V) (" + this.TerritorialDesignation + "), ");
-                    }                    
+                        sb.Append(" (V) (" + this.TerritorialDesignation + ")");
+                    }
+                    sb.Append(", ");
                 }
 
                 

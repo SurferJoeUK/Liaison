@@ -22,7 +22,11 @@ namespace Liaison.Data.Sql
                 unitindex = "JFHQ";
             }
 
-            var xxxx = context.UnitIndexes.First(ui => ui.IndexCode == unitindex);
+            var xxxx = context.UnitIndexes.FirstOrDefault(ui => ui.IndexCode == unitindex);
+            if (xxxx==null)
+            {
+                return null;
+            }    
 
             return GetUnit(context, xxxx.UnitId);
         }

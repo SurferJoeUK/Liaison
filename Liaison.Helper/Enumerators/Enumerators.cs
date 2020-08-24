@@ -85,9 +85,10 @@ namespace Liaison.Helper.Enumerators
 
         //G/CSA/CA/CAMG
         OffCivilAffairs = 170,
+        CivilAffairsCommand= 43390,
 
         //G/CSA/ART
-        DGArtillery= 30,
+        DGArtillery = 30,
 
         //G/CSA/ENG
         EngineerInChief = 114,
@@ -97,9 +98,19 @@ namespace Liaison.Helper.Enumerators
 
         //G/CSA/SIG
         SignalsOffInChief = 79,
+        SignalCommands = 42401,
+        SignalBrigades= 42402,
 
         //G/CSSA
         ArmySustainment = 1214,
+        ArmySustainmentCommands= 42395,
+
+        //G/CSSA/ADJ/EDU/
+        ArmyTrainingCommands= 43392,
+
+        //G/CSSA/ADJ/FIN
+        RoyalArmyPayCorps=142,
+        NigerianArmyFinanceCorps= 99,
 
         //G/CSSA/AGS/PMG
         ProvostMarshalGeneral = 1207,

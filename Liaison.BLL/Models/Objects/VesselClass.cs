@@ -10,7 +10,7 @@ namespace Liaison.BLL.Models.Objects
 			if (shipClass == null) return;
 
 			this.ClassName = shipClass.ClassName;
-			this.ClassCode = new HCS(shipClass.ClassCodeHCS, shipClass.ClassCodeNumber);
+			this.ClassCode = new HCS(shipClass.ClassCodeHCS, shipClass.ClassCodeNumber, HCS.HCSType.HCS);
 			this.ModName = shipClass.ModName;
 			this.IsLeadShip = isLeadShip;
 		}

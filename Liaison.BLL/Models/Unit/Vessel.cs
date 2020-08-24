@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using ExtensionMethods;
 using Liaison.BLL.Models.Objects;
 using Liaison.BLL.Models.Unit.Abstracts;
 using Liaison.BLL.Models.Unit.Interfaces;
@@ -11,25 +12,13 @@ namespace Liaison.BLL.Models.Unit
 {
 	public class Vessel : AUnit, IUnit
     {
+        public DateTime? DecommissioningDate { get; set; }
         public string GetAdminCorps()
         {
             return "";
         }
         public Vessel(Data.Sql.Edmx.Unit sqlUnit)
         {
-            Ship ship = null;
-            try
-            {
-                ship = sqlUnit.Ships.First();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                
-            }
-            
-
-            this.Decommissioned = sqlUnit.Decommissioned ?? false;
             this.UnitId = sqlUnit.UnitId;
             this.UnitGuid = sqlUnit.UnitGuid;
             this.RankLevel = sqlUnit.Rank.RankLevel;
@@ -37,19 +26,6 @@ namespace Liaison.BLL.Models.Unit
             this.Service = (ServicesBll)sqlUnit.ServiceIdx;
             this.ServiceType = (ServiceTypeBLL)sqlUnit.ServiceTypeIdx;
             this.RankSymbol = sqlUnit.RankSymbol.ToCharArray()[0];
-            this.Prefix = sqlUnit.Ships.First().ShipPrefix.ShipPrefix1;
-            this.ShipName = ship.Name;
-            this.HCS = new HCS(ship.HCS, ship.HCSNumber);
-            this.PennantNumber =new HCS(ship.PennantCode, ship.PennantNumber);
-
-            if (ship.ShipClassMembers.Any())
-            {
-                if (ship.ShipClassMembers.Count > 1)
-                {
-                    throw new Exception("Too many ship classes");
-                }
-                this.ShipClass = new VesselClass(ship.ShipClassMembers.First().ShipClass, ship.ShipClassMembers.First().IsLeadBoat);
-            }
 
             this.Mission = new BllMissions(sqlUnit.MissionUnits);
             this.Base = new BLLBase(sqlUnit.Bases.FirstOrDefault());
@@ -62,11 +38,33 @@ namespace Liaison.BLL.Models.Unit
             relMain.AddRange(relt);
             this.Relationships = new BLLRelationships(sqlUnit.UnitId, relt);
             this.UnitObject = sqlUnit.UnitObject;
+            this.Decommissioned = sqlUnit.Decommissioned ?? false;
             if (string.IsNullOrWhiteSpace(sqlUnit.UnitObject))
             {
                 Liaison.Data.Sql.GetStuff.SetUnitObject(sqlUnit.UnitId, this.GetType().ToString());
             }
 
+
+            if (sqlUnit.Ships != null && sqlUnit.Ships.Count() > 0)
+            {
+                Ship ship = sqlUnit.Ships.First();
+                this.Prefix = ship.ShipPrefix.ShipPrefix1;
+                this.ShipName = ship.Name;
+                this.HCS = new HCS(ship.HCS, ship.HCSNumber, HCS.HCSType.HCS);
+                this.PennantNumber = new HCS(ship.PennantCode, ship.PennantNumber, HCS.HCSType.Pennant);
+
+                if (ship.ShipClassMembers.Any())
+                {
+                    if (ship.ShipClassMembers.Count > 1)
+                    {
+                        throw new Exception("Too many ship classes");
+                    }
+                    this.ShipClass = new VesselClass(ship.ShipClassMembers.First().ShipClass, ship.ShipClassMembers.First().IsLeadBoat);
+                }
+
+                if (ship.Decommissioned < DateTime.Now)
+                { this.DecommissioningDate = ship.Decommissioned; }
+            }
         }
 
         public Vessel(Ship ship)
@@ -76,8 +74,8 @@ namespace Liaison.BLL.Models.Unit
             {
                 this.Prefix = ship.ShipPrefix.ShipPrefix1;
                 this.ShipName = ship.Name;
-                this.HCS = new HCS(ship.HCS, ship.HCSNumber);
-                this.PennantNumber = new HCS(ship.PennantCode, ship.PennantNumber);
+                this.HCS = new HCS(ship.HCS, ship.HCSNumber, HCS.HCSType.HCS);
+                this.PennantNumber = new HCS(ship.PennantCode, ship.PennantNumber, HCS.HCSType.Pennant);
             }
         }
 
@@ -94,6 +92,7 @@ namespace Liaison.BLL.Models.Unit
           StringBuilder sb = new StringBuilder();
             sb.Append(this.Prefix+" ");
             sb.Append(this.ShipName);
+            sb.Append(" (" + this.HCS.ToStringy() + " / " + this.PennantNumber.ToStringy() + ")");
             //sb.Append(" (");
             //sb.Append(this.HCS.Code + " " + this.HCS.Number);
             //sb.Append("/");
@@ -133,7 +132,50 @@ namespace Liaison.BLL.Models.Unit
         public bool IsTaskForce { get; }
         public bool IsDecommissioned()
         {
+            //if (!Decommissioned && DecommissioningDate < DateTime.Now)
+            //{ 
+            //    throw new Exception();
+            //}
             return Decommissioned;
+        }
+
+        public override string GetMission()
+        {
+            if (this.Mission == null)
+            {
+                return string.Empty;
+            }
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var mission in this.Mission)
+            {
+                sb.Append("(" + mission.MissionId + ") ");
+                sb.Append(mission.DisplayName);
+                if (!string.IsNullOrWhiteSpace(mission.Variant))
+                {
+                    sb.Append(" - " + mission.Variant);
+                }
+
+                sb.Append(ResourceStrings.Seperator);
+            }
+
+
+
+            var returnable = sb.ToString();
+            if (string.IsNullOrWhiteSpace(returnable))
+            {
+                return returnable;
+            }
+            returnable =  returnable.Substring(0, returnable.Length - ResourceStrings.Seperator.Length);
+
+            var unitDecom = IsDecommissioned();
+            var shipDecom = DecommissioningDate != null && DecommissioningDate < DateTime.Now;
+
+            if (unitDecom ^ shipDecom)
+            {
+                returnable = returnable + " [DCOM]";
+            }
+            return returnable;
         }
     }
 }

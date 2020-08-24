@@ -82,6 +82,7 @@
     <Compile Include="Models\Objects\RelationshipTracker.cs" />
     <Compile Include="Models\Unit\Abstracts\ThreeBlob.cs" />
     <Compile Include="Models\Unit\AirForceEstablishment.cs" />
+    <Compile Include="Models\Unit\ArmyGroup.cs" />
     <Compile Include="Models\Unit\Battery.cs" />
     <Compile Include="Models\Unit\Directorate.cs" />
     <Compile Include="Models\Unit\ExpeditionaryUnit.cs" />

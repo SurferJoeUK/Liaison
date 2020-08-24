@@ -13,7 +13,7 @@ namespace Liaison.BLL.Models.Unit
             this.Number = sqlUnit.Number;
             this.UseOrdinal = sqlUnit.UseOrdinal;
             this.NickName = sqlUnit.NickName;
-            //this.LegacyMissionName = sqlUnit.LegacyMissionName;
+            this.HigherHQName = sqlUnit.CommandName;
             this.UniqueName = sqlUnit.UniqueName;
             this.TerritorialDesignation = sqlUnit.TerritorialDesignation;
             this.MissionName = sqlUnit.MissionName;
@@ -45,7 +45,7 @@ namespace Liaison.BLL.Models.Unit
         }
 
         public UnitTypeVariant UnitTypeVariant { get; set; }
-
+        public string HigherHQName { get; private set; }
         public string UniqueName { get; set; }
 
         public string TerritorialDesignation { get; set; }
@@ -92,7 +92,12 @@ namespace Liaison.BLL.Models.Unit
                 sb.Append(" " + this.UnitTypeVariant.ToUtvString());
             }
 
-            return sb.ToString();
+            if (!string.IsNullOrWhiteSpace(this.HigherHQName))
+            {
+                sb.Append(", " + this.HigherHQName);
+            }
+
+            return sb.ToString().Replace("_", "");
         }
 
         public override int GetRankLevel()

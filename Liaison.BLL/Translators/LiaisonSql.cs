@@ -129,7 +129,10 @@ namespace Liaison.BLL.Translators
 
             var cont = thisUnitRankLevel <= _depthRequired;
 
-            
+            if (sqlUnit.CommandName != null && sqlUnit.CommandName.StartsWith("Task Force"))
+            {
+                return new TaskForceBll(sqlUnit);
+            }
 
             if (sqlUnit.RankSymbol == " ")
             {
@@ -308,7 +311,8 @@ namespace Liaison.BLL.Translators
                 }
 
                 if (sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.Navy
-                    || sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.FleetAuxiliary)
+                    || sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.FleetAuxiliary 
+                    || sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.CoastGuard)
                 {
                     if (sqlUnit.Number == null)
                     {
@@ -354,7 +358,8 @@ namespace Liaison.BLL.Translators
 	            }
 
                 if (sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.Navy ||
-                    sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.FleetAuxiliary)
+                    sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.FleetAuxiliary 
+                    || sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.CoastGuard)
                 {
                     if (sqlUnit.Number == null)
                     {
@@ -432,7 +437,8 @@ namespace Liaison.BLL.Translators
                 }
 
                 if (sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.Navy ||
-                    sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.FleetAuxiliary)
+                    sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.FleetAuxiliary
+                    || sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.CoastGuard)
                 {
                     if (sqlUnit.MissionName != null && sqlUnit.MissionName.Contains("Strike"))
                     {
@@ -452,6 +458,10 @@ namespace Liaison.BLL.Translators
                     {
                         return new Command(sqlUnit);
                     }
+                }
+                if (sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.Civil)
+                {
+                    return new Directorate(sqlUnit);
                 }
             }
             else if (sqlUnit.RankSymbol == "/")
@@ -479,7 +489,8 @@ namespace Liaison.BLL.Translators
                     return new Regiment(sqlUnit);
                 }
                 if (sqlUnit.ServiceIdx == (int) Helper.Enumerators.ServicesBll.Navy||
-                    sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.FleetAuxiliary)
+                    sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.FleetAuxiliary 
+                    || sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.CoastGuard)
                 {
                     var f = sqlUnit.CommandName;
                     if (sqlUnit.Ships != null && sqlUnit.Ships.Any())
@@ -611,14 +622,18 @@ namespace Liaison.BLL.Translators
                 }
 
                 if (sqlUnit.ServiceIdx == (int) Helper.Enumerators.ServicesBll.Navy ||
-                    sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.FleetAuxiliary)
+                    sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.FleetAuxiliary ||
+                    sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.CoastGuard)
                 {                    
                     if (sqlUnit.AdminCorp?.ParentAdminCorpsId == (int) Helper.Enumerators.AdminCorps.NavalAviation
                         ||sqlUnit.AdminCorp?.ParentAdminCorpsId==(int)Helper.Enumerators.AdminCorps.FleetArmArm)
                     {
                         return new AirSquadron(sqlUnit);
                     }
-
+                    if (sqlUnit.Ships.Any(b => b.IsBase))
+                    {
+                        return new Facility(sqlUnit);
+                    }
                     if (sqlUnit.AdminCorp?.AdminCorpsId == (int) Helper.Enumerators.AdminCorps.RoyalNavalMedicalService)
                     {
                         return new Battalion(sqlUnit);
@@ -680,7 +695,8 @@ namespace Liaison.BLL.Translators
                 }
 
                 if (sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.Navy ||
-                    sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.FleetAuxiliary)
+                    sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.FleetAuxiliary ||
+                    sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.CoastGuard)
                 {
                     if (sqlUnit.AdminCorp?.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.RoyalNavalMedicalService)
                     {

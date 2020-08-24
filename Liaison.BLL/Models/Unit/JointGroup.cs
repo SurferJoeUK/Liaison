@@ -62,7 +62,11 @@ namespace Liaison.BLL.Models.Unit
                 // this.AdminCorpsName = sqlUnit.AdminCorp.Name;
                 // this.AdminCorpsCode = sqlUnit.AdminCorp.Code;
             }
-
+            this.UnitObject = sqlUnit.UnitObject;
+            if (string.IsNullOrWhiteSpace(sqlUnit.UnitObject))
+            {
+                Liaison.Data.Sql.GetStuff.SetUnitObject(sqlUnit.UnitId, this.GetType().ToString());
+            }
             var relMain = sqlUnit.RelationshipsFrom.ToList();
             var relt = sqlUnit.RelationshipsTo.ToList();
 
@@ -201,7 +205,7 @@ namespace Liaison.BLL.Models.Unit
 
         public string PrintTree()
         {
-            throw new NotImplementedException();
+            return AUnit.PrintAnyTree(this);
         }
 
         public int GetRankLevel()
