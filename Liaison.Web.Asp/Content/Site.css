@@ -26,6 +26,14 @@ textarea {
 .lzRankStar {
     color: darkmagenta;
 }
+.lzHasBecome {
+    color: darkmagenta;
+    font-style: italic;
+}
+.lzUsedToBe {
+    color: darkorange;
+    font-style: italic;
+}
 .lzIndex {
     color:darkcyan;
 }

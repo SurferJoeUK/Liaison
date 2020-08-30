@@ -17,7 +17,7 @@ namespace Liaison.Data.Sql.Edmx
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Ship()
         {
-            this.HasBecome = new HashSet<Ship>();
+            this.UsedToBe = new HashSet<Ship>();
             this.ShipClassMembers = new HashSet<ShipClassMember>();
             this.Bases = new HashSet<Base>();
         }
@@ -41,8 +41,8 @@ namespace Liaison.Data.Sql.Edmx
         public Nullable<int> UnitId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Ship> HasBecome { get; set; }
-        public virtual Ship WasPreviously { get; set; }
+        public virtual ICollection<Ship> UsedToBe { get; set; }
+        public virtual Ship IsNow { get; set; }
         public virtual ShipPrefix ShipPrefix { get; set; }
         public virtual Unit Unit { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

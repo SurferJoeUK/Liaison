@@ -1233,8 +1233,8 @@
           <Property Name="AltHCSNumber" Type="Int32" />
           <Property Name="IsInactive" Type="Boolean" Nullable="false" />
           <Property Name="NewShipId" Type="Guid" />
-          <NavigationProperty Name="HasBecome" Relationship="LiaisonModel.FK_Ship_NewShip" FromRole="Ship" ToRole="Ship1" />
-          <NavigationProperty Name="WasPreviously" Relationship="LiaisonModel.FK_Ship_NewShip" FromRole="Ship1" ToRole="Ship" />
+          <NavigationProperty Name="UsedToBe" Relationship="LiaisonModel.FK_Ship_NewShip" FromRole="Ship" ToRole="Ship1" />
+          <NavigationProperty Name="IsNow" Relationship="LiaisonModel.FK_Ship_NewShip" FromRole="Ship1" ToRole="Ship" />
           <NavigationProperty Name="ShipPrefix" Relationship="LiaisonModel.FK_Ship_ShipPrefix" FromRole="Ship" ToRole="ShipPrefix" />
           <Property Name="Commissioned" Type="DateTime" Precision="0" />
           <Property Name="Decommissioned" Type="DateTime" Precision="0" />

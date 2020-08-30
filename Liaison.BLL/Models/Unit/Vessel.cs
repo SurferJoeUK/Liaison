@@ -13,6 +13,8 @@ namespace Liaison.BLL.Models.Unit
 	public class Vessel : AUnit, IUnit
     {
         public DateTime? DecommissioningDate { get; set; }
+        public string HasBecome { get; set; }
+        public string WasPreviously { get; set; }
         public string GetAdminCorps()
         {
             return "";
@@ -52,6 +54,17 @@ namespace Liaison.BLL.Models.Unit
                 this.ShipName = ship.Name;
                 this.HCS = new HCS(ship.HCS, ship.HCSNumber, HCS.HCSType.HCS);
                 this.PennantNumber = new HCS(ship.PennantCode, ship.PennantNumber, HCS.HCSType.Pennant);
+                if (ship.IsNow != null)
+                {
+                    Ship hasbecome = ship.IsNow;
+                    this.HasBecome = " -->-- " + hasbecome.ShipPrefix.ShipPrefix1 + " " + hasbecome.Name + " (" + hasbecome.PennantCode + " " + hasbecome.PennantNumber + ")";
+                }
+                if (ship.UsedToBe.Count>0)
+                {
+                    Ship waspreviously = ship.UsedToBe.First();
+                    this.WasPreviously = " ex " + waspreviously.ShipPrefix.ShipPrefix1 + " " + waspreviously.Name + " (" + waspreviously.PennantCode + " " + waspreviously.PennantNumber + ")";
+                }
+                
 
                 if (ship.ShipClassMembers.Any())
                 {
@@ -90,9 +103,25 @@ namespace Liaison.BLL.Models.Unit
         public string GetName()
         {
           StringBuilder sb = new StringBuilder();
+
+            var unitDecom = IsDecommissioned();
+            var shipDecom = DecommissioningDate != null && DecommissioningDate < DateTime.Now;
+
+            if (unitDecom ^ shipDecom)
+            {
+                sb.Append("ex-");
+            }
             sb.Append(this.Prefix+" ");
             sb.Append(this.ShipName);
             sb.Append(" (" + this.HCS.ToStringy() + " / " + this.PennantNumber.ToStringy() + ")");
+            if (!string.IsNullOrWhiteSpace(this.WasPreviously))
+            {
+                sb.Append("</span><span class='lzUsedToBe'>" + this.WasPreviously);
+            }
+            if (!string.IsNullOrWhiteSpace(this.HasBecome))
+            {
+                sb.Append("</span><span class='lzHasBecome'>" + this.HasBecome);
+            }
             //sb.Append(" (");
             //sb.Append(this.HCS.Code + " " + this.HCS.Number);
             //sb.Append("/");
