@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 using Liaison.BLL.Models.Equipment;
 using Liaison.BLL.Models.Objects;
@@ -20,7 +22,7 @@ namespace Liaison.BLL.Models.Unit
             this.MissionName = sqlUnit.MissionName;
             this.RankLevel = sqlUnit.Rank.RankLevel;
             this.RankStar = sqlUnit.Rank.Rank1;
-            
+            this.Language = sqlUnit.Language;
             this.Service = (ServicesBll)sqlUnit.ServiceIdx;
             this.ServiceType = (ServiceTypeBLL)sqlUnit.ServiceTypeIdx;
             this.RankSymbol = sqlUnit.RankSymbol.ToCharArray()[0];
@@ -60,6 +62,10 @@ namespace Liaison.BLL.Models.Unit
 
         public override string GetName()
         {
+            if (this.Language != null)
+            {
+                return this.GetNameNotEnglish();
+            }
             StringBuilder sb = new StringBuilder();
 
 	        bool unitWithId = !(this.Number == null && this.Letter == null);
@@ -139,7 +145,21 @@ namespace Liaison.BLL.Models.Unit
 		}
 
         public string CommandName { get; set; }
+        private string GetNameNotEnglish()
+        {
+            Type type = Type.GetType("Liaison.BLL.Languages." + this.Language.Replace('-', '_'));
 
+            var instance = Activator.CreateInstance(type);
+            MethodInfo method = type.GetMethod("GetArmySquadronName");
+            if (method != null)
+            {
+                string a = method.Invoke(instance, new object[] { this }).ToString();
+
+                return a;
+            }
+
+            return "";
+        }
         public string TerritorialDesignation { get; set; }
 
         public override EquipmentContainer GetEquipment()

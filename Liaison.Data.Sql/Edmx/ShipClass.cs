@@ -27,6 +27,7 @@ namespace Liaison.Data.Sql.Edmx
         public int ClassCodeNumber { get; set; }
         public Nullable<int> ModFrom { get; set; }
         public string ModName { get; set; }
+        public string Notes { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ShipClass> ShipClass1 { get; set; }

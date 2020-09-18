@@ -64,7 +64,7 @@ namespace Liaison.BLL.Models
             }
         }
 
-        public BLLRelationships(int unitId, List<Relationship> relParent, bool isParent)
+        public BLLRelationships(int unitId, List<Relationship> relParent)
         {
             foreach (var rel in relParent)
             {

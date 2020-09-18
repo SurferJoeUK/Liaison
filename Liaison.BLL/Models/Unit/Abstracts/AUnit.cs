@@ -11,7 +11,18 @@ using Liaison.Helper.Enumerators;
 
 namespace Liaison.BLL.Models.Unit.Abstracts
 {
-	public abstract class AUnit
+    public class FieldBasket
+    {
+        public int? Number { get; internal set; }
+        public string CommandName { get; internal set; }
+        public string NickName { get; internal set; }
+        public string LegacyMissionName { get; internal set; }
+        public string MissionName { get; internal set; }
+        public string TerritorialDesignation { get; internal set; }
+        public string UnitName { get; internal set; }
+        public string UniqueName { get; internal set; }
+    }
+    public abstract class AUnit
     {
         internal bool Decommissioned;
         internal int UnitId;
@@ -123,6 +134,19 @@ namespace Liaison.BLL.Models.Unit.Abstracts
 
                 }
             }
+        }
+
+        protected static string NotesReplace(string notes, FieldBasket bskt)
+        {
+          return notes.Replace("{XX}", bskt.Number.ToRomanNumerals())
+                     .Replace("{CN}", bskt.CommandName)
+                     .Replace("{NN}", bskt.NickName)
+                     .Replace("{LMN}", bskt.LegacyMissionName)
+                     .Replace("{MN}", bskt.MissionName)
+                     .Replace("{TD}", bskt.TerritorialDesignation)
+                     .Replace("{UN}", bskt.UniqueName)
+                     .Replace("{C}", "Corps")
+                     .Replace ("{D}", "Division");
         }
 
         public string GetConcurrentsHigher()

@@ -39,12 +39,12 @@ namespace Liaison.Web.Asp.Controllers
         }
 
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Publish(NewThing m)
-        {
+        //[AcceptVerbs(HttpVerbs.Post)]
+        //public ActionResult Publish(NewThing m)
+        //{
             
-            return null;
-        }
+        //    return null;
+        //}
 
         public ActionResult NewAirForceBase()
         {

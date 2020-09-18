@@ -32,6 +32,7 @@
           <Property Name="SortName" Type="nvarchar" MaxLength="50" />
           <Property Name="Mark" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Sort" Type="nvarchar" MaxLength="50" />
+          <Property Name="CV" Type="bit" />
           <Property Name="AltCode" Type="nvarchar" MaxLength="50" />
           <Property Name="AltName" Type="nvarchar" MaxLength="50" />
           <Property Name="AltSort" Type="nvarchar" MaxLength="50" />
@@ -47,7 +48,7 @@
           <Property Name="IndexCode10" Type="nvarchar" MaxLength="50" />
           <Property Name="IndexCode20" Type="nvarchar" MaxLength="50" />
           <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="Service" Type="nchar" MaxLength="10" />
+          <Property Name="Service" Type="nvarchar" MaxLength="50" />
           <Property Name="Active" Type="bit" />
         </EntityType>
         <EntityType Name="Base">
@@ -78,7 +79,7 @@
             <PropertyRef Name="ConfigSetting" />
           </Key>
           <Property Name="ConfigSetting" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="ConfigValue" Type="nvarchar(max)" />
+          <Property Name="ConfigValue" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Dictionary">
           <Key>
@@ -239,6 +240,7 @@
           <Property Name="ClassCodeNumber" Type="int" Nullable="false" />
           <Property Name="ModFrom" Type="int" />
           <Property Name="ModName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Notes" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="ShipClassMember">
           <Key>
@@ -255,6 +257,7 @@
           </Key>
           <Property Name="ShipPrefixId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ShipPrefix" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="InFull" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="SortOrder">
           <Key>
@@ -271,7 +274,7 @@
             <PropertyRef Name="UnitId" />
           </Key>
           <Property Name="UnitId" Type="int" Nullable="false" />
-          <Property Name="TaskForceName" Type="nvarchar" MaxLength="50" />
+          <Property Name="TaskForceName" Type="nvarchar" MaxLength="255" />
           <Property Name="TaskForceNo" Type="int" />
           <Property Name="TaskGroup" Type="int" />
           <Property Name="TaskUnit" Type="int" />
@@ -314,6 +317,7 @@
           <Property Name="Decommissioned" Type="bit" />
           <Property Name="Language" Type="nvarchar" MaxLength="5" />
           <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="Format" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="UnitIndex">
           <Key>
@@ -924,6 +928,7 @@
           <NavigationProperty Name="AdminCorps" Relationship="LiaisonModel.FK_AdminCorps_Unit" FromRole="Unit" ToRole="AdminCorp" />
           <NavigationProperty Name="AdminCorp" Relationship="LiaisonModel.FK_Unit_AdminCorps" FromRole="Unit" ToRole="AdminCorp" />
           <Property Name="UnitObject" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Format" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Unit_Rank">
           <End Type="LiaisonModel.Rank" Role="Rank" Multiplicity="1" />
@@ -1188,7 +1193,7 @@
             <PropertyRef Name="UnitId" />
           </Key>
           <Property Name="UnitId" Type="Int32" Nullable="false" />
-          <Property Name="TaskForceName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaskForceName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="TaskForceNo" Type="Int32" />
           <Property Name="TaskGroup" Type="Int32" />
           <Property Name="TaskUnit" Type="Int32" />
@@ -1215,6 +1220,7 @@
           <Property Name="ShipPrefixId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ShipPrefix1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Ships" Relationship="LiaisonModel.FK_Ship_ShipPrefix" FromRole="ShipPrefix" ToRole="Ship" />
+          <Property Name="InFull" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Ship">
           <Key>
@@ -1316,6 +1322,7 @@
           <NavigationProperty Name="ShipClass2" Relationship="LiaisonModel.FK_ShipClass_Mod" FromRole="ShipClass1" ToRole="ShipClass" />
           <NavigationProperty Name="ShipClassMembers" Relationship="LiaisonModel.FK_ShipClassMember_ShipClass" FromRole="ShipClass" ToRole="ShipClassMember" />
           <Property Name="ModName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_ShipClass_Mod">
           <End Type="LiaisonModel.ShipClass" Role="ShipClass" Multiplicity="0..1" />
@@ -1346,7 +1353,7 @@
             <PropertyRef Name="ConfigSetting1" />
           </Key>
           <Property Name="ConfigSetting1" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ConfigValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ConfigValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <Association Name="FK_Base_Ship">
           <End Type="LiaisonModel.Ship" Role="Ship" Multiplicity="0..1" />
@@ -1367,7 +1374,7 @@
           <Property Name="AltCodeId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AltCodeUse" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Service" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Service" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" />
           <Property Name="IndexCode10" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IndexCode20" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1400,6 +1407,7 @@
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DoNotUse" Type="Boolean" />
           <NavigationProperty Name="EquipmentOwners" Relationship="LiaisonModel.FK_EquipmentOwner_Aircraft" FromRole="Aircraft" ToRole="EquipmentOwner" />
+          <Property Name="CV" Type="Boolean" />
         </EntityType>
         <EntityType Name="EquipmentOwner">
           <Key>
@@ -1569,6 +1577,7 @@
           <EntitySetMapping Name="Units">
             <EntityTypeMapping TypeName="LiaisonModel.Unit">
               <MappingFragment StoreEntitySet="Unit">
+                <ScalarProperty Name="Format" ColumnName="Format" />
                 <ScalarProperty Name="UnitObject" ColumnName="UnitObject" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
@@ -1714,6 +1723,7 @@
           <EntitySetMapping Name="ShipPrefixes">
             <EntityTypeMapping TypeName="LiaisonModel.ShipPrefix">
               <MappingFragment StoreEntitySet="ShipPrefix">
+                <ScalarProperty Name="InFull" ColumnName="InFull" />
                 <ScalarProperty Name="ShipPrefix1" ColumnName="ShipPrefix" />
                 <ScalarProperty Name="ShipPrefixId" ColumnName="ShipPrefixId" />
               </MappingFragment>
@@ -1754,6 +1764,7 @@
           <EntitySetMapping Name="ShipClasses">
             <EntityTypeMapping TypeName="LiaisonModel.ShipClass">
               <MappingFragment StoreEntitySet="ShipClass">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="ModName" ColumnName="ModName" />
                 <ScalarProperty Name="ModFrom" ColumnName="ModFrom" />
                 <ScalarProperty Name="ClassCodeNumber" ColumnName="ClassCodeNumber" />
@@ -1796,6 +1807,7 @@
           <EntitySetMapping Name="Aircraft">
             <EntityTypeMapping TypeName="LiaisonModel.Aircraft">
               <MappingFragment StoreEntitySet="Aircraft">
+                <ScalarProperty Name="CV" ColumnName="CV" />
                 <ScalarProperty Name="DoNotUse" ColumnName="DoNotUse" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="AltSort" ColumnName="AltSort" />

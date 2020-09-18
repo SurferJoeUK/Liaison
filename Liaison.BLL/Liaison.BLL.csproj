@@ -55,9 +55,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Languages\de_de.cs" />
     <Compile Include="Languages\fr_be.cs" />
+    <Compile Include="Languages\fr_fr.cs" />
     <Compile Include="Languages\ILanguage.cs" />
-    <Compile Include="Languages\nl-be.cs" />
+    <Compile Include="Languages\nl_be.cs" />
     <Compile Include="Models\BLLBase.cs" />
     <Compile Include="Models\BLLBases.cs" />
     <Compile Include="Models\BLLMission.cs" />

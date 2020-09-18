@@ -5,94 +5,86 @@ using Liaison.Helper.Enumerators;
 
 namespace Liaison.BLL.Languages
 {
-    // ReSharper disable once InconsistentNaming
-    public class fr_be : ILanguage
+    public class fr_be : fr_fr
     {
-        public string GetBattalionName(Battalion battalion)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append(ToOrdinal(battalion.Number, battalion.UseOrdinal) + " ");
+        //public string GetBattalionName(Battalion battalion)
+        //{
+        //    StringBuilder sb = new StringBuilder();
+        //    sb.Append(ToOrdinal(battalion.Number, battalion.UseOrdinal) + " ");
 
-            if (battalion.ServiceType == ServiceTypeBLL.Reserve)
-            {
-                sb.Append("(R) ");
-            }
-            else if (battalion.ServiceType == ServiceTypeBLL.Volunteer)
-            {
-                sb.Append("(V) (" + battalion.TerritorialDesignation + ") ");
-            }
+        //    if (battalion.ServiceType == ServiceTypeBLL.Reserve)
+        //    {
+        //        sb.Append("(R) ");
+        //    }
+        //    else if (battalion.ServiceType == ServiceTypeBLL.Volunteer)
+        //    {
+        //        sb.Append("(V) (" + battalion.TerritorialDesignation + ") ");
+        //    }
 
-            sb.Append("bataillon");
+        //    sb.Append("bataillon");
 
-            #region cmt
+        //    #region cmt
 
-            // List<string> missions = new List<string>() {"Civil Affairs", "Psychological Operations", "Commando"};
-            // if (string.IsNullOrWhiteSpace(battalion.UniqueName))
-            //{
-            //    if (!string.IsNullOrWhiteSpace(battalion.MissionName))
-            //    {
-            //        if (battalion.Number == null)
-            //        {
-            //            sb.Append(battalion.MissionName + " ");
-            //        }
-            //        else
-            //        {
-            //            if (missions.Contains(battalion.MissionName))
-            //            {
-            //                sb.Append(battalion.MissionName);
-            //                //if (this.MissionName != "Commando")
-            //                //{
-            //                sb.Append(" ");
-            //                //}
-            //            }
-            //            else
-            //            {
-            //                sb.Append("(" + battalion.MissionName + ") ");
-            //            }
-            //        }
-            //    }
-            //}
-            // else
-            //{
-            //    if (!string.IsNullOrWhiteSpace(battalion.UniqueName))
-            //    {
-            //        sb.Append("(" + battalion.UniqueName + ") ");
-            //    }
+        //    // List<string> missions = new List<string>() {"Civil Affairs", "Psychological Operations", "Commando"};
+        //    // if (string.IsNullOrWhiteSpace(battalion.UniqueName))
+        //    //{
+        //    //    if (!string.IsNullOrWhiteSpace(battalion.MissionName))
+        //    //    {
+        //    //        if (battalion.Number == null)
+        //    //        {
+        //    //            sb.Append(battalion.MissionName + " ");
+        //    //        }
+        //    //        else
+        //    //        {
+        //    //            if (missions.Contains(battalion.MissionName))
+        //    //            {
+        //    //                sb.Append(battalion.MissionName);
+        //    //                //if (this.MissionName != "Commando")
+        //    //                //{
+        //    //                sb.Append(" ");
+        //    //                //}
+        //    //            }
+        //    //            else
+        //    //            {
+        //    //                sb.Append("(" + battalion.MissionName + ") ");
+        //    //            }
+        //    //        }
+        //    //    }
+        //    //}
+        //    // else
+        //    //{
+        //    //    if (!string.IsNullOrWhiteSpace(battalion.UniqueName))
+        //    //    {
+        //    //        sb.Append("(" + battalion.UniqueName + ") ");
+        //    //    }
 
-            //    sb.Append(battalion.MissionName + " ");
-            //}
+        //    //    sb.Append(battalion.MissionName + " ");
+        //    //}
 
-            #endregion cmt
+        //    #endregion cmt
 
-            sb.Append(" " + battalion.MissionName);
+        //    sb.Append(" " + battalion.MissionName);
 
-            sb.Append(ResourceStrings.Seperator + battalion.AdminCorps?.UnitDisplayName);
-            return sb.ToString().Replace("_", "");
-        }
+        //    sb.Append(ResourceStrings.Seperator + battalion.AdminCorps?.UnitDisplayName);
+        //    return sb.ToString().Replace("_", "");
+        //}
 
-        public string ToOrdinal(int? input, bool useOrdinal)
-        {
+        //public string GetBrigadeName(Brigade brigade)
+        //{
+        //    throw new System.NotImplementedException();
+        //}
 
-            if (input == null)
-            {
-                return "";
-            }
+        //public string GetDivisionName(Division division)
+        //{
+        //    throw new System.NotImplementedException();
+        //}
 
-            if (!useOrdinal)
-            {
-                return input.Value.ToString();
-            }
-
-            if (input <= 0) return input.ToString();
-
-
-            if (input.Value == 1)
-            {
-                return input + "er";
-            }
-
-            return input + "e";
-
-        }
+        //public string ToOrdinal(int? input, bool useOrdinal)
+        //{
+        //    using (var french = new fr_fr())
+        //    {
+        //        return french.ToOrdinal(input, useOrdinal);
+        //    }
+        //}
     }
 }

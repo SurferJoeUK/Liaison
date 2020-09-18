@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Liaison.BLL.Models.Equipment;
+using Liaison.BLL.Models.Objects;
+using Liaison.BLL.Models.Unit.Abstracts;
+using Liaison.Helper.Enumerators;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using Liaison.BLL.Models.Equipment;
-using Liaison.BLL.Models.Objects;
-using Liaison.BLL.Models.Unit.Abstracts;
-using Liaison.Helper.Enumerators;
 
 namespace Liaison.BLL.Models.Unit
 {
@@ -16,6 +16,7 @@ namespace Liaison.BLL.Models.Unit
         public string TerritorialDesignation { get; set; }
         public string UniqueName { get; set; }
 		public string CommandName { get; set; }
+        public string Format { get; private set; }
         public Battalion(Data.Sql.Edmx.Unit sqlUnit)
         {
             this.UnitId = sqlUnit.UnitId;
@@ -42,7 +43,7 @@ namespace Liaison.BLL.Models.Unit
             this.Base = new BLLBase(sqlUnit.Bases.FirstOrDefault());
             this.Indices = sqlUnit.UnitIndexes.OrderBy(x => x.DisplayOrder).Where(x => x.IsDisplayIndex).Select(x => x.IndexCode).ToList();
             this.SortIndex = GetSortIndex(sqlUnit.UnitIndexes);
-
+            this.Format = sqlUnit.Format;
             var relMain = sqlUnit.RelationshipsFrom.ToList();
             var relt = sqlUnit.RelationshipsTo.ToList();
 
@@ -66,6 +67,21 @@ namespace Liaison.BLL.Models.Unit
             if (this.Language != null)
             {
                 return this.GetNameNotEnglish();
+            }
+            if (!string.IsNullOrWhiteSpace(this.Format))
+            {
+                return AUnit.NotesReplace(this.Format, new FieldBasket
+                {
+                    Number = this.Number,
+                    //CommandName = this.CommandName,
+                    NickName = this.NickName,
+                    UniqueName = this.UniqueName,
+                    //LegacyMissionName = this.LegacyMissionName,
+                    MissionName = this.MissionName,
+                    TerritorialDesignation = this.TerritorialDesignation,
+                    UnitName = "Battalion"
+                }
+                   );
             }
             StringBuilder sb = new StringBuilder();
 

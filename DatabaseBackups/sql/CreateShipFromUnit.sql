@@ -1,5 +1,5 @@
 
-begin tran tran1
+--begin tran tran1
 
 use Liaison 
 go
@@ -11,23 +11,19 @@ declare @shipprefixid int
 declare @shipclassId int
 declare @missionid int
 declare @hcs nvarchar(255)
-set @shipPrefix = 'HNLMS'
+declare @missionname nvarchar(10)
+set @shipPrefix = 'ITS'
 set @pennantcode = 'F'
-set @hcs = 'FFS'
-set @shipclassId=13051
-set @missionid=61294
+set @hcs = 'FFGH'
+set @shipclassId=7050
+set @missionid=62296
 insert @listOfIDs(id) values
-(86240)
-,(86243)
-,(86245)
-,(86247)
-,(86249)
-,(86250)
-,(86251)
-,(86252)
-,(86253)
-,(86257)
-
+(88398)
+,(88404)
+,(88405)
+,(88407)
+,(88408)
+,(88409)
 
 set @shipprefixid = (select ShipPrefixId from ShipPrefix where ShipPrefix.ShipPrefix = @shipPrefix)
 insert into Ship 
@@ -44,4 +40,6 @@ select ShipId, @ShipClassId, 0 from Ship where unitid in (select id from @listof
 insert into MissionUnit (MissionId, UnitId, IsAssociate)
 select @missionid, id, 0 from  @listofIds
 
-rollback tran tran1
+
+
+--rollback tran tran1

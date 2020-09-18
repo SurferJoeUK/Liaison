@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 using Liaison.BLL.Models.Unit.Abstracts;
 using Liaison.Helper.Enumerators;
@@ -20,7 +22,7 @@ namespace Liaison.BLL.Models.Unit
             this.UnitTypeVariant = new UnitTypeVariant(sqlUnit.UnitTypeVariant);
             this.RankLevel = sqlUnit.Rank.RankLevel;
             this.RankStar = sqlUnit.Rank.Rank1;
-            
+            this.Language = sqlUnit.Language;
             this.Service = (ServicesBll)sqlUnit.ServiceIdx;
             this.ServiceType = (ServiceTypeBLL)sqlUnit.ServiceTypeIdx;
             this.RankSymbol = sqlUnit.RankSymbol.ToCharArray()[0];
@@ -57,6 +59,10 @@ namespace Liaison.BLL.Models.Unit
 
         public override string GetName()
         {
+            if (this.Language != null)
+            {
+                return this.GetNameNotEnglish();
+            }
             StringBuilder sb = new StringBuilder();
             sb.Append(this.Number.ToOrdinal(this.UseOrdinal) + " ");
             if (this.ServiceType == ServiceTypeBLL.Reserve)
@@ -99,7 +105,21 @@ namespace Liaison.BLL.Models.Unit
 
             return sb.ToString().Replace("_", "");
         }
+        private string GetNameNotEnglish()
+        {
+            Type type = Type.GetType("Liaison.BLL.Languages." + this.Language.Replace('-', '_'));
 
+            var instance = Activator.CreateInstance(type);
+            MethodInfo method = type.GetMethod("GetBrigadeName");
+            if (method != null)
+            {
+                string a = method.Invoke(instance, new object[] { this }).ToString();
+
+                return a;
+            }
+
+            return "";
+        }
         public override int GetRankLevel()
         {
             return RankLevel ?? 0;

@@ -6,6 +6,7 @@ using Liaison.BLL.Models.Unit.Abstracts;
 using Liaison.BLL.Models.Equipment;
 using Liaison.BLL.Models.Objects;
 using Liaison.Helper.Enumerators;
+using System.Reflection;
 
 namespace Liaison.BLL.Models.Unit
 {
@@ -24,6 +25,7 @@ namespace Liaison.BLL.Models.Unit
             this.RankStar = sqlUnit.Rank.Rank1;
             this.Service = (ServicesBll) sqlUnit.ServiceIdx;
             this.ServiceType = (ServiceTypeBLL) sqlUnit.ServiceTypeIdx;
+            this.Language = sqlUnit.Language;
             this.RankSymbol = sqlUnit.RankSymbol.ToCharArray()[0];
             this.AdminCorps = new BLLAdminCorps(sqlUnit.AdminCorp, this.UnitId);
             this.Equipment = sqlUnit.EquipmentOwners.ToEquipmentList();
@@ -64,6 +66,10 @@ namespace Liaison.BLL.Models.Unit
 
         public override string GetName()
         {
+            if (this.Language != null)
+            {
+                return this.GetNameNotEnglish();
+            }
             StringBuilder sb = new StringBuilder();
 
             bool unitWithId = !(this.Number == null && this.Letter == null);
@@ -227,7 +233,21 @@ namespace Liaison.BLL.Models.Unit
 
 			return returnable;
         }
+        private string GetNameNotEnglish()
+        {
+            Type type = Type.GetType("Liaison.BLL.Languages." + this.Language.Replace('-', '_'));
 
+            var instance = Activator.CreateInstance(type);
+            MethodInfo method = type.GetMethod("GetCompanyName");
+            if (method != null)
+            {
+                string a = method.Invoke(instance, new object[] { this }).ToString();
+
+                return a;
+            }
+
+            return "";
+        }
         public object LegacyMissionName { get; set; }
 
         public override EquipmentContainer GetEquipment()

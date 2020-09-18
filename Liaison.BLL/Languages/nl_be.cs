@@ -12,6 +12,11 @@ namespace Liaison.BLL.Languages
     // ReSharper disable once InconsistentNaming
     public class nl_be : ILanguage
     {
+        public string GetArmySquadronName(ArmySquadron armySquadron)
+        {
+            throw new NotImplementedException();
+        }
+
         public string GetBattalionName(Battalion battalion)
         {
             StringBuilder sb = new StringBuilder();
@@ -70,6 +75,21 @@ namespace Liaison.BLL.Languages
 
             sb.Append(ResourceStrings.Seperator + battalion.AdminCorps?.UnitDisplayName);
             return sb.ToString().Replace("_", "");            
+        }
+
+        public string GetBrigadeName(Brigade brigade)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetCompanyName(Company company)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetDivisionName(Division division)
+        {
+            throw new NotImplementedException();
         }
 
         public string ToOrdinal(int? input, bool useOrdinal)

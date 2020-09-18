@@ -13,6 +13,8 @@ namespace Liaison.BLL.Models.Unit
         public string LegacyMissionName { get; set; }
         public string UniqueName { get; set; }
         public string TerritorialDesignation { get; set; }
+        public string Format { get; private set; }
+
         public Division(Data.Sql.Edmx.Unit sqlUnit)
         {
             this.UnitId = sqlUnit.UnitId;
@@ -31,13 +33,18 @@ namespace Liaison.BLL.Models.Unit
             this.Decommissioned = sqlUnit.Decommissioned ?? false;
             this.TerritorialDesignation = sqlUnit.TerritorialDesignation;
             this.UnitTypeVariant = sqlUnit.UnitTypeVariant;
-
+            this.Language = sqlUnit.Language;
             this.Mission = new BllMissions(sqlUnit.MissionUnits);
             this.Base = new BLLBase(sqlUnit.Bases.FirstOrDefault());
             this.Indices = sqlUnit.UnitIndexes.OrderBy(x => x.DisplayOrder).Where(x => x.IsDisplayIndex).Select(x => x.IndexCode).ToList();
             this.SortIndex = GetSortIndex(sqlUnit.UnitIndexes);
             this.AdminCorps = new BLLAdminCorps(sqlUnit.AdminCorp, this.UnitId);
-
+            this.Format = sqlUnit.Format;
+            this.UnitObject = sqlUnit.UnitObject;
+            if (string.IsNullOrWhiteSpace(sqlUnit.UnitObject))
+            {
+                Liaison.Data.Sql.GetStuff.SetUnitObject(sqlUnit.UnitId, this.GetType().ToString());
+            }
             var relMain = sqlUnit.RelationshipsFrom.ToList();
             var relt = sqlUnit.RelationshipsTo.ToList();
 
@@ -57,6 +64,22 @@ namespace Liaison.BLL.Models.Unit
         }
         public override string GetName()
         {
+            if (!string.IsNullOrWhiteSpace(this.Format))
+            {
+                return AUnit.NotesReplace(this.Format, new FieldBasket
+                {
+                    Number = this.Number,
+                    CommandName = this.CommandName,
+                    NickName = this.NickName,
+                    LegacyMissionName = this.LegacyMissionName,
+                    MissionName = this.MissionName,
+                    TerritorialDesignation = this.TerritorialDesignation,
+                    UniqueName=this.UniqueName,
+                    UnitName = "Division"
+                }
+                );
+            }
+
             var unitname = "Division";
             if (this.AdminCorps.AdminCorpsId == (int) Helper.Enumerators.AdminCorps.RoyalMarineLogistics)
             {

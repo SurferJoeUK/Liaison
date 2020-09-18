@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using Liaison.BLL.Models.Equipment;
 using Liaison.BLL.Models.Objects;
 using Liaison.BLL.Models.Unit.Abstracts;
 using Liaison.Helper.Enumerators;
@@ -31,7 +32,7 @@ namespace Liaison.BLL.Models.Unit
             this.Decommissioned = sqlUnit.Decommissioned ?? false;
             this.UnitTypeVariant = sqlUnit.UnitTypeVariant;
             this.TerritorialDesignation = sqlUnit.TerritorialDesignation;
-
+            this.Equipment = sqlUnit.EquipmentOwners.ToEquipmentList();
             this.Mission = new BllMissions(sqlUnit.MissionUnits);
             this.Base = new BLLBase(sqlUnit.Bases.FirstOrDefault());
             this.Indices = sqlUnit.UnitIndexes.OrderBy(x => x.DisplayOrder).Where(x => x.IsDisplayIndex).Select(x => x.IndexCode).ToList();
@@ -54,7 +55,46 @@ namespace Liaison.BLL.Models.Unit
 
         public override EquipmentContainer GetEquipment()
         {
-            return new EquipmentContainer( "");
+            if(this.Equipment==null)
+            {
+                return null;
+            }
+            bool showAltName = true;
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var thing in this.Equipment)
+            {
+                if (thing.GetType() == typeof(BLLGroundEquipment))
+                {
+                    if (thing is BLLGroundEquipment grnd)
+                    {
+                        if (grnd.Qty != null)
+                        {
+                            sb.Append(grnd.Qty + " ");
+                        }
+                        sb.Append(grnd.PrintName);
+                        if (showAltName)
+                        {
+                            sb.Append(" [");
+                            if (!string.IsNullOrEmpty(grnd.AltCode))
+                            {
+                                sb.Append(grnd.AltCode);
+                            }
+                            if (!string.IsNullOrEmpty(grnd.AltName))
+                            {
+                                sb.Append(" " + grnd.AltName);
+                            }
+                            sb.Append("]");
+                        }
+                    }
+                }
+
+                sb.Append(ResourceStrings.Seperator);
+            }
+
+            var x = sb.ToString();
+            return new EquipmentContainer(
+                (x.Length > 0 ? x.Substring(0, x.Length - ResourceStrings.Seperator.Length) : x).Replace("_", ""));
         }
 
         public override string GetAdminCorps()
@@ -145,7 +185,7 @@ namespace Liaison.BLL.Models.Unit
 
             if (isAcceptable)
             {
-                return sb.ToString();
+                return sb.ToString().Replace("_", "");
             }
 
             throw new Exception();

@@ -22,6 +22,7 @@ namespace Liaison.Data.Sql.Edmx
     
         public int ShipPrefixId { get; set; }
         public string ShipPrefix1 { get; set; }
+        public string InFull { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ship> Ships { get; set; }

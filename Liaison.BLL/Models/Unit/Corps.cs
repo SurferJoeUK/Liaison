@@ -8,6 +8,9 @@ namespace Liaison.BLL.Models.Unit
 	public class Corps :ThreeStar
     {
         public string LegacyMissionName { get; set; }
+        public string TerritorialDesignation { get; private set; }
+        public string Format { get; private set; }
+
         public Corps(Data.Sql.Edmx.Unit sqlUnit)
         {
             this.UnitId = sqlUnit.UnitId;
@@ -15,6 +18,7 @@ namespace Liaison.BLL.Models.Unit
             this.Number = sqlUnit.Number;
             this.NickName = sqlUnit.NickName;
             this.LegacyMissionName = sqlUnit.LegacyMissionName;
+            this.TerritorialDesignation = sqlUnit.TerritorialDesignation;
             this.MissionName = sqlUnit.MissionName;
             this.RankLevel = sqlUnit.Rank.RankLevel;
             this.RankStar = sqlUnit.Rank.Rank1;
@@ -27,7 +31,12 @@ namespace Liaison.BLL.Models.Unit
             this.Indices = sqlUnit.UnitIndexes.OrderBy(x => x.DisplayOrder).Where(x => x.IsDisplayIndex).Select(x => x.IndexCode).ToList();
             this.SortIndex = GetSortIndex(sqlUnit.UnitIndexes);            
             this.AdminCorps = new BLLAdminCorps(sqlUnit.AdminCorp, this.UnitId);
-
+            this.Format = sqlUnit.Format;
+            this.UnitObject = sqlUnit.UnitObject;
+            if (string.IsNullOrWhiteSpace(sqlUnit.UnitObject))
+            {
+                Liaison.Data.Sql.GetStuff.SetUnitObject(sqlUnit.UnitId, this.GetType().ToString());
+            }
             var relMain = sqlUnit.RelationshipsFrom.ToList();
             var relt = sqlUnit.RelationshipsTo.ToList();
 
@@ -38,25 +47,52 @@ namespace Liaison.BLL.Models.Unit
 
         public override string GetName()
         {
+            if (!string.IsNullOrWhiteSpace(this.Format))
+            {
+                return AUnit.NotesReplace(this.Format, new FieldBasket
+                {
+                    Number = this.Number,
+                    //CommandName = this.CommandName,
+                    NickName = this.NickName,
+                    LegacyMissionName = this.LegacyMissionName,
+                    MissionName = this.MissionName,
+                    TerritorialDesignation = this.TerritorialDesignation,
+                    UnitName = "Division"
+                }
+                   );
+            }
             StringBuilder sb = new StringBuilder();
-            sb.Append(this.Number.ToRomanNumerals() + " ");
-            if (!string.IsNullOrWhiteSpace(this.LegacyMissionName))
-            { 
-                sb.Append("\"" + this.LegacyMissionName + "\"" + " ");
+            if (this.Number == null)
+            {
+                if (!string.IsNullOrWhiteSpace(this.TerritorialDesignation))
+                {
+                    sb.Append("(" + this.TerritorialDesignation + ") ");
+                }
+                sb.Append(this.MissionName + " ");
+
                 sb.Append("Corps");
+            }
+            else
+            {
+                sb.Append(this.Number.ToRomanNumerals() + " ");
+                if (!string.IsNullOrWhiteSpace(this.TerritorialDesignation))
+                {
+                    sb.Append("(" + this.TerritorialDesignation + ") ");
+                }
+                if (!string.IsNullOrWhiteSpace(this.LegacyMissionName))
+                {
+                    sb.Append("\"" + this.LegacyMissionName + "\"" + " ");
+                }
+                if (!string.IsNullOrWhiteSpace(this.NickName))
+                {
+                    sb.Append("\"" + this.NickName + "\"" + " ");
+                }
                 if (!string.IsNullOrWhiteSpace(this.MissionName))
                 {
                     sb.Append(" (" + this.MissionName + ") ");
                 }
-            }
-            else
-            {
-                if (!string.IsNullOrWhiteSpace(this.MissionName))
-                {
-                    sb.Append(this.MissionName + " ");
-                }
 
-                sb.Append("Corps");
+                sb.Append("Corps");          
             }
 
             return sb.ToString();
