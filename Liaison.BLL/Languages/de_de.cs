@@ -14,17 +14,25 @@ namespace Liaison.BLL.Languages
         public string GetBattalionName(Battalion battalion)
         {
             StringBuilder sb = new StringBuilder();
-            if (battalion.MissionName=="Light Infantry")
-            {
-                sb.Append("Jägerbataillon ");
-            }
-            else if (battalion.MissionName == "Artillery")
-            {
-                sb.Append("Artilleriebataillon ");
-            }
-
+            sb.Append(Translator(battalion.MissionName));
+            sb.Append("bataillon ");
             sb.Append(battalion.Number);
             return sb.ToString();
+        }
+
+        private string Translator(string english)
+        {
+            switch (english)
+            {
+                case "Light Infantry":
+                    return "Jäger";
+                case "Artillery":
+                    return "Artillerie";
+                case "Armoured Engineer":
+                    return "Panzerpionier";
+                default:
+                    throw new NotImplementedException();
+            }
         }
 
         public string GetBrigadeName(Brigade brigade)
@@ -34,7 +42,11 @@ namespace Liaison.BLL.Languages
 
         public string GetCompanyName(Company company)
         {
-            throw new NotImplementedException();
+            StringBuilder sb = new StringBuilder();
+            sb.Append(Translator(company.MissionName));
+            sb.Append("kompanie ");
+            sb.Append(company.Number);
+            return sb.ToString();
         }
 
         public string GetDivisionName(Division division)

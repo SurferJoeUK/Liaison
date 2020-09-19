@@ -73,15 +73,11 @@ namespace Liaison.BLL.Models.Unit
                 return AUnit.NotesReplace(this.Format, new FieldBasket
                 {
                     Number = this.Number,
-                    //CommandName = this.CommandName,
                     NickName = this.NickName,
                     UniqueName = this.UniqueName,
-                    //LegacyMissionName = this.LegacyMissionName,
                     MissionName = this.MissionName,
                     TerritorialDesignation = this.TerritorialDesignation,
-                    UnitName = "Battalion"
-                }
-                   );
+                });
             }
             StringBuilder sb = new StringBuilder();
 

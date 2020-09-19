@@ -75,9 +75,8 @@ namespace Liaison.BLL.Models.Unit
                     MissionName = this.MissionName,
                     TerritorialDesignation = this.TerritorialDesignation,
                     UniqueName=this.UniqueName,
-                    UnitName = "Division"
-                }
-                );
+                    //UnitName = "Division"
+                });
             }
 
             var unitname = "Division";

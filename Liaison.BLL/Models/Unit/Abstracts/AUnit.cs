@@ -19,7 +19,7 @@ namespace Liaison.BLL.Models.Unit.Abstracts
         public string LegacyMissionName { get; internal set; }
         public string MissionName { get; internal set; }
         public string TerritorialDesignation { get; internal set; }
-        public string UnitName { get; internal set; }
+       // public string UnitName { get; internal set; }
         public string UniqueName { get; internal set; }
     }
     public abstract class AUnit
@@ -138,15 +138,18 @@ namespace Liaison.BLL.Models.Unit.Abstracts
 
         protected static string NotesReplace(string notes, FieldBasket bskt)
         {
-          return notes.Replace("{XX}", bskt.Number.ToRomanNumerals())
-                     .Replace("{CN}", bskt.CommandName)
-                     .Replace("{NN}", bskt.NickName)
-                     .Replace("{LMN}", bskt.LegacyMissionName)
-                     .Replace("{MN}", bskt.MissionName)
-                     .Replace("{TD}", bskt.TerritorialDesignation)
-                     .Replace("{UN}", bskt.UniqueName)
-                     .Replace("{C}", "Corps")
-                     .Replace ("{D}", "Division");
+            return notes.Replace("{XX}", bskt.Number.ToRomanNumerals())
+                       .Replace("{CN}", bskt.CommandName)
+                       .Replace("{NN}", bskt.NickName)
+                       .Replace("{LMN}", bskt.LegacyMissionName)
+                       .Replace("{MN}", bskt.MissionName)
+                       .Replace("{TD}", bskt.TerritorialDesignation)
+                       .Replace("{UN}", bskt.UniqueName)
+                       .Replace("{C}", "Corps")
+                       .Replace("{D}", "Division")
+                       .Replace("{B}", "Brigade")
+                       .Replace("{Bn}", "Battalion");
+
         }
 
         public string GetConcurrentsHigher()

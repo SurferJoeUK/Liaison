@@ -9,6 +9,12 @@ namespace Liaison.BLL.Models.Unit
 {
     public class Brigade : OneStar
     {
+        public UnitTypeVariant UnitTypeVariant { get; set; }
+        public string HigherHQName { get; private set; }
+        public string UniqueName { get; set; }
+        public string CommandName { get; set; }
+        public string TerritorialDesignation { get; set; }
+        public string Format { get; private set; }
         public Brigade(Data.Sql.Edmx.Unit sqlUnit)
         {
             this.UnitId = sqlUnit.UnitId;
@@ -17,6 +23,7 @@ namespace Liaison.BLL.Models.Unit
             this.NickName = sqlUnit.NickName;
             this.HigherHQName = sqlUnit.CommandName;
             this.UniqueName = sqlUnit.UniqueName;
+            this.CommandName = sqlUnit.CommandName;
             this.TerritorialDesignation = sqlUnit.TerritorialDesignation;
             this.MissionName = sqlUnit.MissionName;
             this.UnitTypeVariant = new UnitTypeVariant(sqlUnit.UnitTypeVariant);
@@ -28,7 +35,7 @@ namespace Liaison.BLL.Models.Unit
             this.RankSymbol = sqlUnit.RankSymbol.ToCharArray()[0];
             this.Decommissioned = sqlUnit.Decommissioned ?? false;
             this.AdminCorps = new BLLAdminCorps(sqlUnit.AdminCorp, this.UnitId);
-
+            this.Format = sqlUnit.Format;
             this.Mission = new BllMissions(sqlUnit.MissionUnits);
             this.Base = new BLLBase(sqlUnit.Bases.FirstOrDefault());
             this.Indices = sqlUnit.UnitIndexes.OrderBy(x => x.DisplayOrder).Where(x => x.IsDisplayIndex).Select(x => x.IndexCode).ToList();
@@ -46,12 +53,6 @@ namespace Liaison.BLL.Models.Unit
             }
         }
 
-        public UnitTypeVariant UnitTypeVariant { get; set; }
-        public string HigherHQName { get; private set; }
-        public string UniqueName { get; set; }
-
-        public string TerritorialDesignation { get; set; }
-
         public override string GetAdminCorps()
         {
             return this.AdminCorps == null ? string.Empty : this.AdminCorps.DisplayName;
@@ -62,6 +63,18 @@ namespace Liaison.BLL.Models.Unit
             if (this.Language != null)
             {
                 return this.GetNameNotEnglish();
+            }
+            if (!string.IsNullOrWhiteSpace(this.Format))
+            {
+                return AUnit.NotesReplace(this.Format, new FieldBasket
+                {
+                    Number = this.Number,
+                    NickName = this.NickName,
+                    CommandName=this.CommandName,
+                    MissionName = this.MissionName,
+                    TerritorialDesignation = this.TerritorialDesignation,
+                }
+                   );
             }
             StringBuilder sb = new StringBuilder();
             sb.Append(this.Number.ToOrdinal(this.UseOrdinal) + " ");

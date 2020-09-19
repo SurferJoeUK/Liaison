@@ -57,7 +57,7 @@ namespace Liaison.BLL.Models.Unit
                     LegacyMissionName = this.LegacyMissionName,
                     MissionName = this.MissionName,
                     TerritorialDesignation = this.TerritorialDesignation,
-                    UnitName = "Division"
+                    //UnitName = "Division"
                 }
                    );
             }
