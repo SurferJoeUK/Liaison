@@ -25,6 +25,7 @@ namespace Liaison.Data.Sql.Edmx
             this.Ships = new HashSet<Ship>();
             this.EquipmentOwners = new HashSet<EquipmentOwner>();
             this.AdminCorps = new HashSet<AdminCorp>();
+            this.AdminCorpsUnits = new HashSet<AdminCorpsUnit>();
         }
     
         public int UnitId { get; set; }
@@ -71,5 +72,7 @@ namespace Liaison.Data.Sql.Edmx
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdminCorp> AdminCorps { get; set; }
         public virtual AdminCorp AdminCorp { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AdminCorpsUnit> AdminCorpsUnits { get; set; }
     }
 }

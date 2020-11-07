@@ -4,6 +4,7 @@ use Liaison
 go
 
 declare @admincorpsid int
+declare @supportadmincorps int
 declare @parentid int
 declare @hsc_id int
 declare @a_id int
@@ -25,35 +26,53 @@ declare @unitA nvarchar(1)
 declare @unitB nvarchar(1)
 declare @unitC nvarchar(1)
 --declare @unitD nvarchar(1)
+declare @unittype nvarchar(4)
+declare @commandname nvarchar(255)
+declare @index10 nvarchar(25)
+declare @index20 nvarchar(25)
+declare @index30 nvarchar(25)
+declare @index50 nvarchar(25)
+declare @servicetype int
+declare @headquarters nvarchar(3)
+declare @territorial nvarchar(2)
 
-set @admincorpsid = 42391
---set @battalion='____5th Bn., ___10th RRM'
-set @batnumb='_4'
+set @admincorpsid = 59434
+set @supportadmincorps = 1212
+set @batnumb='_1'
 --set @regnumb='12'
-set @batord = 'th'
+set @batord = 'st'
 --set @rgtord = 'th'
 set @unitA='A'
 set @unitB='B'
 set @unitC='C'
 --set @unitD = 'D'
-set @parentid=72090
+set @parentid=99383
+set @unittype = 'Bty.'
+set @headquarters = 'HHB'
 ---------------------
-set @hsc_missionid=48273
-set @inf_missionid=48274
-set @wpn_missionid=48277
-set @baseid=39624
+set @hsc_missionid=67297
+set @inf_missionid=67298
+set @wpn_missionid=70316
+set @baseid=59646
+set @commandname = '____1st Bn., __201st Art. Rgt., RA'
+set @servicetype = 4
+set @territorial='WV'
+set @index10 = 'ART__201'
+set @index20 = '__201 ART'
+set @index30 = '__201st (V) Art. Rgt.'
+set @index50 = 'ART__201'
 
 DECLARE @OutputTbl TABLE (ID INT)
 
-INSERT INTO Unit ( UseOrdinal, Letter, MissionName, CommandName, ServiceIdx, ServiceTypeIdx,  RankSymbol, AdminCorpsId, CanHide, Notes)
+INSERT INTO Unit ( UseOrdinal, Number, Letter, MissionName, CommandName, ServiceIdx, ServiceTypeIdx,  RankSymbol, AdminCorpsId, CanHide, Notes)
 OUTPUT INSERTED.UnitId INTO @OutputTbl(ID)
 VALUES 
-(0, null, 'Headquarters & Headquarters','___'+@batnumb+@batord+' Bty., ____4th Bn., __319th Art. Rgt.', 2,1,'|', @admincorpsid, 1, null)
-, (0, @unitA, null, '___'+@batnumb+@batord+' Bty., ____4th Bn., __319th Art. Rgt.',2,1,'|', @admincorpsid, 1, null)
-, (0, @unitB, null, '___'+@batnumb+@batord+' Bty., ____4th Bn., __319th Art. Rgt.',2,1,'|', @admincorpsid, 1, null) 
-, (0, @unitC, null, '___'+@batnumb+@batord+' Bty., ____4th Bn., __319th Art. Rgt.',2,1,'|', @admincorpsid, 1, null)
---, (0, @unitD, null, '___'+@batnumb+@batord+' Sqn., Royal Texas Rifles',2,1,'|', @admincorpsid, 1, null)
-, (0, null, 'G', '___'+@batnumb+@batord+' Sqn., __173rd Bde. Supt. Rgt.',2,1,'|', @admincorpsid, 1, null)
+(0, null,null, 'Headquarters & Headquarters','___'+@batnumb+@batord+' '+@unittype+', '+@commandname, 2,@servicetype,'|', @admincorpsid, 1, null)
+, (0, null,@unitA, null, '___'+@batnumb+@batord+' '+@unittype+', '+@commandname,2,@servicetype,'|', @admincorpsid, 1, null)
+, (0, null,@unitB, null, '___'+@batnumb+@batord+' '+@unittype+', '+@commandname,2,@servicetype,'|', @admincorpsid, 1, null) 
+, (0, null,@unitC, null, '___'+@batnumb+@batord+' '+@unittype+', '+@commandname,2,@servicetype,'|', @admincorpsid, 1, null)
+--, (0, @unitD, null, '___'+@batnumb+@batord+' Sqn., Royal Texas Rifles',2,@servicetype,'|', @admincorpsid, 1, null)
+, (0, 1201,null, 'Close Support Logistics Sqn.', null,2,@servicetype,'|', @supportadmincorps, 1, null)
 
 
 --select id from @OutputTbl
@@ -76,43 +95,43 @@ select 2, @parentid, id,0 from @OutputTbl;
 
 insert into unitindex( IndexCode, UnitId, IsSortIndex, IsDisplayIndex, IsAlt, IsPlaceholder, DisplayOrder)
 values 
-('RA@__319@____'+@batnumb+'|!', @hsc_id, 1, 1, 0, 0, 10)
-, ('HHB-___'+@batnumb+'/__319 FAR, RA',@hsc_id, 0, 1, 0, 0, 20)
-, ('HHC, ___'+@batnumb+@batord+' Bn., __319th FAR, RA',@hsc_id, 0, 1, 0, 0, 30)
-, ('~USA ART __319/___'+@batnumb+ '-HHB',@hsc_id, 0, 1, 1, 0, 50)
+(@index10+'@____'+@batnumb+'|!', @hsc_id, 1, 1, 0, 0, 10)
+, (@headquarters+'-___'+@batnumb+'/'+@index20,@hsc_id, 0, 1, 0, 0, 20)
+, (@headquarters+', ___'+@batnumb+@batord+' Bn., '+@commandname,@hsc_id, 0, 1, 0, 0, 30)
+, ('~USA '+@index50+'/___'+@batnumb+ '-'+@headquarters,@hsc_id, 0, 1, 1, 0, 50)
 --('PARA@___'+@batnumb+'|!', @hsc_id, 1, 1, 0, 0, 10)
 --, ('HHC-___'+@batnumb+'/___'+@regnumb+' PARA',@hsc_id, 0, 1, 0, 0, 20)
 --, ('HHC, ___'+@batnumb+@batord+' Bn., ___'+@regnumb+@regord+' Para. Rgt.',@hsc_id, 0, 1, 0, 0, 30)
 --, ('~USA INF __503/___'+@batnumb+ '-HHC',@hsc_id, 0, 1, 1, 0, 50)
 
-, ('RA@__319@____'+@batnumb+'|'+@unitA,@a_id, 1, 1, 0, 0, 10)
-, (@unitA+'-___'+@batnumb+'/__319 FAR, RA',@a_id, 0, 1, 0, 0, 20)
-, (@unitA+' Bty., ___'+@batnumb+@batord+' Bn., __319th FAR, RA',@a_id, 0, 1, 0, 0, 30)
-, ('~USA ART __319/___'+@batnumb+ '-A',@a_id, 0, 1, 1, 0, 50)
+, (@index10+'@____'+@batnumb+'|'+@unitA,@a_id, 1, 1, 0, 0, 10)
+, (@unitA+'-___'+@batnumb+'/'+@index20,@a_id, 0, 1, 0, 0, 20)
+, (@unitA+' Bty., ___'+@batnumb+@batord+' Bn., '+@commandname,@a_id, 0, 1, 0, 0, 30)
+, ('~USA '+@index50+'/___'+@batnumb+ '-A',@a_id, 0, 1, 1, 0, 50)
  
-, ('RA@__319@____'+@batnumb+'|'+@unitB,@b_id, 1, 1, 0, 0, 10)
-, (@unitB+'-___'+@batnumb+'//__319 FAR, RA',@b_id, 0, 1, 0, 0, 20)
-, (@unitB+' Coy., ___'+@batnumb+@batord+' Bn., __319th FAR, RA',@b_id, 0, 1, 0, 0, 30)
-, ('~USA ART __319/___'+@batnumb+ '-B',@b_id, 0, 1, 1, 0, 50)
+, (@index10+'@____'+@batnumb+'|'+@unitB,@b_id, 1, 1, 0, 0, 10)
+, (@unitB+'-___'+@batnumb+'/'+@index20,@b_id, 0, 1, 0, 0, 20)
+, (@unitB+' Coy., ___'+@batnumb+@batord+' Bn., '+@commandname,@b_id, 0, 1, 0, 0, 30)
+, ('~USA '+@index50+'/___'+@batnumb+ '-B',@b_id, 0, 1, 1, 0, 50)
 
-, ('RA@__319@____'+@batnumb+'|'+@unitC,@c_id, 1, 1, 0, 0, 10)
-, (@unitC+'-___'+@batnumb+'/__319 FAR, RA',@c_id, 0, 1, 0, 0, 20)
-, (@unitC+' Coy., ___'+@batnumb+@batord+' Bn., __319th FAR, RA',@c_id, 0, 1, 0, 0, 30)
-, ('~USA ART __319/___'+@batnumb+ '-C',@c_id, 0, 1, 1, 0, 50)
+, (@index10+'@____'+@batnumb+'|'+@unitC,@c_id, 1, 1, 0, 0, 10)
+, (@unitC+'-___'+@batnumb+'/'+@index20,@c_id, 0, 1, 0, 0, 20)
+, (@unitC+' Coy., ___'+@batnumb+@batord+' Bn., '+@commandname,@c_id, 0, 1, 0, 0, 30)
+, ('~USA '+@index50+'/___'+@batnumb+ '-C',@c_id, 0, 1, 1, 0, 50)
 
 --, ('RTXRFLS@___'+@batnumb+'|'+@unitD,@d_id, 1, 1, 0, 0, 10)
---, (@unitD+'-___'+@batnumb+'/R TX RFLS',@d_id, 0, 1, 0, 0, 20)
+--, (@unitD+'-___'+@batnumb+'/'+@index20,@d_id, 0, 1, 0, 0, 20)
 --, (@unitD+' Coy., ___'+@batnumb+@batord+' Bn., Royal Texas Rifles',@d_id, 0, 1, 0, 0, 30)
---, ('~USA INF __143/___'+@batnumb+ '-D',@d_id, 0, 1, 1, 0, 50)
+--, ('~USA '+@index10+'/___'+@batnumb+ '-D',@d_id, 0, 1, 1, 0, 50)
 
 --, ('RRM___'+@regnumb+'@___'+@batnumb+'|X',@wpn_id, 1, 1, 0, 0, 10)
 --, ('WPNS-___'+@batnumb+'/___'+@regnumb+' RRM',@wpn_id, 0, 1, 0, 0, 20)
 --, ('Wpns. Coy., ___'+@batnumb+@batord+' Bn., ___'+@regnumb+@rgtord+' RRM',@wpn_id, 0, 1, 0, 0, 30)
 --, ('~USMC MARINES ___'+@regnumb+'/___'+@batnumb+ '-WPNS',@wpn_id, 0, 1, 1, 0, 50)
-, ('CSSA@__173|G',@wpn_id, 1, 1, 0, 0, 10)
-, ('G-__173 BSR',@wpn_id, 0, 1, 0, 0, 20)
-, ('G Coy., __173rd (Abn.) Bde. Supt. Rgt.',@wpn_id, 0, 1, 0, 0, 30)
-, ('~USA SUPT __173-G',@wpn_id, 0, 1, 1, 0, 50)
+, ('CSSA|_1201',@wpn_id, 1, 1, 0, 0, 10)
+, ('_1201 CSLS',@wpn_id, 0, 1, 0, 0, 20)
+, ('_1201 (V) CSLS',@wpn_id, 0, 1, 0, 0, 30)
+, ('~USA FSC _1201',@wpn_id, 0, 1, 1, 0, 50)
 --@d_id, 
 
 insert into missionunit (missionid, unitid)
@@ -132,7 +151,7 @@ values (@baseid, @hsc_id, 0)
 , (@baseid, @wpn_id, 0)
 
 
-select Unit.UnitId, CONCAT(number, letter, missionname, commandname) , Mission.FullName, base.SortName  
+select Unit.UnitId, CONCAT(number, letter, missionname, commandname) As UnitDetails, Mission.FullName as MissionFullName, base.SortName  as Base
 from Unit 
 inner join  missionunit on  unit.unitid = missionunit.unitid 
 inner join mission on missionunit.missionid = mission.MissionId

@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<ArrayOfGlobalSecurityObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GlobalSecurityObject>
+    <Url>https://www.globalsecurity.org/military/agency/navy/ctf-53.htm</Url>
+    <NameNode>Commander, Logistics Forces (COMLOGFORNAVCENT)Commander, Task Force 53 (CTF-53)</NameNode>
+    <FullName>Commander, Logistics Forces (COMLOGFORNAVCENT); Commander, Task Force 53 (CTF-53)</FullName>
+    <LogoUrl>https://www.globalsecurity.org/military/agency/navy/images/ctf-53.gif</LogoUrl>
+    <HigherHq />
+    <Children>
+      <SubUnitObject>
+        <Url>https://www.globalsecurity.org/military/agency/navy/nrcc-bah.htm</Url>
+        <FullName>NRCC Detachment Bahrain</FullName>
+        <Name>NRCC Detachment Bahrain</Name>
+        <Id>navy/nrcc-bah.htm</Id>
+        <IsIndirect>false</IsIndirect>
+      </SubUnitObject>
+    </Children>
+    <UnitService>Navy</UnitService>
+    <UnitComponent>Active</UnitComponent>
+    <NameFormer />
+    <TableNodes>
+      <TableNode>
+        <h3>Units</h3>
+        <li>
+          <li>
+            <href>https://www.globalsecurity.org/military/agency/navy/nrcc-bah.htm</href>
+            <text>NRCC Detachment Bahrain</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Homeport</h3>
+        <li>
+          <li>
+            <href>https://www.globalsecurity.org/military/facility/muharraq.htm</href>
+            <text>Muharraq Airfield, Bahrain
+Manama, Bahrain</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Official Homepage</h3>
+        <li>
+          <li>
+            <href>http://www.ctf53.bahrain.navy.mil/</href>
+            <text>COMLOGFORNAVCENT</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+    </TableNodes>
+    <Description>
+      <DescriptionObj>
+        <NodeType>h2</NodeType>
+        <Contents>Commander, Logistics Forces (COMLOGFORNAVCENT)
+&lt;br&gt;Commander, Task Force 53 (CTF-53)</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>img</NodeType>
+        <Contents>images/ctf-53.gif</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>#text</NodeType>
+        <Contents>With 12 Navy Cargo Handling Battalions, two Supply Support Battalions and a total of 3,200 Naval Reserve personnel, the Naval Expeditionary Logistics Support Force (NAVELSF) represents over 90 percent of the Navy's overseas shore-based supply and transportation capability. During peacetime, NAVELSF provides operational and exercise logistics support to a wide range of customers around the globe. Many of those customers have come to rely on NAVELSF manpower and expertise on an ongoing basis to assist with their day-to-day operations.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>ul</NodeType>
+        <Contents>CTF 53 Expediting Section. Tracked and expedited CASREP requisitions and assisted with the preparation of the Consolidated Aircraft Material Status Report, which included the status of NMCS/PMCS requisitions for aviation units.
+BANZ Warehouse. Supply Support Battalions and Freight Terminal Companies performed inventories, processed receipts, and tracked incoming material for further transfer to afloat operational units.
+AVUNIT (air terminal). Processed mail, cargo and customers arriving from CONUS and other locations. NAVELSF Air Cargo Companies loaded and unloaded Navy organic aircraft. They also provided assistance with flight status boards and load planning, as well as limited assistance with RCAPS documentation.
+COMUSNAV-CENTCOM5FLT N4 Headquarters Support. NAVELSF personnel assisted with daily fleet material readiness reports and responses on all ships operating in the Arabian Gulf and Indian Ocean.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+    </Description>
+    <NickName />
+  </GlobalSecurityObject>
+  <GlobalSecurityObject>
+    <Url>https://www.globalsecurity.org/military/agency/navy/nrcc-bah.htm</Url>
+    <NameNode>Naval Regional Contracting Center Detachment Bahrain</NameNode>
+    <FullName>Naval Regional Contracting Center Detachment Bahrain</FullName>
+    <LogoUrl>https://www.globalsecurity.org/military/agency/navy/images/nrcc-np.gif</LogoUrl>
+    <HigherHq>
+      <HigherHqObject>
+        <IsCurrent>true</IsCurrent>
+        <Type>Unknown</Type>
+        <Name>Husbanding Contracts</Name>
+      </HigherHqObject>
+    </HigherHq>
+    <Children />
+    <UnitService>Navy</UnitService>
+    <UnitComponent>Active</UnitComponent>
+    <NameFormer />
+    <TableNodes>
+      <TableNode>
+        <h3>Units</h3>
+        <li>
+          <li>
+            <text>DET Dubai, UAE</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Husbanding Contracts</h3>
+        <li />
+      </TableNode>
+      <TableNode>
+        <li>
+          <li>
+            <text>Aden, Yemen		
+Aqaba, Jordan 
+Cairo, Egypt
+Cape Town, South Africa
+Damman, Saudi Arabia
+Doha, Qatar
+Djibouti
+Durban, South Africa
+Esseb, Eritrea		   
+Hurghada, Egypt
+Jeddah, Saudi Arabia
+Jubail, Saudi Arabia	
+Kuwait City, Kuwait
+Manama, Bahrain
+Massawa, Eritrea
+Mombasa, Kenya
+Muscat, Oman		
+United Arab Emirates
+Salalah, Oman
+Seychelles		   
+Yanbu, Saudi Arabia</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Homeport</h3>
+        <li>
+          <li>
+            <href>https://www.globalsecurity.org/military/facility/manama.htm</href>
+            <text>Manama</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Official Homepage</h3>
+        <li>
+          <li>
+            <href>http://www.nrccbah.com/</href>
+            <text>NRCC Bahrain</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+    </TableNodes>
+    <Description>
+      <DescriptionObj>
+        <NodeType>h2</NodeType>
+        <Contents>Naval Regional Contracting Center Detachment Bahrain
+</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>img</NodeType>
+        <Contents>images/nrcc-np.gif</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>#text</NodeType>
+        <Contents>A large part of the customer service efforts include supporting exercises and operations.  Infinite Moonlight 98 (14 May 98 - 8 Jun 98) in Jordan was a  A cooperative training exercise between the forces of the Hashmite Kingdom of Jordan and U.S. forces in literal environment.  NRCC Bahrain supported the USS Tarawa Amphibious Readiness Group (ARG). Inherent Fury 98 (Nov 98) at Sheik Isa Air Base,  Bahrain was an annual joint command/combined special operations exercise conducted between the Bahraini Armed Forces and U.S. Special Operations Forces.   NRCC Bahrain provided ground support equipment,  messing &amp; berthing.  NRCC Bahrain supported SOCCENT (Special Operations Command, Central) HQ &amp; NAVCENT. Other supported exercises include BRIGHT STAR,  NEON FALCON and  EAGLE RESOLVE.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+    </Description>
+    <NickName />
+  </GlobalSecurityObject>
+</ArrayOfGlobalSecurityObject>

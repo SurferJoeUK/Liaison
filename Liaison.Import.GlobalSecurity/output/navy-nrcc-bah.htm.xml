@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<ArrayOfGlobalSecurityObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GlobalSecurityObject>
+    <Url>https://www.globalsecurity.org/military/agency/navy/nrcc-bah.htm</Url>
+    <NameNode>Naval Regional Contracting Center Detachment Bahrain</NameNode>
+    <FullName>Naval Regional Contracting Center Detachment Bahrain</FullName>
+    <LogoUrl>https://www.globalsecurity.org/military/agency/navy/images/nrcc-np.gif</LogoUrl>
+    <HigherHq>
+      <HigherHqObject>
+        <IsCurrent>true</IsCurrent>
+        <Type>Unknown</Type>
+        <Name>Husbanding Contracts</Name>
+      </HigherHqObject>
+    </HigherHq>
+    <Children />
+    <UnitService>Navy</UnitService>
+    <UnitComponent>Active</UnitComponent>
+    <NameFormer />
+    <TableNodes>
+      <TableNode>
+        <h3>Units</h3>
+        <li>
+          <li>
+            <text>DET Dubai, UAE</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Husbanding Contracts</h3>
+        <li />
+      </TableNode>
+      <TableNode>
+        <li>
+          <li>
+            <text>Aden, Yemen		
+Aqaba, Jordan 
+Cairo, Egypt
+Cape Town, South Africa
+Damman, Saudi Arabia
+Doha, Qatar
+Djibouti
+Durban, South Africa
+Esseb, Eritrea		   
+Hurghada, Egypt
+Jeddah, Saudi Arabia
+Jubail, Saudi Arabia	
+Kuwait City, Kuwait
+Manama, Bahrain
+Massawa, Eritrea
+Mombasa, Kenya
+Muscat, Oman		
+United Arab Emirates
+Salalah, Oman
+Seychelles		   
+Yanbu, Saudi Arabia</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Homeport</h3>
+        <li>
+          <li>
+            <href>https://www.globalsecurity.org/military/facility/manama.htm</href>
+            <text>Manama</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Official Homepage</h3>
+        <li>
+          <li>
+            <href>http://www.nrccbah.com/</href>
+            <text>NRCC Bahrain</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+    </TableNodes>
+    <Description>
+      <DescriptionObj>
+        <NodeType>h2</NodeType>
+        <Contents>Naval Regional Contracting Center Detachment Bahrain
+</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>img</NodeType>
+        <Contents>images/nrcc-np.gif</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>#text</NodeType>
+        <Contents>A large part of the customer service efforts include supporting exercises and operations.  Infinite Moonlight 98 (14 May 98 - 8 Jun 98) in Jordan was a  A cooperative training exercise between the forces of the Hashmite Kingdom of Jordan and U.S. forces in literal environment.  NRCC Bahrain supported the USS Tarawa Amphibious Readiness Group (ARG). Inherent Fury 98 (Nov 98) at Sheik Isa Air Base,  Bahrain was an annual joint command/combined special operations exercise conducted between the Bahraini Armed Forces and U.S. Special Operations Forces.   NRCC Bahrain provided ground support equipment,  messing &amp; berthing.  NRCC Bahrain supported SOCCENT (Special Operations Command, Central) HQ &amp; NAVCENT. Other supported exercises include BRIGHT STAR,  NEON FALCON and  EAGLE RESOLVE.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+    </Description>
+    <NickName />
+  </GlobalSecurityObject>
+</ArrayOfGlobalSecurityObject>

@@ -35,6 +35,8 @@ namespace Liaison.BLL.Models.Equipment
                 {
                     continue;
                 }
+
+                thing.GetEquipmentString().Replace("_", "");
                 if (thing.GetType() == typeof(BLLGroundEquipment))
                 {
                     if (thing is BLLGroundEquipment ground)

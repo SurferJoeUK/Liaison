@@ -4,7 +4,6 @@ using System.Text;
 using Liaison.BLL.Models.Objects;
 using Liaison.BLL.Models.Unit.Abstracts;
 using Liaison.BLL.Models.Unit.Interfaces;
-using Liaison.Data.Sql.Edmx;
 using Liaison.Helper.Enumerators;
 
 namespace Liaison.BLL.Models.Unit
@@ -29,7 +28,7 @@ namespace Liaison.BLL.Models.Unit
             this.Base = new BLLBase(sqlUnit.Bases.FirstOrDefault());
             this.Indices = sqlUnit.UnitIndexes.OrderBy(x => x.DisplayOrder).Where(x => x.IsDisplayIndex)
                 .Select(x => x.IndexCode).ToList();
-            this.Indices.Add(this.Base.AirfieldCode);
+            //this.Indices.Add(this.Base.AirfieldCode);
             this.SortIndex = GetSortIndex(sqlUnit.UnitIndexes);
             //this.AdminCorps = new BLLAdminCorps(sqlUnit.AdminCorp);
 

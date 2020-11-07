@@ -1,5 +1,6 @@
 ﻿using Liaison.BLL.Models;
 using Liaison.BLL.Models.Unit;
+using Liaison.BLL.Models.Unit.Abstracts;
 using Liaison.Helper.Enumerators;
 using System;
 using System.Text;
@@ -9,6 +10,14 @@ namespace Liaison.BLL.Languages
     // ReSharper disable once InconsistentNaming
     public class fr_fr : ILanguage, IDisposable
     {
+        System.Collections.Generic.Dictionary<string, string> _translations=null;
+        public fr_fr()
+        {
+            if (_translations == null)
+            {
+                _translations = AUnit.GetTranslations("fr_fr");
+            }
+        }
         public string GetBattalionName(Battalion battalion)
         {
             StringBuilder sb = new StringBuilder();
@@ -88,7 +97,7 @@ namespace Liaison.BLL.Languages
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(ToOrdinal(armySquadron.Number, armySquadron.UseOrdinal) + " ");
-            sb.Append("Esc. " + armySquadron.MissionName + ", " + armySquadron.CommandName);
+            sb.Append("Esc. " + Translator(armySquadron.MissionName) + ", " + armySquadron.CommandName);
 
             return sb.ToString().Replace("_", "");
         }
@@ -96,7 +105,7 @@ namespace Liaison.BLL.Languages
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(ToOrdinal(company.Number, company.UseOrdinal) + " ");
-            sb.Append("Cie. " + company.MissionName + ", " + company.CommandName);
+            sb.Append("Cie. " + Translator(company.MissionName) + ", " + company.CommandName);
 
             return sb.ToString().Replace("_", "");
         }
@@ -116,22 +125,9 @@ namespace Liaison.BLL.Languages
 
             sb.Append(unitname);
 
-            if (missionName == "Armoured")
-            {
-                sb.Append(" Blindée");
-            }
-            else if (missionName == "Marine Infantry")
-            {
-                sb.Append(" d'Infanterie de Marine");
-            }
-            else if (missionName == "Mountain Infantry")
-            {
-                sb.Append(" d’Infanterie de Montagne");
-            }
-            else
-            {
-                sb.Append(" " + missionName);
-            }
+            sb.Append(" " + Translator(missionName));
+
+           
 
             return sb.ToString();
         }
@@ -167,5 +163,32 @@ namespace Liaison.BLL.Languages
         }
 
 
+
+        private string Translator(string key)
+        {
+            return AUnit.DoTranslation(_translations, key, "fr_fr");
+
+
+
+            //switch (english)
+            //{
+            //    case "Armoured":
+            //        return "Blindée";
+            //    case "Marine Infantry":
+            //        return "d'Infanterie de Marine";
+            //    case "Mountain Infantry":
+            //        return "d’Infanterie de Montagne";
+            //    case "Support":
+            //        return "de soutien";
+            //    case "Combat":
+            //        return "de combat";
+            //    case "Command & Logistics":
+            //        return "de commandement et de logistique";
+            //    case "Armoured Reconnaissance":
+            //        return "blindés de reconnaissance";
+            //    default:
+            //        throw new NotImplementedException(english + " not translated");
+            //}
+        }
     }
-}
+} 

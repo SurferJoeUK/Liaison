@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<ArrayOfGlobalSecurityObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GlobalSecurityObject>
+    <Url>https://www.globalsecurity.org/military/agency/navy/patreconwing1.htm</Url>
+    <NameNode>Commander, Patrol and Reconnaissance Wing One (CPRW-1)Commander, Patrol and Reconnaissance Force Fifth Fleet (CTF-57)Commander, Patrol and Reconnaissance Force Seventh Fleet (CTF-72)</NameNode>
+    <FullName>Commander, Patrol and Reconnaissance Wing One (CPRW-1); Commander, Patrol and Reconnaissance Force Fifth Fleet (CTF-57); Commander, Patrol and Reconnaissance Force Seventh Fleet (CTF-72)</FullName>
+    <LogoUrl>https://www.globalsecurity.org/military/agency/navy/images/patwing1.gif</LogoUrl>
+    <HigherHq />
+    <Children>
+      <SubUnitObject>
+        <Url>https://www.globalsecurity.org/military/agency/navy/patron-diego-garcia.htm</Url>
+        <FullName>Patrol Squadron (PATRON), Diego Garcia  
+Patrol Squadron (PATRON), Misawa  
+TSC Detachment, Diego Garcia 
+TSC Detachment, Kadena
+TSC Detachment, Misawa</FullName>
+        <Name>Patrol Squadron (PATRON), Diego Garcia  
+Patrol Squadron (PATRON), Misawa  
+TSC Detachment, Diego Garcia 
+TSC Detachment, Kadena
+TSC Detachment, Misawa</Name>
+        <Id>navy/patron-diego-garcia.htm</Id>
+        <IsIndirect>false</IsIndirect>
+      </SubUnitObject>
+    </Children>
+    <UnitService>Navy</UnitService>
+    <UnitComponent>Active</UnitComponent>
+    <NameFormer />
+    <TableNodes>
+      <TableNode>
+        <h3>Units</h3>
+        <li>
+          <li>
+            <href>https://www.globalsecurity.org/military/agency/navy/patron-diego-garcia.htm</href>
+            <text>Patrol Squadron (PATRON), Diego Garcia  
+Patrol Squadron (PATRON), Misawa  
+TSC Detachment, Diego Garcia 
+TSC Detachment, Kadena
+TSC Detachment, Misawa</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Homeport</h3>
+        <li>
+          <li>
+            <text>Naval Support Facility Kamiseya</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Official Homepage</h3>
+        <li>
+          <li>
+            <href>http://www.atsugi.navy.mil/cprw1/cprw1.html</href>
+            <text>Patrol &amp; Reconnaissance Wing ONE  
+Patrol and Reconnaissance Force Seventh Fleet</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+    </TableNodes>
+    <Description>
+      <DescriptionObj>
+        <NodeType>h2</NodeType>
+        <Contents>
+Commander, Patrol and Reconnaissance Wing One (CPRW-1)&lt;br&gt;
+Commander, Patrol and Reconnaissance Force Fifth Fleet (CTF-57)&lt;br&gt;
+Commander, Patrol and Reconnaissance Force Seventh Fleet (CTF-72) 
+</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>img</NodeType>
+        <Contents>images/patwing1.gif</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>#text</NodeType>
+        <Contents>Task Force 57's area of responsibility includes the Arabian Gulf, Red Sea, Gulf of Oman and North Arabian Sea. Task Force FIVE SEVEN is comprised of three detachments totaling six Lockheed P-3 Orion and Aries II aircraft, together witl FIFTH Fleet special squadron detachments. Over 400 personnel are assigned to Task Force FIVE SEVEN. Major task groups under the operational control a Commander, Patrol and Reconnaissance Force FIFTH Fleet are: The Indian Ocean Air Patrol Group (Task Group 57.2; consisting of a P-3 Orion aircraft squadron deployed to Naval Support Facility Diego Garcia with detachments in Masirah, Oman and Manama, Bahrain; Fleet Air Reconnaissance Squadron ONE (Task Group 57.1) Detachment Manama, Bahrain and other detachments as may be necessary.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+    </Description>
+    <NickName />
+  </GlobalSecurityObject>
+  <GlobalSecurityObject>
+    <Url>https://www.globalsecurity.org/military/agency/navy/patron-diego-garcia.htm</Url>
+    <NameNode>Patrol Squadron Diego Garcia</NameNode>
+    <FullName>Patrol Squadron Diego Garcia</FullName>
+    <HigherHq>
+      <HigherHqObject>
+        <IsCurrent>true</IsCurrent>
+        <Type>Unknown</Type>
+        <Name>Official Homepage</Name>
+      </HigherHqObject>
+    </HigherHq>
+    <Children />
+    <UnitService>Navy</UnitService>
+    <UnitComponent>Active</UnitComponent>
+    <NameFormer />
+    <TableNodes>
+      <TableNode>
+        <h3>Major Deployments, 1998-99</h3>
+        <li>
+          <li>
+            <text>VP-47 Nov 97-Jun 98
+VP-9 Jun 98-Dec 98
+VP-4 Dec 98-Jun 99</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Equipment</h3>
+        <li>
+          <li>
+            <text>P-3C Orion</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Homeport</h3>
+        <li>
+          <li>
+            <text>Diego Garcia
+Bahrain (detachment) 
+Masirah  (detachment)</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Official Homepage</h3>
+        <li />
+      </TableNode>
+    </TableNodes>
+    <Description>
+      <DescriptionObj>
+        <NodeType>h2</NodeType>
+        <Contents>Patrol Squadron Diego Garcia</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>#text</NodeType>
+        <Contents>On 14 October 2000, Patrol Squadron FORTY's Diego Garcia, British Indian Ocean Territory, detachment site received word that a small sail boat somewhere in the Indian Ocean was in distress.  The squadron did not hesitate to lend assistance.  VP-40 sent Combat Air Crew Three (CAC-3) to assist in the search and rescue effort.
+CAC-3 proceeded to the suspected location of the sinking vessel.  The crew-members knew they had found the stranded sailors when they observed a flare from the boat.  Fortunately, the sailboat was still seaworthy, so the crew did not have to drop the SAR kit.  Instead they closely monitored the position of the boat and coordinated the efforts of an Australian SAR team that was able to safely bring the two sailors back to Perth.  After the long flight the P-3 did not have enough fuel to return to Diego Garcia, so it landed in the Cocos Islands. CAC 3 returned safely to Diego Garcia next day.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+    </Description>
+    <NickName />
+  </GlobalSecurityObject>
+</ArrayOfGlobalSecurityObject>

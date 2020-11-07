@@ -140,6 +140,10 @@ namespace Liaison.BLL.Models.Unit
                 else if (this.Service == ServicesBll.Marines && string.IsNullOrWhiteSpace(this.MissionName))
                 {
                     sb.Append("Marine Air Sqn.");
+                    if (this.ServiceType==ServiceTypeBLL.Reinforced)
+                    {
+                        sb.Append(" (Rein.)");
+                    }
                 }
                 else
                 {
@@ -164,33 +168,36 @@ namespace Liaison.BLL.Models.Unit
             }
 
             return sb.ToString();
-        }        
-
+        }
         public override EquipmentContainer GetEquipment()
         {
-            bool showAltName = true;
-
-            StringBuilder sb =new StringBuilder();
-            foreach (var thing in this.Equipment)
-            {
-                if (thing.GetType() == typeof(BLLAircraft))
-                {
-                    if (thing is BLLAircraft airc)
-                    {
-                        sb.Append(airc.PAA + " " + airc.Name + " " + airc.Mark);
-                        if (showAltName)
-                        {
-                            sb.Append(" [" + airc.AltCode + " " + airc.AltName + "]");
-                        }
-                    }
-                }
-
-                sb.Append(ResourceStrings.Seperator);
-            }
-
-            var x = sb.ToString();
-            return new EquipmentContainer(  (x.Length > 0 ? x.Substring(0, x.Length - ResourceStrings.Seperator.Length) : x).Replace("_", ""));
+            return EquipmentMethods.GetEquipment(this.Equipment);
         }
+        //public override EquipmentContainer GetEquipment()
+        //{
+        //    bool showAltName = true;
+
+        //    StringBuilder sb =new StringBuilder();
+        //    foreach (var thing in this.Equipment)
+        //    {
+        //        //if (thing.GetType() == typeof(BLLAircraft))
+        //        //{
+        //        //    if (thing is BLLAircraft airc)
+        //        //    {
+        //        //        sb.Append(airc.PAA + " " + airc.Name + " " + airc.Mark);
+        //        //        if (showAltName)
+        //        //        {
+        //        //            sb.Append(" [" + airc.AltCode + " " + airc.AltName + "]");
+        //        //        }
+        //        //    }
+        //        //}
+        //        thing.GetEquipmentString();
+        //        sb.Append(ResourceStrings.Seperator);
+        //    }
+
+        //    var x = sb.ToString();
+        //    return new EquipmentContainer(  (x.Length > 0 ? x.Substring(0, x.Length - ResourceStrings.Seperator.Length) : x).Replace("_", ""));
+        //}
 
         public string GetTerritorialDesignation()
         {

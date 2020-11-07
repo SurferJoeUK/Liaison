@@ -174,32 +174,35 @@ namespace Liaison.BLL.Models.Unit
         }
 
 
-
         public override EquipmentContainer GetEquipment()
         {
-            bool showAltName = true;
-
-            StringBuilder sb = new StringBuilder();
-            foreach (var thing in this.Equipment)
-            {
-                if (thing.GetType() == typeof(BLLAircraft))
-                {
-                    if (thing is BLLAircraft airc)
-                    {
-                        sb.Append(airc.PAA + " " + airc.Name + " " + airc.Mark);
-                        if (showAltName)
-                        {
-                            sb.Append(" [" + airc.AltCode + " " + airc.AltName + "]");
-                        }
-                    }
-                }
-
-                sb.Append(ResourceStrings.Seperator);
-            }
-
-            var x = sb.ToString();
-            return new EquipmentContainer(x.Length > 0 ? x.Substring(0, x.Length - ResourceStrings.Seperator.Length) : x);
+            return EquipmentMethods.GetEquipment(this.Equipment);
         }
+        //public override EquipmentContainer GetEquipment()
+        //{
+        //    bool showAltName = true;
+
+        //    StringBuilder sb = new StringBuilder();
+        //    foreach (var thing in this.Equipment)
+        //    {
+        //        //if (thing.GetType() == typeof(BLLAircraft))
+        //        //{
+        //        //    if (thing is BLLAircraft airc)
+        //        //    {
+        //        //        sb.Append(airc.PAA + " " + airc.Name + " " + airc.Mark);
+        //        //        if (showAltName)
+        //        //        {
+        //        //            sb.Append(" [" + airc.AltCode + " " + airc.AltName + "]");
+        //        //        }
+        //        //    }
+        //        //}
+        //        thing.GetEquipmentString();
+        //        sb.Append(ResourceStrings.Seperator);
+        //    }
+
+        //    var x = sb.ToString();
+        //    return new EquipmentContainer(x.Length > 0 ? x.Substring(0, x.Length - ResourceStrings.Seperator.Length) : x);
+        //}
 
         public string GetTerritorialDesignation()
         {

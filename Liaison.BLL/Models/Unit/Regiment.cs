@@ -8,6 +8,26 @@ using Liaison.Helper.Enumerators;
 
 namespace Liaison.BLL.Models.Unit
 {
+    public class RegionalTrainingInstitute : Regiment
+    {
+        public RegionalTrainingInstitute(Data.Sql.Edmx.Unit sqlUnit) : base(sqlUnit)
+        {
+        }
+
+        public override string GetName()
+        {
+            StringBuilder sb = new StringBuilder(
+                this.Number.ToOrdinal(this.UseOrdinal) +
+                " (V) (" + this.TerritorialDesignation + ") " +
+                this.MissionName);
+            if (!string.IsNullOrWhiteSpace(this.UniqueName))
+            {
+                sb.Append(" (" + this.UniqueName + ")");
+            }
+            return sb.ToString();
+        }
+    }
+
     public class Regiment : ThreeBar
     {
         public string LegacyMissionName { get; set; }

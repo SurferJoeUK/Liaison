@@ -19,6 +19,16 @@
           <Property Name="Lookup" Type="nvarchar" MaxLength="5" />
           <Property Name="ParentAdminCorpsId" Type="int" />
         </EntityType>
+        <EntityType Name="AdminCorpsUnits">
+          <Key>
+            <PropertyRef Name="AdminCorpsId" />
+            <PropertyRef Name="UnitId" />
+          </Key>
+          <Property Name="AdminCorpsId" Type="int" Nullable="false" />
+          <Property Name="UnitId" Type="int" Nullable="false" />
+          <Property Name="DoNotUse" Type="bit" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Aircraft">
           <Key>
             <PropertyRef Name="AircraftGuid" />
@@ -90,6 +100,39 @@
           <Property Name="Value" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+          </Key>
+          <Property Name="DocumentId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UnitId" Type="int" />
+          <Property Name="Folder" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Filename" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FileType" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Publisher" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Reference" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="DocumentLink">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="LinkedId" />
+          </Key>
+          <Property Name="DocumentId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="LinkedId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="DocumentReference">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="Reference" />
+          </Key>
+          <Property Name="DocumentId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Reference" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Source" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="CurrentRef" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="EquipmentOwner">
           <Key>
             <PropertyRef Name="EquipmentOwnerId" />
@@ -115,8 +158,8 @@
           <Property Name="FamilyDesignation" Type="nvarchar" MaxLength="50" />
           <Property Name="SortName" Type="nvarchar" MaxLength="255" />
           <Property Name="AltCode" Type="nvarchar" MaxLength="50" />
-          <Property Name="AltName" Type="nvarchar" MaxLength="50" />
-          <Property Name="AltSort" Type="nvarchar" MaxLength="50" />
+          <Property Name="AltName" Type="nvarchar" MaxLength="255" />
+          <Property Name="AltSort" Type="nvarchar" MaxLength="255" />
           <Property Name="Notes" Type="nvarchar(max)" />
           <Property Name="DoNotUse" Type="bit" />
         </EntityType>
@@ -292,6 +335,15 @@
           <Property Name="IsHost" Type="bit" Nullable="false" />
           <Property Name="Notes" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="Translation">
+          <Key>
+            <PropertyRef Name="TranslationId" />
+          </Key>
+          <Property Name="TranslationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="English" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Translation" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Language" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Unit">
           <Key>
             <PropertyRef Name="UnitId" />
@@ -342,6 +394,30 @@
             </Principal>
             <Dependent Role="AdminCorps">
               <PropertyRef Name="ParentUnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdminCorpsUnits_AdminCorps">
+          <End Role="AdminCorps" Type="Self.AdminCorps" Multiplicity="1" />
+          <End Role="AdminCorpsUnits" Type="Self.AdminCorpsUnits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminCorps">
+              <PropertyRef Name="AdminCorpsId" />
+            </Principal>
+            <Dependent Role="AdminCorpsUnits">
+              <PropertyRef Name="AdminCorpsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdminCorpsUnits_Unit">
+          <End Role="Unit" Type="Self.Unit" Multiplicity="1" />
+          <End Role="AdminCorpsUnits" Type="Self.AdminCorpsUnits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="UnitId" />
+            </Principal>
+            <Dependent Role="AdminCorpsUnits">
+              <PropertyRef Name="UnitId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -599,11 +675,15 @@
         </Association>
         <EntityContainer Name="LiaisonModelStoreContainer">
           <EntitySet Name="AdminCorps" EntityType="Self.AdminCorps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdminCorpsUnits" EntityType="Self.AdminCorpsUnits" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Aircraft" EntityType="Self.Aircraft" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AltCode" EntityType="Self.AltCode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Base" EntityType="Self.Base" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConfigSettings" EntityType="Self.ConfigSettings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dictionary" EntityType="Self.Dictionary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Document" EntityType="Self.Document" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentLink" EntityType="Self.DocumentLink" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentReference" EntityType="Self.DocumentReference" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EquipmentOwner" EntityType="Self.EquipmentOwner" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GroundEquipment" EntityType="Self.GroundEquipment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Mission" EntityType="Self.Mission" Schema="dbo" store:Type="Tables" />
@@ -620,11 +700,20 @@
           <EntitySet Name="SortOrder" EntityType="Self.SortOrder" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaskForce" EntityType="Self.TaskForce" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tennant" EntityType="Self.Tennant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Translation" EntityType="Self.Translation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UnitIndex" EntityType="Self.UnitIndex" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AdminCorps_Unit" Association="Self.FK_AdminCorps_Unit">
             <End Role="Unit" EntitySet="Unit" />
             <End Role="AdminCorps" EntitySet="AdminCorps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdminCorpsUnits_AdminCorps" Association="Self.FK_AdminCorpsUnits_AdminCorps">
+            <End Role="AdminCorps" EntitySet="AdminCorps" />
+            <End Role="AdminCorpsUnits" EntitySet="AdminCorpsUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdminCorpsUnits_Unit" Association="Self.FK_AdminCorpsUnits_Unit">
+            <End Role="Unit" EntitySet="Unit" />
+            <End Role="AdminCorpsUnits" EntitySet="AdminCorpsUnits" />
           </AssociationSet>
           <AssociationSet Name="FK_Base_Base" Association="Self.FK_Base_Base">
             <End Role="Base" EntitySet="Base" />
@@ -855,6 +944,19 @@
             <End Role="AdminCorp" EntitySet="AdminCorps" />
             <End Role="Unit" EntitySet="Units" />
           </AssociationSet>
+          <EntitySet Name="AdminCorpsUnits" EntityType="LiaisonModel.AdminCorpsUnit" />
+          <EntitySet Name="Documents" EntityType="LiaisonModel.Document" />
+          <EntitySet Name="DocumentLinks" EntityType="LiaisonModel.DocumentLink" />
+          <EntitySet Name="DocumentReferences" EntityType="LiaisonModel.DocumentReference" />
+          <EntitySet Name="Translations" EntityType="LiaisonModel.Translation" />
+          <AssociationSet Name="FK_AdminCorpsUnits_AdminCorps" Association="LiaisonModel.FK_AdminCorpsUnits_AdminCorps">
+            <End Role="AdminCorp" EntitySet="AdminCorps" />
+            <End Role="AdminCorpsUnit" EntitySet="AdminCorpsUnits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdminCorpsUnits_Unit" Association="LiaisonModel.FK_AdminCorpsUnits_Unit">
+            <End Role="Unit" EntitySet="Units" />
+            <End Role="AdminCorpsUnit" EntitySet="AdminCorpsUnits" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="RelationshipType">
           <Key>
@@ -929,6 +1031,7 @@
           <NavigationProperty Name="AdminCorp" Relationship="LiaisonModel.FK_Unit_AdminCorps" FromRole="Unit" ToRole="AdminCorp" />
           <Property Name="UnitObject" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Format" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AdminCorpsUnits" Relationship="LiaisonModel.FK_AdminCorpsUnits_Unit" FromRole="Unit" ToRole="AdminCorpsUnit" />
         </EntityType>
         <Association Name="FK_Unit_Rank">
           <End Type="LiaisonModel.Rank" Role="Rank" Multiplicity="1" />
@@ -1459,8 +1562,8 @@
           <Property Name="FamilyDesignation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SortName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="AltCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AltName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AltSort" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AltName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AltSort" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DoNotUse" Type="Boolean" />
           <NavigationProperty Name="EquipmentOwners" Relationship="LiaisonModel.FK_EquipmentOwner_GroundEquipment" FromRole="GroundEquipment" ToRole="EquipmentOwner" />
@@ -1494,6 +1597,7 @@
           <Property Name="ParentAdminCorpsId" Type="Int32" />
           <NavigationProperty Name="Unit" Relationship="LiaisonModel.FK_AdminCorps_Unit" FromRole="AdminCorp" ToRole="Unit" />
           <NavigationProperty Name="Units" Relationship="LiaisonModel.FK_Unit_AdminCorps" FromRole="AdminCorp" ToRole="Unit" />
+          <NavigationProperty Name="AdminCorpsUnits" Relationship="LiaisonModel.FK_AdminCorpsUnits_AdminCorps" FromRole="AdminCorp" ToRole="AdminCorpsUnit" />
         </EntityType>
         <Association Name="FK_AdminCorps_Unit">
           <End Type="LiaisonModel.Unit" Role="Unit" Multiplicity="0..1" />
@@ -1516,6 +1620,84 @@
             </Principal>
             <Dependent Role="Unit">
               <PropertyRef Name="AdminCorpsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AdminCorpsUnit">
+          <Key>
+            <PropertyRef Name="AdminCorpsId" />
+            <PropertyRef Name="UnitId" />
+          </Key>
+          <Property Name="AdminCorpsId" Type="Int32" Nullable="false" />
+          <Property Name="UnitId" Type="Int32" Nullable="false" />
+          <Property Name="DoNotUse" Type="Boolean" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AdminCorp" Relationship="LiaisonModel.FK_AdminCorpsUnits_AdminCorps" FromRole="AdminCorpsUnit" ToRole="AdminCorp" />
+          <NavigationProperty Name="Unit" Relationship="LiaisonModel.FK_AdminCorpsUnits_Unit" FromRole="AdminCorpsUnit" ToRole="Unit" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+          </Key>
+          <Property Name="DocumentId" Type="Guid" Nullable="false" />
+          <Property Name="UnitId" Type="Int32" />
+          <Property Name="Folder" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Filename" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FileType" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Publisher" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Reference" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DocumentLink">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="LinkedId" />
+          </Key>
+          <Property Name="DocumentId" Type="Guid" Nullable="false" />
+          <Property Name="LinkedId" Type="Guid" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DocumentReference">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="Reference" />
+          </Key>
+          <Property Name="DocumentId" Type="Guid" Nullable="false" />
+          <Property Name="Reference" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Source" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CurrentRef" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Translation">
+          <Key>
+            <PropertyRef Name="TranslationId" />
+          </Key>
+          <Property Name="TranslationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="English" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Translation1" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Language" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_AdminCorpsUnits_AdminCorps">
+          <End Type="LiaisonModel.AdminCorp" Role="AdminCorp" Multiplicity="1" />
+          <End Type="LiaisonModel.AdminCorpsUnit" Role="AdminCorpsUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminCorp">
+              <PropertyRef Name="AdminCorpsId" />
+            </Principal>
+            <Dependent Role="AdminCorpsUnit">
+              <PropertyRef Name="AdminCorpsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdminCorpsUnits_Unit">
+          <End Type="LiaisonModel.Unit" Role="Unit" Multiplicity="1" />
+          <End Type="LiaisonModel.AdminCorpsUnit" Role="AdminCorpsUnit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="UnitId" />
+            </Principal>
+            <Dependent Role="AdminCorpsUnit">
+              <PropertyRef Name="UnitId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1869,6 +2051,60 @@
                 <ScalarProperty Name="SortName" ColumnName="SortName" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="AdminCorpsId" ColumnName="AdminCorpsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminCorpsUnits">
+            <EntityTypeMapping TypeName="LiaisonModel.AdminCorpsUnit">
+              <MappingFragment StoreEntitySet="AdminCorpsUnits">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="DoNotUse" ColumnName="DoNotUse" />
+                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
+                <ScalarProperty Name="AdminCorpsId" ColumnName="AdminCorpsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Documents">
+            <EntityTypeMapping TypeName="LiaisonModel.Document">
+              <MappingFragment StoreEntitySet="Document">
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="FileType" ColumnName="FileType" />
+                <ScalarProperty Name="Filename" ColumnName="Filename" />
+                <ScalarProperty Name="Folder" ColumnName="Folder" />
+                <ScalarProperty Name="UnitId" ColumnName="UnitId" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentLinks">
+            <EntityTypeMapping TypeName="LiaisonModel.DocumentLink">
+              <MappingFragment StoreEntitySet="DocumentLink">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="LinkedId" ColumnName="LinkedId" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentReferences">
+            <EntityTypeMapping TypeName="LiaisonModel.DocumentReference">
+              <MappingFragment StoreEntitySet="DocumentReference">
+                <ScalarProperty Name="CurrentRef" ColumnName="CurrentRef" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Translations">
+            <EntityTypeMapping TypeName="LiaisonModel.Translation">
+              <MappingFragment StoreEntitySet="Translation">
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Translation1" ColumnName="Translation" />
+                <ScalarProperty Name="English" ColumnName="English" />
+                <ScalarProperty Name="TranslationId" ColumnName="TranslationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -125,6 +125,12 @@ namespace Liaison.Helper.Enumerators
         NavalAviation = 78,
         FleetArmArm = 1,
 
+        //N/EXP
+        RNConstructionForce = 57423,
+        RNEODForce = 57425,
+        RNMarSecFor = 60423,
+        RNExLogFor = 61421,
+
         //AIR        
         RAFFlyingTraining = 1230,
 
@@ -352,6 +358,7 @@ namespace Liaison.Helper.Enumerators
         Volunteer = 4, // TA, ANG
         StateVolunteer = 5, // Local Defence
         Expeditionary = 6,
+        Reinforced = 7,
     }
 
     public enum ShortFormType

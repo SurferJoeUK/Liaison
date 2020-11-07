@@ -32,56 +32,65 @@ namespace Liaison.Import.GlobalSecurity
         {
             using (var webClient = new WebClient())
             {
-                string [] urls=
+                string[] urls =
                 {
-                    //"https://www.globalsecurity.org/military/agency/usaf/ang.htm"
-                    //"https://www.globalsecurity.org/military/agency/army/ca-psyop.htm"
-                    "https://www.globalsecurity.org/military/agency/army/9rsc.htm",
-                    "https://www.globalsecurity.org/military/agency/army/63rsc.htm",
-                    "https://www.globalsecurity.org/military/agency/army/65rsc.htm",
-                    "https://www.globalsecurity.org/military/agency/army/70rsc.htm",
-                    "https://www.globalsecurity.org/military/agency/army/77rsc.htm",
-                    "https://www.globalsecurity.org/military/agency/army/81rsc.htm",
-                    "https://www.globalsecurity.org/military/agency/army/88rsc.htm",
-                    "https://www.globalsecurity.org/military/agency/army/89rsc.htm",
-                    "https://www.globalsecurity.org/military/agency/army/90rsc.htm",
-                    "https://www.globalsecurity.org/military/agency/army/94rsc.htm",
-                    "https://www.globalsecurity.org/military/agency/army/96rsc.htm",
-                    "https://www.globalsecurity.org/military/agency/army/99rsc.htm",
-                    "https://www.globalsecurity.org/military/agency/army/81rsg.htm",
-                    "https://www.globalsecurity.org/military/agency/army/88rsg.htm",
-                    "https://www.globalsecurity.org/military/agency/army/90rsg.htm",
-                    "https://www.globalsecurity.org/military/agency/army/7arcom.htm",
-                    "https://www.globalsecurity.org/military/agency/army/ix-corps.htm",
-                    "https://www.globalsecurity.org/military/agency/army/9tsc.htm",
-                    "https://www.globalsecurity.org/military/agency/army/19tsc-ca.htm",
-                    "https://www.globalsecurity.org/military/agency/army/21tsc-ca.htm",
-                    "https://www.globalsecurity.org/military/agency/army/377tsc.htm",
-                    "https://www.globalsecurity.org/military/agency/army/143transcom.htm",
-                    "https://www.globalsecurity.org/military/agency/army/311coscom.htm",
-                    "https://www.globalsecurity.org/military/agency/army/335tsc.htm",
-                    "https://www.globalsecurity.org/military/agency/army/412en-com.htm",
-                    "https://www.globalsecurity.org/military/agency/army/416encom.htm",
-                    "https://www.globalsecurity.org/military/agency/army/3medcom.htm",
-                    "https://www.globalsecurity.org/military/agency/army/332med-bde.htm",
-                    "https://www.globalsecurity.org/military/agency/army/807med-bde.htm",
-                    "https://www.globalsecurity.org/military/agency/army/80d.htm",
-                    "https://www.globalsecurity.org/military/agency/army/84d.htm",
-                    "https://www.globalsecurity.org/military/agency/army/95d.htm",
-                    "https://www.globalsecurity.org/military/agency/army/98d.htm",
-                    "https://www.globalsecurity.org/military/agency/army/100d.htm",
-                    "https://www.globalsecurity.org/military/agency/army/104d.htm",
-                    "https://www.globalsecurity.org/military/agency/army/108d.htm",
-                    "https://www.globalsecurity.org/military/agency/army/75d.htm",
-                    "https://www.globalsecurity.org/military/agency/army/78d.htm",
-                    "https://www.globalsecurity.org/military/agency/army/85d.htm",
-                    "https://www.globalsecurity.org/military/agency/army/87d.htm",
-                    "https://www.globalsecurity.org/military/agency/army/91d.htm",
-                    "https://www.globalsecurity.org/military/agency/army/244avn.htm",
-                    "https://www.globalsecurity.org/military/agency/army/readinesscmd.htm",
-                    "https://www.globalsecurity.org/military/agency/army/77id.htm",
-                    ""
+                    "https://www.globalsecurity.org/military/agency/navy/comnavairlant.htm"//,
+                    //"https://www.globalsecurity.org/military/agency/navy/vq-2-det-souda.htm",
+                    //"https://www.globalsecurity.org/military/agency/navy/fairmed.htm",
+                    //"https://www.globalsecurity.org/military/agency/navy/tsc-rota.htm",
+                    //"https://www.globalsecurity.org/military/agency/navy/tsc-sigonella.htm",
+                    //"https://www.globalsecurity.org/military/agency/navy/hc-4.htm"
                 };
+                //string [] urls=
+                //{
+                //    //"https://www.globalsecurity.org/military/agency/usaf/ang.htm"
+                //    //"https://www.globalsecurity.org/military/agency/army/ca-psyop.htm"
+                //    "https://www.globalsecurity.org/military/agency/army/9rsc.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/63rsc.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/65rsc.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/70rsc.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/77rsc.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/81rsc.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/88rsc.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/89rsc.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/90rsc.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/94rsc.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/96rsc.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/99rsc.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/81rsg.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/88rsg.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/90rsg.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/7arcom.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/ix-corps.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/9tsc.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/19tsc-ca.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/21tsc-ca.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/377tsc.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/143transcom.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/311coscom.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/335tsc.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/412en-com.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/416encom.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/3medcom.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/332med-bde.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/807med-bde.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/80d.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/84d.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/95d.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/98d.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/100d.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/104d.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/108d.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/75d.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/78d.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/85d.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/87d.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/91d.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/244avn.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/readinesscmd.htm",
+                //    "https://www.globalsecurity.org/military/agency/army/77id.htm",
+                //    ""
+                //};
                 /*string[] urls =
                 {
                     //"https://www.globalsecurity.org/military/agency/army/usace.htm",
@@ -350,46 +359,51 @@ namespace Liaison.Import.GlobalSecurity
 
 
             //string nameText;
-           // string formerName = null ;
-            obj.NameNode = titleNode.InnerText.Replace(Environment.NewLine, "").Replace("<strike>", "ex. ").Replace("</strike>", "").Trim();
+            // string formerName = null ;
+            if (titleNode != null)
+            {
+                obj.NameNode = titleNode.InnerText.Replace(Environment.NewLine, "").Replace("<strike>", "ex. ").Replace("</strike>", "").Trim();
+            }
             obj.Url = url;
 
             StringBuilder sbName = new StringBuilder();
             StringBuilder sbFormer = new StringBuilder();
             StringBuilder sbNickName = new StringBuilder();
-            foreach (var node in titleNode.ChildNodes)
+            if (titleNode != null)
             {
-                var text = node.InnerText.Trim();
-
-                if (!string.IsNullOrWhiteSpace(text))
+                foreach (var node in titleNode.ChildNodes)
                 {
-                    if (node.Name == "strike")
-                    {
-                        if (sbFormer.Length != 0)
-                        {
-                            sbFormer.Append("; ");
-                        }
-                        sbFormer.Append(text);
-                    }
-                    if (node.Name == "#text")
-                    {
-                        if (text.StartsWith("\"") && text.EndsWith("\""))
-                        {
-                            sbNickName.Append(text);
-                        }
-                        else
-                        {
-                            if (sbName.Length != 0)
-                            {
-                                sbName.Append("; ");
-                            }
+                    var text = node.InnerText.Trim();
 
-                            sbName.Append(text);
+                    if (!string.IsNullOrWhiteSpace(text))
+                    {
+                        if (node.Name == "strike")
+                        {
+                            if (sbFormer.Length != 0)
+                            {
+                                sbFormer.Append("; ");
+                            }
+                            sbFormer.Append(text);
+                        }
+                        if (node.Name == "#text")
+                        {
+                            if (text.StartsWith("\"") && text.EndsWith("\""))
+                            {
+                                sbNickName.Append(text);
+                            }
+                            else
+                            {
+                                if (sbName.Length != 0)
+                                {
+                                    sbName.Append("; ");
+                                }
+
+                                sbName.Append(text);
+                            }
                         }
                     }
                 }
             }
-
             obj.FullName = sbName.ToString() ;
             obj.NameFormer = sbFormer.ToString() ;
             obj.NickName = sbNickName.ToString();
@@ -581,6 +595,7 @@ namespace Liaison.Import.GlobalSecurity
                                     case "ezoic-top-image":
                                     case "ez-clearholder-medrectangle-3":
                                     case "ez-clearholder-medrectangle-4":
+                                    case "globalsecurity_1x1_article":
                                         {
                                             continue;
                                         }
@@ -794,11 +809,11 @@ namespace Liaison.Import.GlobalSecurity
                             tablenode = null;
                         }
                     }
-                }            
-            else if (tdChildNode.Name=="h2"||tdChildNode.Name == "h3" || tdChildNode.Name == "h4")
+                }
+                else if (tdChildNode.Name == "h2" || tdChildNode.Name == "h3" || tdChildNode.Name == "h4")
                 {
                     var h3url = tdChildNode?.ChildNodes?.Where(n => n.Name == "a").FirstOrDefault()?.Attributes
-                        ?.First(n => n.Name == "href"||n.Name=="herf")?.Value;
+                        ?.First(n => n.Name == "href" || n.Name == "herf")?.Value;
                     tablenode = new TableNode();
                     tablenode.h3 = tdChildNode.InnerText;
                     tablenode.href = h3url == null ? null : url.Substring(0, url.LastIndexOf('/') + 1) + h3url;
@@ -854,7 +869,7 @@ namespace Liaison.Import.GlobalSecurity
                         }
                     }
                 }
-                else if (tdChildNode.Name == "ul"||tdChildNode.Name=="ol")
+                else if (tdChildNode.Name == "ul" || tdChildNode.Name == "ol")
                 {
                     if (tablenode == null)
                     {
@@ -868,9 +883,30 @@ namespace Liaison.Import.GlobalSecurity
                         {
                             // do nothing
                         }
-                        else if (nodeul.Name == "li" || nodeul.Name == "b"||nodeul.Name=="u")
+                        else if (nodeul.Name == "li" || nodeul.Name == "b" || nodeul.Name == "u")
                         {
                             AddLi(nodeul, url, ref tablenode, ref list);
+
+                            string[] units = nodeul.InnerHtml.Split('\n');
+                            if (units.Length > 0)
+                            {
+                                foreach (var u in units)
+                                {
+                                    if (u.Contains(".htm"))
+                                    {
+                                        var liX = new li();
+                                        var endurl = u.IndexOf(".htm") + 4;
+                                        var starturl = u.IndexOf("href=") + 6;
+                                        var h = u.Substring(starturl, endurl - starturl);
+                                        var href = url.Substring(0, url.LastIndexOf('/') + 1) + h;
+                                        liX.href = href;
+                                        var textstart = endurl + 2;
+                                        liX.text = u.Substring(textstart, u.IndexOf("</a>") - textstart);
+
+                                        tablenode.li.Add(liX);
+                                    }
+                                }
+                            }
                         }
                         else if (nodeul.Name == "strike" || nodeul.Name == "h3")
                         {
@@ -894,12 +930,12 @@ namespace Liaison.Import.GlobalSecurity
 
                             //GetTableNodes(ref list, ref tablenode, tdChildNode, url);
                         }
-                        else if (nodeul.Name == "ul"||nodeul.Name=="p")
+                        else if (nodeul.Name == "ul" || nodeul.Name == "p")
                         {
                             if (nodeul.InnerText.Trim() == "Amphibious Task Force 03")
                             {
                                 list.Add(tablenode);
-                                tablenode=null;
+                                tablenode = null;
                             }
                             GetTableNodes(ref list, ref tablenode, nodeul, url);
                         }
@@ -969,13 +1005,13 @@ namespace Liaison.Import.GlobalSecurity
                 }
                 else if (tdChildNode.Name == "strike")
                 {
-                    GetTableNodes(ref list, ref tablenode, tdChildNode, url);                    
+                    GetTableNodes(ref list, ref tablenode, tdChildNode, url);
                 }
                 else if (tdChildNode.Name == "a")
                 {
                     if (tdChildNode.Attributes.FirstOrDefault().Name == "href")
                     {
-                        AddLi(tdChildNode, url, ref tablenode, ref list);                        
+                        AddLi(tdChildNode, url, ref tablenode, ref list);
                     }
                     else
                     {
@@ -999,7 +1035,6 @@ namespace Liaison.Import.GlobalSecurity
                 }
 
             }
-
         }
 
         private static void AddLi(HtmlNode nodeul, string url, ref TableNode tablenode, ref List<TableNode> list)

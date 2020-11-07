@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<ArrayOfGlobalSecurityObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GlobalSecurityObject>
+    <Url>https://www.globalsecurity.org/military/agency/navy/desron50.htm</Url>
+    <NameNode>Destroyer Squadron FIFTY (DESRON 50)Battle Force Fifth Fleet (CTF-50)Commander Middle East Force</NameNode>
+    <FullName>Destroyer Squadron FIFTY (DESRON 50); Battle Force Fifth Fleet (CTF-50); Commander Middle East Force</FullName>
+    <HigherHq>
+      <HigherHqObject>
+        <IsCurrent>true</IsCurrent>
+        <Type>Unknown</Type>
+        <Name>Official Homepage</Name>
+      </HigherHqObject>
+    </HigherHq>
+    <Children />
+    <UnitService>Navy</UnitService>
+    <UnitComponent>Active</UnitComponent>
+    <NameFormer />
+    <TableNodes>
+      <TableNode>
+        <h3>Units</h3>
+        <li>
+          <li>
+            <text>NONE</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Homeport</h3>
+        <li>
+          <li>
+            <href>https://www.globalsecurity.org/military/facility/manama.htm</href>
+            <text>Manama, Bahrain</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Official Homepage</h3>
+        <li />
+      </TableNode>
+    </TableNodes>
+    <Description>
+      <DescriptionObj>
+        <NodeType>h2</NodeType>
+        <Contents>Destroyer Squadron FIFTY (DESRON 50)&lt;br&gt;
+Battle Force Fifth Fleet (CTF-50)&lt;br&gt;
+Commander Middle East Force 
+</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>#text</NodeType>
+        <Contents>Middle East Force 00-4 included USS Higgins.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+    </Description>
+    <NickName />
+  </GlobalSecurityObject>
+</ArrayOfGlobalSecurityObject>

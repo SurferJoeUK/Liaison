@@ -42,6 +42,8 @@ namespace Liaison.BLL.Translators
                     Data.Sql.GetStuff.GetConfigSetting("Detachment|||UnitIds");
                 HttpContext.Current.Session["Detachment|UnitIds"] =
                     Data.Sql.GetStuff.GetConfigSetting("Detachment|UnitIds");
+                HttpContext.Current.Session["Detachment---UnitIds"] =
+                    Data.Sql.GetStuff.GetConfigSetting("Detachment---UnitIds");
                 HttpContext.Current.Session["BrigadeCommandsUnitIds"] =
                     Data.Sql.GetStuff.GetConfigSetting("BrigadeCommandsUnitIds");
                 HttpContext.Current.Session["BatteryCorps"] = Data.Sql.GetStuff.GetConfigSetting("BatteryCorps");
@@ -440,7 +442,11 @@ namespace Liaison.BLL.Translators
                     sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.FleetAuxiliary
                     || sqlUnit.ServiceIdx == (int)Helper.Enumerators.ServicesBll.CoastGuard)
                 {
-                    if (sqlUnit.MissionName != null && sqlUnit.MissionName.Contains("Strike"))
+                    if (sqlUnit.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.RNConstructionForce ||
+                        sqlUnit.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.RNEODForce ||
+                        sqlUnit.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.RNMarSecFor ||
+                        sqlUnit.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.RNExLogFor ||
+                      sqlUnit.MissionName != null && sqlUnit.MissionName.Contains("Strike"))
                     {
                         return new NavalGroup(sqlUnit);
                     }
@@ -481,6 +487,10 @@ namespace Liaison.BLL.Translators
                     if (sqlUnit.MissionName == "Army Garrison")
                     {
                         return new Facility(sqlUnit);
+                    }
+                    else if (sqlUnit.MissionName== "Regional Training Institute")
+                    {
+                        return new RegionalTrainingInstitute(sqlUnit);
                     }
                     if (!string.IsNullOrWhiteSpace(sqlUnit.CommandName))
                     {
@@ -659,6 +669,13 @@ namespace Liaison.BLL.Translators
                     {
                         return new Vessel(sqlUnit);
                     }
+
+                    if (sqlUnit.UnitTypeVariant == "Unit")
+                    {
+                        sqlUnit.UnitTypeVariant = null;
+                        return new JointUnit(sqlUnit);
+                    }                   
+
                     return new Facility(sqlUnit);
 
                 }

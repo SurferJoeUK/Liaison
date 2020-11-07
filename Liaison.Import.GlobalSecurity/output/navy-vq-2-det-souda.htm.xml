@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<ArrayOfGlobalSecurityObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GlobalSecurityObject>
+    <Url>https://www.globalsecurity.org/military/agency/navy/vq-2-det-souda.htm</Url>
+    <NameNode>VQ-2 Detachment Souda Bay</NameNode>
+    <FullName>VQ-2 Detachment Souda Bay</FullName>
+    <HigherHq>
+      <HigherHqObject>
+        <IsCurrent>true</IsCurrent>
+        <Type>Unknown</Type>
+        <Name>Official Homepage</Name>
+      </HigherHqObject>
+    </HigherHq>
+    <Children />
+    <UnitService>Navy</UnitService>
+    <UnitComponent>Active</UnitComponent>
+    <NameFormer />
+    <TableNodes>
+      <TableNode>
+        <h3>Equipment</h3>
+        <li>
+          <li>
+            <text>EP-3E ARIES II</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Homeport</h3>
+        <li>
+          <li>
+            <text>Naval Support Activity, Souda Bay</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Official Homepage</h3>
+        <li />
+      </TableNode>
+    </TableNodes>
+    <Description>
+      <DescriptionObj>
+        <NodeType>h2</NodeType>
+        <Contents>VQ-2 Detachment Souda Bay
+</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>#text</NodeType>
+        <Contents>On 01 October 1980, U.S. Naval Detachment, Souda Bay was disestablished and U.S. Naval Support Activity, Souda Bay, Crete, Greece was established. In December 1990, in addition to the previous Detachment's mission, the Naval Support Activity's mission increased to include support of US Air Force and Navy Reconnaissance missions. As of 1994 the Naval Support Activity has 17 officers and 210 enlisted personnel due to this increased mission and increased port operations in Souda Harbor. The Naval Support Activity is located on Crete's Akrotiri peninsula, 17 kilometers east of Chania. The command is collocated with the Hellenic Air Force at Souda Air Base.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+    </Description>
+    <NickName />
+  </GlobalSecurityObject>
+</ArrayOfGlobalSecurityObject>

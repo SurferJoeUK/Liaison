@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<ArrayOfGlobalSecurityObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GlobalSecurityObject>
+    <Url>https://www.globalsecurity.org/military/agency/navy/c5f.htm</Url>
+    <NameNode>Fifth Fleet</NameNode>
+    <FullName>Fifth Fleet</FullName>
+    <LogoUrl>https://www.globalsecurity.org/military/agency/navy/images/fleet-5.gif</LogoUrl>
+    <HigherHq />
+    <Children>
+      <SubUnitObject>
+        <Url>https://www.globalsecurity.org/military/agency/navy/desron50.htm</Url>
+        <FullName>CTF-50
+CTF-51 [ARG]
+CTF-52 [MEU]
+CTF-53
+CTF-54
+CTF-55
+CTF-56 / CJTF-DR [Determined Response]
+CTF-57</FullName>
+        <Name>CTF-50
+CTF-51 [ARG]
+CTF-52 [MEU]
+CTF-53
+CTF-54
+CTF-55
+CTF-56 / CJTF-DR [Determined Response]
+CTF-57</Name>
+        <Id>navy/desron50.htm</Id>
+        <IsIndirect>false</IsIndirect>
+      </SubUnitObject>
+    </Children>
+    <UnitService>Navy</UnitService>
+    <UnitComponent>Active</UnitComponent>
+    <NameFormer />
+    <TableNodes>
+      <TableNode>
+        <h3>Units</h3>
+        <li>
+          <li>
+            <href>https://www.globalsecurity.org/military/agency/navy/desron50.htm</href>
+            <text>CTF-50
+CTF-51 [ARG]
+CTF-52 [MEU]
+CTF-53
+CTF-54
+CTF-55
+CTF-56 / CJTF-DR [Determined Response]
+CTF-57</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Homeport</h3>
+        <li>
+          <li>
+            <href>https://www.globalsecurity.org/military/facility/manama.htm</href>
+            <text>Manama</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Official Homepage</h3>
+        <li>
+          <li>
+            <href>http://www.cusnc.navy.mil/</href>
+            <text>Commander, Fifth Fleet (COMFIFTHFLEET)</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+    </TableNodes>
+    <Description>
+      <DescriptionObj>
+        <NodeType>h2</NodeType>
+        <Contents>Fifth Fleet</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>img</NodeType>
+        <Contents>images/fleet-5.gif</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>#text</NodeType>
+        <Contents>March 26, 1945, Commander, SEVENTH Fleet assumed responsibility for the control of the areas and forces assigned to FIFTH Fleet, and the Commander, FIFTH Fleet staff moved ashore on the West Coast. Vice Admiral Alfred E. Montgomery assumed command of the FIFTH Fleet September 5, 1946, and in January 1947, FIFTH Fleet was disestablished.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+    </Description>
+    <NickName />
+  </GlobalSecurityObject>
+  <GlobalSecurityObject>
+    <Url>https://www.globalsecurity.org/military/agency/navy/desron50.htm</Url>
+    <NameNode>Destroyer Squadron FIFTY (DESRON 50)Battle Force Fifth Fleet (CTF-50)Commander Middle East Force</NameNode>
+    <FullName>Destroyer Squadron FIFTY (DESRON 50); Battle Force Fifth Fleet (CTF-50); Commander Middle East Force</FullName>
+    <HigherHq>
+      <HigherHqObject>
+        <IsCurrent>true</IsCurrent>
+        <Type>Unknown</Type>
+        <Name>Official Homepage</Name>
+      </HigherHqObject>
+    </HigherHq>
+    <Children />
+    <UnitService>Navy</UnitService>
+    <UnitComponent>Active</UnitComponent>
+    <NameFormer />
+    <TableNodes>
+      <TableNode>
+        <h3>Units</h3>
+        <li>
+          <li>
+            <text>NONE</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Homeport</h3>
+        <li>
+          <li>
+            <href>https://www.globalsecurity.org/military/facility/manama.htm</href>
+            <text>Manama, Bahrain</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Official Homepage</h3>
+        <li />
+      </TableNode>
+    </TableNodes>
+    <Description>
+      <DescriptionObj>
+        <NodeType>h2</NodeType>
+        <Contents>Destroyer Squadron FIFTY (DESRON 50)&lt;br&gt;
+Battle Force Fifth Fleet (CTF-50)&lt;br&gt;
+Commander Middle East Force 
+</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>#text</NodeType>
+        <Contents>Middle East Force 00-4 included USS Higgins.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+    </Description>
+    <NickName />
+  </GlobalSecurityObject>
+</ArrayOfGlobalSecurityObject>

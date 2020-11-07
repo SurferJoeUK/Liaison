@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<ArrayOfGlobalSecurityObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GlobalSecurityObject>
+    <Url>https://www.globalsecurity.org/military/agency/navy/tsc-sigonella.htm</Url>
+    <NameNode>Tactical Support Center (TSC) SigonellaMaritime Air Control AuthorityCommander, Task Unit 67.1.2 [CTU-67.1.2]Comander Task Group 431.3 [CTG-431.3]</NameNode>
+    <FullName>Tactical Support Center (TSC) Sigonella; Maritime Air Control Authority; Commander, Task Unit 67.1.2 [CTU-67.1.2]; Comander Task Group 431.3 [CTG-431.3]</FullName>
+    <LogoUrl>https://www.globalsecurity.org/military/agency/navy/images/tsc-sigonella.gif</LogoUrl>
+    <HigherHq>
+      <HigherHqObject>
+        <IsCurrent>true</IsCurrent>
+        <Type>Unknown</Type>
+        <Name>Equipment</Name>
+      </HigherHqObject>
+    </HigherHq>
+    <Children />
+    <UnitService>Navy</UnitService>
+    <UnitComponent>Active</UnitComponent>
+    <NameFormer />
+    <TableNodes>
+      <TableNode>
+        <h3>Equipment</h3>
+        <li />
+      </TableNode>
+      <TableNode>
+        <h3>Homeport</h3>
+        <li>
+          <li>
+            <href>https://www.globalsecurity.org/military/facility/sigonella.htm</href>
+            <text>NAS Sigonella</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Official Homepage</h3>
+        <li>
+          <li>
+            <href>http://www.sicily.navy.mil/tsc/index.htm</href>
+            <text>Tactical Support Center Sigonella</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+    </TableNodes>
+    <Description>
+      <DescriptionObj>
+        <NodeType>h2</NodeType>
+        <Contents>Tactical Support Center (TSC) Sigonella
+&lt;br&gt;Maritime Air Control Authority
+&lt;br&gt;Commander, Task Unit 67.1.2 [CTU-67.1.2]
+&lt;br&gt;Comander Task Group 431.3 [CTG-431.3]</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>img</NodeType>
+        <Contents>images/tsc-sigonella.gif</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>#text</NodeType>
+        <Contents>Operating in a new, multimillion dollar facility, TSC/MACA Sigonella is constantly evolving in its mission of supporting forward-deployed MPA assets.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+    </Description>
+    <NickName />
+  </GlobalSecurityObject>
+</ArrayOfGlobalSecurityObject>

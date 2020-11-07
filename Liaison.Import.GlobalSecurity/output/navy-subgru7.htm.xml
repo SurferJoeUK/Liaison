@@ -1,0 +1,357 @@
+<?xml version="1.0"?>
+<ArrayOfGlobalSecurityObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GlobalSecurityObject>
+    <Url>https://www.globalsecurity.org/military/agency/navy/subgru7.htm</Url>
+    <NameNode>SUBMARINE GROUP SEVEN (COMSUBGRU 7) SUBMARINE TASK FORCE FIVE FOUR  (CTF 54)SUBMARINE TASK FORCE SEVENTY FOUR (CTF 74)</NameNode>
+    <FullName>SUBMARINE GROUP SEVEN (COMSUBGRU 7); SUBMARINE TASK FORCE FIVE FOUR  (CTF 54); SUBMARINE TASK FORCE SEVENTY FOUR (CTF 74)</FullName>
+    <LogoUrl>https://www.globalsecurity.org/military/agency/navy/images/subgru7.gif</LogoUrl>
+    <HigherHq />
+    <Children>
+      <SubUnitObject>
+        <Url>https://www.globalsecurity.org/military/agency/navy/subron1.htm</Url>
+        <FullName>Submarine Squadron 1
+Submarine Squadron 3
+Submarine Squadron 7
+Submarine Squadron 11
+Submarine Squadron 15
+Submarine Development Squadron 5</FullName>
+        <Name>Submarine Squadron 1
+Submarine Squadron 3
+Submarine Squadron 7
+Submarine Squadron 11
+Submarine Squadron 15
+Submarine Development Squadron 5</Name>
+        <Id>navy/subron1.htm</Id>
+        <IsIndirect>false</IsIndirect>
+      </SubUnitObject>
+    </Children>
+    <UnitService>Navy</UnitService>
+    <UnitComponent>Active</UnitComponent>
+    <NameFormer />
+    <TableNodes>
+      <TableNode>
+        <h3>Units</h3>
+        <li>
+          <li>
+            <href>https://www.globalsecurity.org/military/agency/navy/subron1.htm</href>
+            <text>Submarine Squadron 1
+Submarine Squadron 3
+Submarine Squadron 7
+Submarine Squadron 11
+Submarine Squadron 15
+Submarine Development Squadron 5</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Homeport</h3>
+        <li>
+          <li>
+            <href>https://www.globalsecurity.org/military/facility/yokosuka.htm</href>
+            <text>Yokosuka, Japan</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Official Homepage</h3>
+        <li>
+          <li>
+            <href>http://www.ctf74.navy.mil/index2.html</href>
+            <text>Submarine Group SEVEN</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+    </TableNodes>
+    <Description>
+      <DescriptionObj>
+        <NodeType>h2</NodeType>
+        <Contents>SUBMARINE GROUP SEVEN (COMSUBGRU 7)&lt;br&gt; 
+SUBMARINE TASK FORCE FIVE FOUR  (CTF 54)&lt;br&gt;
+SUBMARINE TASK FORCE SEVENTY FOUR (CTF 74) </Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>img</NodeType>
+        <Contents>images/subgru7.gif</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>img</NodeType>
+        <Contents>images/subgru7-2.gif</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>img</NodeType>
+        <Contents>images/ctf-74.gif</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>img</NodeType>
+        <Contents>images/ctf-54.gif</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>li</NodeType>
+        <Contents>The 00 Staff Department provides direct support to the Commander, Submarine Group Seven.
+N1 - Personnel Readiness: Deputy Chief of Staff for Personnel Readiness:  Responsible for the management of all manpower resources (military and civilian) ensuring the highest state of personnel readiness to carry out all assigned missions under peacetime, limited war or general war conditions
+N2 - Intelligence  /  N3 - Operations: Deputy Chief of Staff for Intelligence / Operations:  Responsible for the preparation of security programs and intelligence information to carry out all assigned missions in peacetime, limited war or general war conditions. Responsible for the preparation and development of operational orders,  managing operations, and carrying out all assigned missions under peacetime, limited war or general war conditions 
+N4 - Maintenance: Deputy Chief of Staff for Material:  Responsible for the planning and direction of the overall logistic support of ships and activities in the Western Pacific in material matters.
+ N4S - Logistics: Supply Officer:  To establish and maintain the highest possible state of logistic readiness of the units deployed to the Western Pacific allowing them to carry out all assigned missions under peacetime, limited war or general war conditions.
+N5 - Plans: Deputy Chief of Staff for Plans:  Responsible for the preparation of plans and development of operation plans and carrying out all assigned missions under peacetime, limited war or general war conditions
+N6 - Communications: Deputy Chief of Staff for Communications:  Responsible for rapid and reliable communications within the Western Pacific and Indian Ocean and in support of the Staff and the Fleet.
+N7 - Readiness and Training: Deputy Chief of Staff for Readiness and Training: Responsible for ensuring Submarine Force readiness to employ tactical combat systems, including acoustic sensors, non-acoustic sensors, fire control systems, cruise missiles, torpedoes, mines, other conventional weapons, for ensuring navigational readiness of all deployed assets other than SSBNs, for coordinating initiatives to improve combat and mission effectiveness of Force submarines, and for support of tactical development and evaluation.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>li</NodeType>
+        <Contents>N1 - Personnel Readiness: Deputy Chief of Staff for Personnel Readiness:  Responsible for the management of all manpower resources (military and civilian) ensuring the highest state of personnel readiness to carry out all assigned missions under peacetime, limited war or general war conditions
+N2 - Intelligence  /  N3 - Operations: Deputy Chief of Staff for Intelligence / Operations:  Responsible for the preparation of security programs and intelligence information to carry out all assigned missions in peacetime, limited war or general war conditions. Responsible for the preparation and development of operational orders,  managing operations, and carrying out all assigned missions under peacetime, limited war or general war conditions 
+N4 - Maintenance: Deputy Chief of Staff for Material:  Responsible for the planning and direction of the overall logistic support of ships and activities in the Western Pacific in material matters.
+ N4S - Logistics: Supply Officer:  To establish and maintain the highest possible state of logistic readiness of the units deployed to the Western Pacific allowing them to carry out all assigned missions under peacetime, limited war or general war conditions.
+N5 - Plans: Deputy Chief of Staff for Plans:  Responsible for the preparation of plans and development of operation plans and carrying out all assigned missions under peacetime, limited war or general war conditions
+N6 - Communications: Deputy Chief of Staff for Communications:  Responsible for rapid and reliable communications within the Western Pacific and Indian Ocean and in support of the Staff and the Fleet.
+N7 - Readiness and Training: Deputy Chief of Staff for Readiness and Training: Responsible for ensuring Submarine Force readiness to employ tactical combat systems, including acoustic sensors, non-acoustic sensors, fire control systems, cruise missiles, torpedoes, mines, other conventional weapons, for ensuring navigational readiness of all deployed assets other than SSBNs, for coordinating initiatives to improve combat and mission effectiveness of Force submarines, and for support of tactical development and evaluation.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>li</NodeType>
+        <Contents>N2 - Intelligence  /  N3 - Operations: Deputy Chief of Staff for Intelligence / Operations:  Responsible for the preparation of security programs and intelligence information to carry out all assigned missions in peacetime, limited war or general war conditions. Responsible for the preparation and development of operational orders,  managing operations, and carrying out all assigned missions under peacetime, limited war or general war conditions 
+N4 - Maintenance: Deputy Chief of Staff for Material:  Responsible for the planning and direction of the overall logistic support of ships and activities in the Western Pacific in material matters.
+ N4S - Logistics: Supply Officer:  To establish and maintain the highest possible state of logistic readiness of the units deployed to the Western Pacific allowing them to carry out all assigned missions under peacetime, limited war or general war conditions.
+N5 - Plans: Deputy Chief of Staff for Plans:  Responsible for the preparation of plans and development of operation plans and carrying out all assigned missions under peacetime, limited war or general war conditions
+N6 - Communications: Deputy Chief of Staff for Communications:  Responsible for rapid and reliable communications within the Western Pacific and Indian Ocean and in support of the Staff and the Fleet.
+N7 - Readiness and Training: Deputy Chief of Staff for Readiness and Training: Responsible for ensuring Submarine Force readiness to employ tactical combat systems, including acoustic sensors, non-acoustic sensors, fire control systems, cruise missiles, torpedoes, mines, other conventional weapons, for ensuring navigational readiness of all deployed assets other than SSBNs, for coordinating initiatives to improve combat and mission effectiveness of Force submarines, and for support of tactical development and evaluation.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>li</NodeType>
+        <Contents>N4 - Maintenance: Deputy Chief of Staff for Material:  Responsible for the planning and direction of the overall logistic support of ships and activities in the Western Pacific in material matters.
+ N4S - Logistics: Supply Officer:  To establish and maintain the highest possible state of logistic readiness of the units deployed to the Western Pacific allowing them to carry out all assigned missions under peacetime, limited war or general war conditions.
+N5 - Plans: Deputy Chief of Staff for Plans:  Responsible for the preparation of plans and development of operation plans and carrying out all assigned missions under peacetime, limited war or general war conditions
+N6 - Communications: Deputy Chief of Staff for Communications:  Responsible for rapid and reliable communications within the Western Pacific and Indian Ocean and in support of the Staff and the Fleet.
+N7 - Readiness and Training: Deputy Chief of Staff for Readiness and Training: Responsible for ensuring Submarine Force readiness to employ tactical combat systems, including acoustic sensors, non-acoustic sensors, fire control systems, cruise missiles, torpedoes, mines, other conventional weapons, for ensuring navigational readiness of all deployed assets other than SSBNs, for coordinating initiatives to improve combat and mission effectiveness of Force submarines, and for support of tactical development and evaluation.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>li</NodeType>
+        <Contents>N4S - Logistics: Supply Officer:  To establish and maintain the highest possible state of logistic readiness of the units deployed to the Western Pacific allowing them to carry out all assigned missions under peacetime, limited war or general war conditions.
+N5 - Plans: Deputy Chief of Staff for Plans:  Responsible for the preparation of plans and development of operation plans and carrying out all assigned missions under peacetime, limited war or general war conditions
+N6 - Communications: Deputy Chief of Staff for Communications:  Responsible for rapid and reliable communications within the Western Pacific and Indian Ocean and in support of the Staff and the Fleet.
+N7 - Readiness and Training: Deputy Chief of Staff for Readiness and Training: Responsible for ensuring Submarine Force readiness to employ tactical combat systems, including acoustic sensors, non-acoustic sensors, fire control systems, cruise missiles, torpedoes, mines, other conventional weapons, for ensuring navigational readiness of all deployed assets other than SSBNs, for coordinating initiatives to improve combat and mission effectiveness of Force submarines, and for support of tactical development and evaluation.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>li</NodeType>
+        <Contents>N5 - Plans: Deputy Chief of Staff for Plans:  Responsible for the preparation of plans and development of operation plans and carrying out all assigned missions under peacetime, limited war or general war conditions
+N6 - Communications: Deputy Chief of Staff for Communications:  Responsible for rapid and reliable communications within the Western Pacific and Indian Ocean and in support of the Staff and the Fleet.
+N7 - Readiness and Training: Deputy Chief of Staff for Readiness and Training: Responsible for ensuring Submarine Force readiness to employ tactical combat systems, including acoustic sensors, non-acoustic sensors, fire control systems, cruise missiles, torpedoes, mines, other conventional weapons, for ensuring navigational readiness of all deployed assets other than SSBNs, for coordinating initiatives to improve combat and mission effectiveness of Force submarines, and for support of tactical development and evaluation.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>li</NodeType>
+        <Contents>N6 - Communications: Deputy Chief of Staff for Communications:  Responsible for rapid and reliable communications within the Western Pacific and Indian Ocean and in support of the Staff and the Fleet.
+N7 - Readiness and Training: Deputy Chief of Staff for Readiness and Training: Responsible for ensuring Submarine Force readiness to employ tactical combat systems, including acoustic sensors, non-acoustic sensors, fire control systems, cruise missiles, torpedoes, mines, other conventional weapons, for ensuring navigational readiness of all deployed assets other than SSBNs, for coordinating initiatives to improve combat and mission effectiveness of Force submarines, and for support of tactical development and evaluation.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>li</NodeType>
+        <Contents>N7 - Readiness and Training: Deputy Chief of Staff for Readiness and Training: Responsible for ensuring Submarine Force readiness to employ tactical combat systems, including acoustic sensors, non-acoustic sensors, fire control systems, cruise missiles, torpedoes, mines, other conventional weapons, for ensuring navigational readiness of all deployed assets other than SSBNs, for coordinating initiatives to improve combat and mission effectiveness of Force submarines, and for support of tactical development and evaluation.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>#text</NodeType>
+        <Contents>COMSUBGRU Seven staff serves as a broker for tender work for forward deployed submarines. COMLOGWESTPAC serves as a broker for tender work for surface ships, and interfaces directly with the COMSUBGRU Seven Representative on the tender. The forward deployed submarine tender homeported in Guam regularly deploys to Sasebo and Yokosuka to provide fleet repair services.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+    </Description>
+    <NickName />
+  </GlobalSecurityObject>
+  <GlobalSecurityObject>
+    <Url>https://www.globalsecurity.org/military/agency/navy/subron1.htm</Url>
+    <NameNode>Submarine Squadron ONE</NameNode>
+    <FullName>Submarine Squadron ONE</FullName>
+    <LogoUrl>https://www.globalsecurity.org/military/agency/navy/images/subron1.gif</LogoUrl>
+    <HigherHq />
+    <Children>
+      <SubUnitObject>
+        <Url>https://www.globalsecurity.org/military/agency/navy/ssn-688.htm</Url>
+        <FullName>SSN 688 Los Angeles 
+SSN 701 La Jolla
+SSN 715 Buffalo 
+SSN 766 Charlotte
+SSN 772 Greeneville
+
+SSN 642 Kamehameha [Decom]
+SSN 698 Bremerton</FullName>
+        <Name>SSN 688 Los Angeles 
+SSN 701 La Jolla
+SSN 715 Buffalo 
+SSN 766 Charlotte
+SSN 772 Greeneville
+
+SSN 642 Kamehameha [Decom]
+SSN 698 Bremerton</Name>
+        <Id>navy/ssn-688.htm</Id>
+        <IsIndirect>false</IsIndirect>
+      </SubUnitObject>
+    </Children>
+    <UnitService>Navy</UnitService>
+    <UnitComponent>Active</UnitComponent>
+    <NameFormer />
+    <TableNodes>
+      <TableNode>
+        <h3>Units</h3>
+        <li>
+          <li>
+            <href>https://www.globalsecurity.org/military/agency/navy/ssn-688.htm</href>
+            <text>SSN 688 Los Angeles 
+SSN 701 La Jolla
+SSN 715 Buffalo 
+SSN 766 Charlotte
+SSN 772 Greeneville
+
+SSN 642 Kamehameha [Decom]
+SSN 698 Bremerton</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Homeport</h3>
+        <li>
+          <li>
+            <href>https://www.globalsecurity.org/military/facility/pearl_harbor.htm</href>
+            <text>Pearl Harbor</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Official Homepage</h3>
+        <li>
+          <li>
+            <href>http://www.csp.navy.mil/css1/index.htm</href>
+            <text>Submarine Squadron ONE</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+    </TableNodes>
+    <Description>
+      <DescriptionObj>
+        <NodeType>h2</NodeType>
+        <Contents>Submarine Squadron ONE</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>img</NodeType>
+        <Contents>https://www.globalsecurity.org/military/agency/navy/images/subron1.gif</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>#text</NodeType>
+        <Contents>Submarine Squadron One was first established in May 1941 at New London, Connecticut. There were originally nineteen submarines in the squadron. On October 1, 1945, Submarine Squadron One moved to the Pacific Fleet at Pearl Harbor, Hawaii and has remained there ever since.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+    </Description>
+    <NickName />
+  </GlobalSecurityObject>
+  <GlobalSecurityObject>
+    <Url>https://www.globalsecurity.org/military/agency/navy/ssn-688.htm</Url>
+    <NameNode>SSN 688 Los Angeles</NameNode>
+    <FullName>SSN 688 Los Angeles</FullName>
+    <LogoUrl>https://www.globalsecurity.org/military/agency/navy/images/ssn-688.gif</LogoUrl>
+    <HigherHq>
+      <HigherHqObject>
+        <Url>https://www.globalsecurity.org/military/agency/navy//military/systems/ship/ssn-688.htm</Url>
+        <Id>/navy//military/systems/ship/ssn-688.htm</Id>
+        <IsCurrent>true</IsCurrent>
+        <Type>Unknown</Type>
+        <Name>Los Angeles Class</Name>
+      </HigherHqObject>
+      <HigherHqObject>
+        <IsCurrent>true</IsCurrent>
+        <Type>Unknown</Type>
+        <Name>Tactical Assignments</Name>
+      </HigherHqObject>
+      <HigherHqObject>
+        <Url>https://www.globalsecurity.org/military/agency/navy/ssn-688-refs.htm</Url>
+        <Id>/navy/ssn-688-refs.htm</Id>
+        <IsCurrent>true</IsCurrent>
+        <Type>Unknown</Type>
+        <Name>References</Name>
+      </HigherHqObject>
+    </HigherHq>
+    <Children />
+    <UnitService>Navy</UnitService>
+    <UnitComponent>Active</UnitComponent>
+    <NameFormer />
+    <TableNodes>
+      <TableNode>
+        <href>https://www.globalsecurity.org/military/agency/navy//military/systems/ship/ssn-688.htm</href>
+        <h3>Los Angeles Class</h3>
+        <li />
+      </TableNode>
+      <TableNode>
+        <h3>Tactical Assignments</h3>
+        <li />
+      </TableNode>
+      <TableNode>
+        <h3>Homeport</h3>
+        <li>
+          <li>
+            <href>https://www.globalsecurity.org/military/facility/pearl_harbor.htm</href>
+            <text>Pearl Harbor</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <href>https://www.globalsecurity.org/military/agency/navy/ssn-688-refs.htm</href>
+        <h3>References</h3>
+        <li />
+      </TableNode>
+      <TableNode>
+        <h3>Official Homepage</h3>
+        <li>
+          <li>
+            <href>http://www.csp.navy.mil/css1/688.htm</href>
+            <text>SSN 688 Los Angeles</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+    </TableNodes>
+    <Description>
+      <DescriptionObj>
+        <NodeType>h1</NodeType>
+        <Contents>SSN 688 Los Angeles</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>img</NodeType>
+        <Contents>images/ssn-688.gif</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>h3</NodeType>
+        <Contents>The First Los Angeles</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>h3</NodeType>
+        <Contents>ZR-3</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>h3</NodeType>
+        <Contents>CA-135</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+    </Description>
+    <NickName />
+  </GlobalSecurityObject>
+</ArrayOfGlobalSecurityObject>

@@ -49,5 +49,10 @@ namespace Liaison.Data.Sql.Edmx
         public virtual DbSet<EquipmentOwner> EquipmentOwners { get; set; }
         public virtual DbSet<GroundEquipment> GroundEquipments { get; set; }
         public virtual DbSet<AdminCorp> AdminCorps { get; set; }
+        public virtual DbSet<AdminCorpsUnit> AdminCorpsUnits { get; set; }
+        public virtual DbSet<Document> Documents { get; set; }
+        public virtual DbSet<DocumentLink> DocumentLinks { get; set; }
+        public virtual DbSet<DocumentReference> DocumentReferences { get; set; }
+        public virtual DbSet<Translation> Translations { get; set; }
     }
 }

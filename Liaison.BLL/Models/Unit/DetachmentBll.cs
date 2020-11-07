@@ -35,6 +35,7 @@ namespace Liaison.BLL.Models.Unit
         {
             List<int> threeBarDetachments = HttpContext.Current.Session["Detachment|||UnitIds"] as List<int>;
             List<int> oneBarDetachments = HttpContext.Current.Session["Detachment|UnitIds"] as List<int>;
+            List<int> threeBlobDetachments = HttpContext.Current.Session["Detachment---UnitIds"] as List<int>;
             if (sqlUnit.AdminCorp != null)
             {
                 this.AdminCorps = new BLLAdminCorps(sqlUnit.AdminCorp, sqlUnit.UnitId);
@@ -77,6 +78,11 @@ namespace Liaison.BLL.Models.Unit
 				this.RankLevel = OneBarTab;
 				this.RankStar = OneBar;
 			}
+            else if (threeBlobDetachments!=null && threeBlobDetachments.Contains(this.UnitId))
+            {
+                this.RankLevel = ThreeBlobTab;
+                this.RankStar = ThreeBlob;
+            }
 			else if (this.AdminCorps?.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.RoyalMarinesAirArm
 				|| this.AdminCorps?.ParentAdminCorpsId == (int)Helper.Enumerators.AdminCorps.NavalAviation
                 || this.AdminCorps?.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.RoyalArmyPayCorps)
@@ -242,6 +248,10 @@ namespace Liaison.BLL.Models.Unit
                     else
                     {
                         sb.Append(ResourceStrings.Det + " " + this.Number);
+                        if (!string.IsNullOrWhiteSpace(this.TerritorialDesignation))
+                        {
+                            sb.Append(" (" + this.TerritorialDesignation + ")");
+                        }
                     }
                 }
                 else if (this.Letter != null)
@@ -319,32 +329,37 @@ namespace Liaison.BLL.Models.Unit
         {
             return this.Indices == null ? string.Empty : string.Join(",", this.Indices);
         }
-
         public EquipmentContainer GetEquipment()
         {
-            bool showAltName = true;
-
-            StringBuilder sb = new StringBuilder();
-            foreach (var thing in this.Equipment)
-            {
-                if (thing.GetType() == typeof(BLLAircraft))
-                {
-                    if (thing is BLLAircraft airc)
-                    {
-                        sb.Append(airc.PAA + " " + airc.Name + " " + airc.Mark);
-                        if (showAltName)
-                        {
-                            sb.Append(" [" + airc.AltCode + " " + airc.AltName + "]");
-                        }
-                    }
-                }
-
-                sb.Append(ResourceStrings.Seperator);
-            }
-
-            var x = sb.ToString();
-            return new EquipmentContainer((x.Length > 0 ? x.Substring(0, x.Length - ResourceStrings.Seperator.Length) : x).Replace("_", ""));
+            return EquipmentMethods.GetEquipment(this.Equipment);
         }
+        //public EquipmentContainer GetEquipment()
+        //{
+        //    bool showAltName = true;
+
+        //    StringBuilder sb = new StringBuilder();
+        //    foreach (var thing in this.Equipment)
+        //    {
+        //        thing.GetEquipmentString();
+        //        //if (thing.GetType() == typeof(BLLAircraft))
+        //        //{
+        //        //    if (thing is BLLAircraft airc)
+        //        //    {
+        //        //        airc.GetEquipmentString
+        //        //        sb.Append(airc.PAA + " " + airc.Name + " " + airc.Mark);
+        //        //        if (showAltName)
+        //        //        {
+        //        //            sb.Append(" [" + airc.AltCode + " " + airc.AltName + "]");
+        //        //        }
+        //        //    }
+        //        //}
+
+        //        sb.Append(ResourceStrings.Seperator);
+        //    }
+
+        //    var x = sb.ToString();
+        //    return new EquipmentContainer((x.Length > 0 ? x.Substring(0, x.Length - ResourceStrings.Seperator.Length) : x).Replace("_", ""));
+        //}
 
         public bool IsTaskForce => false;
         public bool IsDecommissioned()

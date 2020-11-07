@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<ArrayOfGlobalSecurityObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GlobalSecurityObject>
+    <Url>https://www.globalsecurity.org/military/agency/navy/mcmdiv31.htm</Url>
+    <NameNode>Mine Countermeasures Division THREE ONE</NameNode>
+    <FullName>Mine Countermeasures Division THREE ONE</FullName>
+    <HigherHq>
+      <HigherHqObject>
+        <IsCurrent>true</IsCurrent>
+        <Type>Unknown</Type>
+        <Name>Official Homepage</Name>
+      </HigherHqObject>
+    </HigherHq>
+    <Children>
+      <SubUnitObject>
+        <Url>https://www.globalsecurity.org/military/agency/navy/mcm-12.htm</Url>
+        <FullName>MCM 12 Ardent
+MCM 13 Dextrous
+ 
+MHC 60 Cardinal 
+MHC 61 Raven</FullName>
+        <Name>MCM 12 Ardent
+MCM 13 Dextrous
+ 
+MHC 60 Cardinal 
+MHC 61 Raven</Name>
+        <Id>navy/mcm-12.htm</Id>
+        <IsIndirect>false</IsIndirect>
+      </SubUnitObject>
+    </Children>
+    <UnitService>Navy</UnitService>
+    <UnitComponent>Active</UnitComponent>
+    <NameFormer />
+    <TableNodes>
+      <TableNode>
+        <h3>Units</h3>
+        <li>
+          <li>
+            <href>https://www.globalsecurity.org/military/agency/navy/mcm-12.htm</href>
+            <text>MCM 12 Ardent
+MCM 13 Dextrous
+ 
+MHC 60 Cardinal 
+MHC 61 Raven</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Homeport</h3>
+        <li>
+          <li>
+            <href>https://www.globalsecurity.org/military/facility/manama.htm</href>
+            <text>Manama, Bahrain</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Official Homepage</h3>
+        <li />
+      </TableNode>
+    </TableNodes>
+    <Description>
+      <DescriptionObj>
+        <NodeType>h2</NodeType>
+        <Contents>Mine Countermeasures Division THREE ONE</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>#text</NodeType>
+        <Contents>Mine Countermeasures ships are designed to sweep an area for explosive devices capable of severely damaging a vessel. Two MCMs, USS Ardent (MCM 12) and USS Dextrous (MCM 13) and two Coastal Minehunters, USS Cardinal (MHC 60) and USS Raven (MHC 61) are permanently forward deployed to the Arabian Gulf.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+    </Description>
+    <NickName />
+  </GlobalSecurityObject>
+  <GlobalSecurityObject>
+    <Url>https://www.globalsecurity.org/military/agency/navy/mcm-12.htm</Url>
+    <NameNode>MCM 12 Ardent</NameNode>
+    <FullName>MCM 12 Ardent</FullName>
+    <LogoUrl>https://www.globalsecurity.org/military/agency/navy/images/mcm-12.gif</LogoUrl>
+    <HigherHq>
+      <HigherHqObject>
+        <Url>https://www.globalsecurity.org/military/agency/navy//military/systems/ship/mcm-1.htm</Url>
+        <Id>/navy//military/systems/ship/mcm-1.htm</Id>
+        <IsCurrent>true</IsCurrent>
+        <Type>Unknown</Type>
+        <Name>Avenger Class</Name>
+      </HigherHqObject>
+      <HigherHqObject>
+        <IsCurrent>true</IsCurrent>
+        <Type>Unknown</Type>
+        <Name>Tactical Assignments</Name>
+      </HigherHqObject>
+      <HigherHqObject>
+        <Url>https://www.globalsecurity.org/military/agency/navy/mcm-12-refs.htm</Url>
+        <Id>/navy/mcm-12-refs.htm</Id>
+        <IsCurrent>true</IsCurrent>
+        <Type>Unknown</Type>
+        <Name>References</Name>
+      </HigherHqObject>
+    </HigherHq>
+    <Children />
+    <UnitService>Navy</UnitService>
+    <UnitComponent>Active</UnitComponent>
+    <NameFormer />
+    <TableNodes>
+      <TableNode>
+        <href>https://www.globalsecurity.org/military/agency/navy//military/systems/ship/mcm-1.htm</href>
+        <h3>Avenger Class</h3>
+        <li />
+      </TableNode>
+      <TableNode>
+        <h3>Tactical Assignments</h3>
+        <li />
+      </TableNode>
+      <TableNode>
+        <h3>Homeport</h3>
+        <li>
+          <li>
+            <href>https://www.globalsecurity.org/military/facility/manama.htm</href>
+            <text>Manama</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <href>https://www.globalsecurity.org/military/agency/navy/mcm-12-refs.htm</href>
+        <h3>References</h3>
+        <li />
+      </TableNode>
+      <TableNode>
+        <h3>Official Homepage</h3>
+        <li>
+          <li>
+            <href>http://www.ardent.navy.mil/</href>
+            <text>MCM 12 Ardent</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+    </TableNodes>
+    <Description>
+      <DescriptionObj>
+        <NodeType>h1</NodeType>
+        <Contents>MCM 12 Ardent</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>img</NodeType>
+        <Contents>images/mcm-12.gif</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>h3</NodeType>
+        <Contents>AM 340</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+    </Description>
+    <NickName />
+  </GlobalSecurityObject>
+</ArrayOfGlobalSecurityObject>

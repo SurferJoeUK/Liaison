@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<ArrayOfGlobalSecurityObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GlobalSecurityObject>
+    <Url>https://www.globalsecurity.org/military/agency/navy/tsc-rota.htm</Url>
+    <NameNode>Tactical Support Center (TSC) RotaFleet Ocean Surveillance Information Facility [FOSIF]Antisubmarine Warfare Operations Center (ASWOC)</NameNode>
+    <FullName>Tactical Support Center (TSC) Rota; Fleet Ocean Surveillance Information Facility [FOSIF]; Antisubmarine Warfare Operations Center (ASWOC)</FullName>
+    <LogoUrl>https://www.globalsecurity.org/military/agency/navy/images/aswoc-rota.gif</LogoUrl>
+    <HigherHq>
+      <HigherHqObject>
+        <IsCurrent>true</IsCurrent>
+        <Type>Unknown</Type>
+        <Name>Equipment</Name>
+      </HigherHqObject>
+      <HigherHqObject>
+        <IsCurrent>true</IsCurrent>
+        <Type>Unknown</Type>
+        <Name>Official Homepage</Name>
+      </HigherHqObject>
+    </HigherHq>
+    <Children />
+    <UnitService>Navy</UnitService>
+    <UnitComponent>Active</UnitComponent>
+    <NameFormer />
+    <TableNodes>
+      <TableNode>
+        <h3>Equipment</h3>
+        <li />
+      </TableNode>
+      <TableNode>
+        <h3>Homeport</h3>
+        <li>
+          <li>
+            <href>https://www.globalsecurity.org/military/facility/rota.htm</href>
+            <text>NAS Rota</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Official Homepage</h3>
+        <li />
+      </TableNode>
+    </TableNodes>
+    <Description>
+      <DescriptionObj>
+        <NodeType>h2</NodeType>
+        <Contents>Tactical Support Center (TSC) Rota
+&lt;br&gt;Fleet Ocean Surveillance Information Facility [FOSIF]
+&lt;br&gt;Antisubmarine Warfare Operations Center (ASWOC)</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>img</NodeType>
+        <Contents>images/aswoc-rota.gif</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>#text</NodeType>
+        <Contents>Although a permanent unit has been deemed no longer necessary, nor cost effective, Sixth Fleet will still maintain area presence in the form of a Mobile Operations Control Center (MOCC).  The MOCC, based in Sigonella, Sicily, can quickly deploy to Naval Station Rota to provide all the command-and-control functions of a permanent TSC.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+    </Description>
+    <NickName />
+  </GlobalSecurityObject>
+</ArrayOfGlobalSecurityObject>

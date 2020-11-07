@@ -162,31 +162,37 @@ namespace Liaison.BLL.Models.Unit
         }
         public string TerritorialDesignation { get; set; }
 
+        //public override EquipmentContainer GetEquipment()
+        //{
+        //    bool showAltName = true;
+
+        //    StringBuilder sb = new StringBuilder();
+        //    foreach (var thing in this.Equipment)
+        //    {
+        //        if (thing.GetType() == typeof(BLLAircraft))
+        //        {
+        //            if (thing is BLLAircraft airc)
+        //            {
+        //                sb.Append(airc.PAA + " " + airc.Name + " " + airc.Mark);
+        //                if (showAltName)
+        //                {
+        //                    sb.Append(" [" + airc.AltCode + " " + airc.AltName + "]");
+        //                }
+        //            }
+        //        }
+
+        //        sb.Append(ResourceStrings.Seperator);
+        //    }
+
+        //    var x = sb.ToString();
+        //    return new EquipmentContainer(
+        //        (x.Length > 0 ? x.Substring(0, x.Length - ResourceStrings.Seperator.Length) : x).Replace("_", ""));
+        //}
+
         public override EquipmentContainer GetEquipment()
         {
-            bool showAltName = true;
+            return EquipmentMethods.GetEquipment(this.Equipment);
 
-            StringBuilder sb = new StringBuilder();
-            foreach (var thing in this.Equipment)
-            {
-                if (thing.GetType() == typeof(BLLAircraft))
-                {
-                    if (thing is BLLAircraft airc)
-                    {
-                        sb.Append(airc.PAA + " " + airc.Name + " " + airc.Mark);
-                        if (showAltName)
-                        {
-                            sb.Append(" [" + airc.AltCode + " " + airc.AltName + "]");
-                        }
-                    }
-                }
-
-                sb.Append(ResourceStrings.Seperator);
-            }
-
-            var x = sb.ToString();
-            return new EquipmentContainer(
-                (x.Length > 0 ? x.Substring(0, x.Length - ResourceStrings.Seperator.Length) : x).Replace("_", ""));
         }
     }
 }

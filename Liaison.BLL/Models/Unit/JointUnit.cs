@@ -54,11 +54,27 @@ namespace Liaison.BLL.Models.Unit
 
             relMain.AddRange(relt);
             this.Relationships = new BLLRelationships(sqlUnit.UnitId, relt);
+            this.UnitObject = sqlUnit.UnitObject;
+            if (string.IsNullOrWhiteSpace(sqlUnit.UnitObject))
+            {
+                Liaison.Data.Sql.GetStuff.SetUnitObject(sqlUnit.UnitId, this.GetType().ToString());
+            }
         }
 
         public string GetName()
         {
             StringBuilder sb = new StringBuilder();
+            if (this.Number!=null)
+            {
+                if (this.UseOrdinal)
+                {
+                    sb.Append(this.Number.ToOrdinal(this.UseOrdinal) + " ");
+                }
+                else
+                {
+                    sb.Append("No. " + this.Number + " ");
+                }
+            }
             if (!string.IsNullOrWhiteSpace(this.MissionName))
             {
                 sb.Append(this.MissionName);
@@ -96,32 +112,35 @@ namespace Liaison.BLL.Models.Unit
         {
             return this.Indices == null ? string.Empty : string.Join(",", this.Indices);
         }
-
-        public EquipmentContainer GetEquipment()
+        public  EquipmentContainer GetEquipment()
         {
-            bool showAltName = true;
-
-            StringBuilder sb = new StringBuilder();
-            foreach (var thing in this.Equipment)
-            {
-                if (thing.GetType() == typeof(BLLAircraft))
-                {
-                    if (thing is BLLAircraft airc)
-                    {
-                        sb.Append(airc.PAA + " " + airc.Name + " " + airc.Mark);
-                        if (showAltName)
-                        {
-                            sb.Append(" [" + airc.AltCode + " " + airc.AltName + "]");
-                        }
-                    }
-                }
-
-                sb.Append(ResourceStrings.Seperator);
-            }
-
-            var x = sb.ToString();
-            return new EquipmentContainer( (x.Length > 0 ? x.Substring(0, x.Length - ResourceStrings.Seperator.Length) : x).Replace("_", ""));
+            return EquipmentMethods.GetEquipment(this.Equipment);
         }
+        //public EquipmentContainer GetEquipment()
+        //{
+        //    bool showAltName = true;
+
+        //    StringBuilder sb = new StringBuilder();
+        //    foreach (var thing in this.Equipment)
+        //    {
+        //        if (thing.GetType() == typeof(BLLAircraft))
+        //        {
+        //            if (thing is BLLAircraft airc)
+        //            {
+        //                sb.Append(airc.PAA + " " + airc.Name + " " + airc.Mark);
+        //                if (showAltName)
+        //                {
+        //                    sb.Append(" [" + airc.AltCode + " " + airc.AltName + "]");
+        //                }
+        //            }
+        //        }
+
+        //        sb.Append(ResourceStrings.Seperator);
+        //    }
+
+        //    var x = sb.ToString();
+        //    return new EquipmentContainer( (x.Length > 0 ? x.Substring(0, x.Length - ResourceStrings.Seperator.Length) : x).Replace("_", ""));
+        //}
 
         public bool IsTaskForce => false;
         public bool IsDecommissioned()

@@ -83,13 +83,16 @@ namespace Liaison.BLL.Models.Unit
             // for HHQD
             if (!string.IsNullOrWhiteSpace(this.MissionName))
             {
-                //if (this.UseOrdinal==false)
-                //{
-                //    sb.Append(ResourceStrings.Det +" ");
-                //}
                 if (this.Number != null)
                 {
-                    sb.Append(this.Number.ToOrdinal(this.UseOrdinal) + " ");
+                    if (this.UseOrdinal)
+                    {
+                        sb.Append(this.Number.ToOrdinal(this.UseOrdinal) + " ");
+                    }
+                    else
+                    {
+                        sb.Append("No. " + this.Number + " ");
+                    }
                 }
 
                 if (this.Letter != null)

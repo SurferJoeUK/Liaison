@@ -27,6 +27,17 @@ namespace Liaison.BLL.Models.Unit.Abstracts
         internal bool Decommissioned;
         internal int UnitId;
         internal Guid UnitGuid;
+
+        internal static string DoTranslation(Dictionary<string, string> translations, string key, string language)
+        {
+            string returnable;
+           if (translations.TryGetValue(key, out returnable))
+            {
+                return returnable;
+            }
+            throw new NotImplementedException(key + " not translated in " + language);
+        }
+
         internal ServicesBll Service;
         internal ServiceTypeBLL ServiceType;
         internal char RankSymbol;
@@ -151,6 +162,7 @@ namespace Liaison.BLL.Models.Unit.Abstracts
                        .Replace("{Bn}", "Battalion");
 
         }
+
 
         public string GetConcurrentsHigher()
         {
@@ -693,6 +705,17 @@ namespace Liaison.BLL.Models.Unit.Abstracts
 
             return false;
 
+        }
+
+        internal static Dictionary<string, string> GetTranslations(string v)
+        {
+            using (var content = new LiaisonEntities())
+            {
+                var dict = from t in content.Translations
+                           where t.Language == v
+                           select new { t.English, t.Translation1 };
+                return dict.ToDictionary(d=>d.English, d=>d.Translation1);
+            }
         }
     }
 }

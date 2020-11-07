@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<ArrayOfGlobalSecurityObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GlobalSecurityObject>
+    <Url>https://www.globalsecurity.org/military/agency/navy/vq-2.htm</Url>
+    <NameNode>Fleet Air Reconnaissance Squadron TWO [VQ-2]"Sandeman"</NameNode>
+    <FullName>Fleet Air Reconnaissance Squadron TWO [VQ-2]</FullName>
+    <LogoUrl>https://www.globalsecurity.org/military/agency/navy/images/vq-2.gif</LogoUrl>
+    <HigherHq>
+      <HigherHqObject>
+        <Url>https://www.globalsecurity.org/military/agency/navy/vq-2-refs.htm</Url>
+        <Id>/navy/vq-2-refs.htm</Id>
+        <IsCurrent>true</IsCurrent>
+        <Type>Unknown</Type>
+        <Name>References</Name>
+      </HigherHqObject>
+    </HigherHq>
+    <Children>
+      <SubUnitObject>
+        <Url>https://www.globalsecurity.org/military/agency/navy/vq-2-det-souda.htm</Url>
+        <FullName>Detachment Souda Bay</FullName>
+        <Name>Detachment Souda Bay</Name>
+        <Id>navy/vq-2-det-souda.htm</Id>
+        <IsIndirect>false</IsIndirect>
+      </SubUnitObject>
+    </Children>
+    <UnitService>Navy</UnitService>
+    <UnitComponent>Active</UnitComponent>
+    <NameFormer />
+    <TableNodes>
+      <TableNode>
+        <h3>Units</h3>
+        <li>
+          <li>
+            <href>https://www.globalsecurity.org/military/agency/navy/vq-2-det-souda.htm</href>
+            <text>Detachment Souda Bay</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Equipment</h3>
+        <li>
+          <li>
+            <text>EP-3E ARIES II</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Homeport</h3>
+        <li>
+          <li>
+            <href>https://www.globalsecurity.org/military/facility/rota.htm</href>
+            <text>NAS Rota
+Whidbey Island, WA [Eff. Sept. 1, 2005]</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <href>https://www.globalsecurity.org/military/agency/navy/vq-2-refs.htm</href>
+        <h3>References</h3>
+        <li />
+      </TableNode>
+      <TableNode>
+        <h3>Official Homepage</h3>
+        <li>
+          <li>
+            <href>http://vq2.rota.navy.mil/</href>
+            <text>Fleet Air Recon Squadron TWO 
+Fleet Air Recon Squadron TWO</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+    </TableNodes>
+    <Description>
+      <DescriptionObj>
+        <NodeType>h2</NodeType>
+        <Contents>Fleet Air Reconnaissance Squadron TWO [VQ-2]
+&lt;br&gt;"Sandeman"</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>img</NodeType>
+        <Contents>images/vq-2.gif</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>b</NodeType>
+        <Contents>Fleet Air Reconnaissance Squadron (VQ) 2 will relocate from Rota, Spain, to Whidbey Island, Wash., effective Sept. 1, 2005.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>img</NodeType>
+        <Contents>images/vq-2-off.gif</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>#text</NodeType>
+        <Contents>The closure of VQ-2 facilities in Rota was done in phases, with most of the Sailors and their family members being permitted to complete their tours in Spain, while new personnel report to facilities in Whidbey Island. Additionally, two smaller associated units, Naval Security Group Activity Rota and Aviation Intermediate Maintenance Unit Rota, will be disestablished through the ongoing transformation efforts.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+    </Description>
+    <NickName>"Sandeman"</NickName>
+  </GlobalSecurityObject>
+  <GlobalSecurityObject>
+    <Url>https://www.globalsecurity.org/military/agency/navy/vq-2-det-souda.htm</Url>
+    <NameNode>VQ-2 Detachment Souda Bay</NameNode>
+    <FullName>VQ-2 Detachment Souda Bay</FullName>
+    <HigherHq>
+      <HigherHqObject>
+        <IsCurrent>true</IsCurrent>
+        <Type>Unknown</Type>
+        <Name>Official Homepage</Name>
+      </HigherHqObject>
+    </HigherHq>
+    <Children />
+    <UnitService>Navy</UnitService>
+    <UnitComponent>Active</UnitComponent>
+    <NameFormer />
+    <TableNodes>
+      <TableNode>
+        <h3>Equipment</h3>
+        <li>
+          <li>
+            <text>EP-3E ARIES II</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Homeport</h3>
+        <li>
+          <li>
+            <text>Naval Support Activity, Souda Bay</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Official Homepage</h3>
+        <li />
+      </TableNode>
+    </TableNodes>
+    <Description>
+      <DescriptionObj>
+        <NodeType>h2</NodeType>
+        <Contents>VQ-2 Detachment Souda Bay
+</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>#text</NodeType>
+        <Contents>On 01 October 1980, U.S. Naval Detachment, Souda Bay was disestablished and U.S. Naval Support Activity, Souda Bay, Crete, Greece was established. In December 1990, in addition to the previous Detachment's mission, the Naval Support Activity's mission increased to include support of US Air Force and Navy Reconnaissance missions. As of 1994 the Naval Support Activity has 17 officers and 210 enlisted personnel due to this increased mission and increased port operations in Souda Harbor. The Naval Support Activity is located on Crete's Akrotiri peninsula, 17 kilometers east of Chania. The command is collocated with the Hellenic Air Force at Souda Air Base.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+    </Description>
+    <NickName />
+  </GlobalSecurityObject>
+</ArrayOfGlobalSecurityObject>

@@ -54,6 +54,13 @@
         <EntityTypeShape EntityType="LiaisonModel.AdminCorp" Width="1.5" PointX="2.625" PointY="12.875" />
         <AssociationConnector Association="LiaisonModel.FK_AdminCorps_Unit" />
         <AssociationConnector Association="LiaisonModel.FK_Unit_AdminCorps" />
+        <EntityTypeShape EntityType="LiaisonModel.AdminCorpsUnit" Width="1.5" PointX="14.875" PointY="7.375" />
+        <EntityTypeShape EntityType="LiaisonModel.Document" Width="1.5" PointX="14.375" PointY="0.75" />
+        <EntityTypeShape EntityType="LiaisonModel.DocumentLink" Width="1.5" PointX="14.375" PointY="4.75" />
+        <EntityTypeShape EntityType="LiaisonModel.DocumentReference" Width="1.5" PointX="14.375" PointY="13.75" />
+        <EntityTypeShape EntityType="LiaisonModel.Translation" Width="1.5" PointX="16.375" PointY="0.75" />
+        <AssociationConnector Association="LiaisonModel.FK_AdminCorpsUnits_AdminCorps" />
+        <AssociationConnector Association="LiaisonModel.FK_AdminCorpsUnits_Unit" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

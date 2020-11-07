@@ -1,0 +1,222 @@
+<?xml version="1.0"?>
+<ArrayOfGlobalSecurityObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GlobalSecurityObject>
+    <Url>https://www.globalsecurity.org/military/agency/navy/hc-4.htm</Url>
+    <NameNode>Helicopter Combat Support Squadron [HC-4]"Black Stallions"</NameNode>
+    <FullName>Helicopter Combat Support Squadron [HC-4]</FullName>
+    <LogoUrl>https://www.globalsecurity.org/military/agency/navy/images/hc-4.gif</LogoUrl>
+    <HigherHq />
+    <Children>
+      <SubUnitObject>
+        <Url>https://www.globalsecurity.org/military/facility/manama.htm</Url>
+        <FullName>Det. 1 [Manama]</FullName>
+        <Name>Det. 1 [Manama]</Name>
+        <Id>//www.globalsecurity.org/military/facility/manama.htm</Id>
+        <IsIndirect>false</IsIndirect>
+      </SubUnitObject>
+    </Children>
+    <UnitService>Navy</UnitService>
+    <UnitComponent>Active</UnitComponent>
+    <NameFormer />
+    <TableNodes>
+      <TableNode>
+        <h3>Units</h3>
+        <li>
+          <li>
+            <href>https://www.globalsecurity.org/military/facility/manama.htm</href>
+            <text>Det. 1 [Manama]</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Equipment</h3>
+        <li>
+          <li>
+            <text>6 - MH-53E Sea Dragons</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Homeport</h3>
+        <li>
+          <li>
+            <href>https://www.globalsecurity.org/military/facility/sigonella.htm</href>
+            <text>NAS Sigonella</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+      <TableNode>
+        <h3>Official Homepage</h3>
+        <li>
+          <li>
+            <href>http://www.sicily.navy.mil/hc4/index.htm</href>
+            <text>Helicopter Combat Support Squadron HC-4</text>
+            <Former>false</Former>
+          </li>
+        </li>
+      </TableNode>
+    </TableNodes>
+    <Description>
+      <DescriptionObj>
+        <NodeType>h2</NodeType>
+        <Contents>Helicopter Combat Support Squadron [HC-4]
+&lt;br&gt;"Black Stallions"</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>img</NodeType>
+        <Contents>images/hc-4.gif</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>#text</NodeType>
+        <Contents>The Nassau, after the initial crisis in Albania, quickly moved on to Zaire, Africa where a similar crisis broke out in March of 1997. Rebels accused the President of Zaire, Mobutu Sese Seko, of robbing the country to enrich himself. HC-4 was there on a moments notice to assist with transporting both Americans and friendly nations' citizens to Congo, Africa off the USS Nassau.</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+    </Description>
+    <NickName>"Black Stallions"</NickName>
+  </GlobalSecurityObject>
+  <GlobalSecurityObject>
+    <Url>https://www.globalsecurity.org/military/facility/manama.htm</Url>
+    <NameNode>Manama [Juffair], Bahrain [Al Manamah]26°14'10"N   50°34'59"E</NameNode>
+    <FullName>Manama [Juffair], Bahrain [Al Manamah]; 26°14'10"N   50°34'59"E</FullName>
+    <LogoUrl>https://www.globalsecurity.org/military/facility/images/bahrain-map-s.jpg</LogoUrl>
+    <HigherHq>
+      <HigherHqObject>
+        <Url>https://www.globalsecurity.org/military/facility/bahrain.htm</Url>
+        <Id>ty/bahrain.htm</Id>
+        <IsCurrent>true</IsCurrent>
+        <Type>Unknown</Type>
+        <Name>Bahrain Facilities</Name>
+      </HigherHqObject>
+      <HigherHqObject>
+        <IsCurrent>true</IsCurrent>
+        <Type>Unknown</Type>
+        <Name>Units</Name>
+      </HigherHqObject>
+      <HigherHqObject>
+        <IsCurrent>true</IsCurrent>
+        <Type>Unknown</Type>
+        <Name>Major Units</Name>
+      </HigherHqObject>
+      <HigherHqObject>
+        <IsCurrent>true</IsCurrent>
+        <Type>Unknown</Type>
+        <Name>Other Units</Name>
+      </HigherHqObject>
+      <HigherHqObject>
+        <IsCurrent>true</IsCurrent>
+        <Type>Unknown</Type>
+        <Name>Remote Sites</Name>
+      </HigherHqObject>
+      <HigherHqObject>
+        <IsCurrent>true</IsCurrent>
+        <Type>Unknown</Type>
+        <Name>Official Homepage</Name>
+      </HigherHqObject>
+    </HigherHq>
+    <Children />
+    <UnitService>Navy</UnitService>
+    <UnitComponent>Active</UnitComponent>
+    <NameFormer />
+    <TableNodes>
+      <TableNode>
+        <href>https://www.globalsecurity.org/military/facility/bahrain.htm</href>
+        <h3>Bahrain Facilities</h3>
+        <li />
+      </TableNode>
+      <TableNode>
+        <h3>Units</h3>
+        <li />
+      </TableNode>
+      <TableNode>
+        <h3>Major Units</h3>
+        <li />
+      </TableNode>
+      <TableNode>
+        <h3>Other Units</h3>
+        <li />
+      </TableNode>
+      <TableNode>
+        <h3>Remote Sites</h3>
+        <li />
+      </TableNode>
+      <TableNode>
+        <h3>Official Homepage</h3>
+        <li />
+      </TableNode>
+    </TableNodes>
+    <Description>
+      <DescriptionObj>
+        <NodeType>h2</NodeType>
+        <Contents>Manama [Juffair], Bahrain [Al Manamah]
+&lt;br&gt;26°14'10"N   50°34'59"E</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>h3</NodeType>
+        <Contents>History</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>i</NodeType>
+        <Contents>USS Duxbury Bay</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>i</NodeType>
+        <Contents>USS Greenwich Bay</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>i</NodeType>
+        <Contents>USS Valcour</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>i</NodeType>
+        <Contents>USS La Salle</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>h4</NodeType>
+        <Contents>Quality of Life</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>h4</NodeType>
+        <Contents>War Reserve Materiel (WRM)</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>img</NodeType>
+        <Contents>https://www.globalsecurity.org/military/facility/images/bahrain-map.jpg</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>img</NodeType>
+        <Contents>https://www.globalsecurity.org/military/facility/images/manama-map1.jpg</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>img</NodeType>
+        <Contents>https://www.globalsecurity.org/military/facility/images/usn-bahrain.jpg</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>img</NodeType>
+        <Contents>https://www.globalsecurity.org/military/facility/images/nsa-bahrain-passid.jpg</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+      <DescriptionObj>
+        <NodeType>img</NodeType>
+        <Contents>https://www.globalsecurity.org/military/facility/images/manama-mainstreet.jpg</Contents>
+        <IsItalic>false</IsItalic>
+      </DescriptionObj>
+    </Description>
+    <NickName />
+  </GlobalSecurityObject>
+</ArrayOfGlobalSecurityObject>
