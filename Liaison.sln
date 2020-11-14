@@ -112,6 +112,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Liaison.Import.SqlToMongo",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Liaison.Web.AspTS", "Liaison.Web.AspTS\Liaison.Web.AspTS.csproj", "{C0EA6CA6-1BB1-4E85-8113-3CC303881F10}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Liaison.Data.SqlEFCore", "Liaison.Data.SqlEFCore\Liaison.Data.SqlEFCore.csproj", "{2D037AA1-9734-4278-BC4D-A030D68F128F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -190,6 +192,10 @@ Global
 		{C0EA6CA6-1BB1-4E85-8113-3CC303881F10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0EA6CA6-1BB1-4E85-8113-3CC303881F10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0EA6CA6-1BB1-4E85-8113-3CC303881F10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D037AA1-9734-4278-BC4D-A030D68F128F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D037AA1-9734-4278-BC4D-A030D68F128F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D037AA1-9734-4278-BC4D-A030D68F128F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D037AA1-9734-4278-BC4D-A030D68F128F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -222,6 +228,7 @@ Global
 		{60FEFA71-894E-4745-A43B-434ACFAB75FB} = {881BF879-1909-4C62-BE0F-EF4A51D3665F}
 		{0FF14781-44F0-44DE-90B9-ADA384FDC994} = {A34BFAB8-B690-45A1-B949-A75FD40A2B08}
 		{C0EA6CA6-1BB1-4E85-8113-3CC303881F10} = {AAFC93AB-7FE4-4535-9C92-EAFCE1FF4924}
+		{2D037AA1-9734-4278-BC4D-A030D68F128F} = {5F781E03-5666-4609-8C01-10E24EFBD94A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4066C976-993D-4F44-90C6-36C10CCD72B3}
