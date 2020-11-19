@@ -30,9 +30,9 @@ namespace Liaison.Web.AspTS.Controllers
         public IActionResult Index()
         {
             //throw new NotImplementedException();
-            List<Data.SqlEFCore.Edmx.Ship> efships = _context.Ships.OrderBy(ef => ef.Name).Include(ef=>ef.ShipPrefix).Take(50).ToList();
+           var efships = _context.Ships.OrderBy(ef => ef.Name).Include(ef=>ef.ShipPrefix);
             IEnumerable<int?> ids = efships.Select(sh => sh.UnitId);
-            IQueryable<Data.SqlEFCore.Edmx.UnitIndex> indicies = _context.UnitIndices.Where(idx => ids.Contains(idx.UnitId));
+            var indicies = _context.UnitIndices.Where(idx => ids.Contains(idx.UnitId)).ToList();
 
           //  var shipclass=  _context.ShipClasses.Where(cl=>cl.)
 
@@ -43,20 +43,27 @@ namespace Liaison.Web.AspTS.Controllers
                                         ShipPrefix = new TsShipPrefix
                                         {
                                             ShipPrefixId = efship.ShipPrefixId,
-                                            Prefix = efship.ShipPrefix?.ShipPrefix1,
+                                            Prefix = efship.ShipPrefix!=null ?efship.ShipPrefix.ShipPrefix1:"",
                                             InFull = efship.ShipPrefix.InFull
                                         },
                                         Name = efship.Name,
-                                        IndexSort = string.Join(",", indicies.Where(idx => idx.UnitId==efship.UnitId && (idx.DisplayOrder >= 10 && idx.DisplayOrder <= 19)).Select(idx=>idx.IndexCode).ToArray()),
-                                        HCS = string.Join(",", indicies.Where(idx=> idx.UnitId == efship.UnitId && idx.DisplayOrder==41).Select(idx => idx.IndexCode).ToArray()),
-                                        Pennant = string.Join(",", indicies.Where(idx => idx.UnitId == efship.UnitId && idx.DisplayOrder == 40).Select(idx => idx.IndexCode).ToArray()),
-                                        AltHCS = string.Join(",", indicies.Where(idx => idx.UnitId == efship.UnitId && idx.DisplayOrder >= 50).Select(idx => idx.IndexCode).ToArray()),
-                                        CommissioningDate = efship.Commissioned,
-                                        DecommissioningDate = efship.Decommissioned,
+                                        //IndexSort = string.Join(",", indicies.Where(idx => idx.UnitId==efship.UnitId && (idx.DisplayOrder >= 10 && idx.DisplayOrder <= 19)).Select(idx=>idx.IndexCode).ToArray()),
+                                        //HCS = string.Join(",", indicies.Where(idx=> idx.UnitId == efship.UnitId && idx.DisplayOrder==41).Select(idx => idx.IndexCode).ToArray()).Replace("@", "").Replace("_", ""),
+                                        //HCS = indicies.Where(idx => idx.UnitId == efship.UnitId && idx.DisplayOrder == 41).FirstOrDefault()?.IndexCode.Replace("@", "").Replace("_", ""),
+                                        //Pennant = string.Join(",", indicies.Where(idx => idx.UnitId == efship.UnitId && idx.DisplayOrder == 40).Select(idx => idx.IndexCode).ToArray()).Replace("@", "").Replace("_", ""),
+                                        //Pennant =  indicies.Where(idx => idx.UnitId == efship.UnitId && idx.DisplayOrder == 40).FirstOrDefault()?.IndexCode.Replace("@", "").Replace("_", ""),
+                                        //AltHCS = string.Join(",", indicies.Where(idx => idx.UnitId == efship.UnitId && idx.DisplayOrder >= 50).Select(idx => idx.IndexCode).ToArray()).Replace("~", "").Replace("_", ""),
+                                        //CommissioningDate = efship.Commissioned,
+                                        //DecommissioningDate = efship.Decommissioned,
                                         IsBase = efship.IsBase,
                                        // ShipClass = new Models.ShipClass(),
                                    
                                     }).ToList();
+            foreach (var tship in tsships)
+            {
+                tship.HCS = indicies.Where(idx => idx.UnitId == tship.UnitId && idx.DisplayOrder == 41).FirstOrDefault()?.IndexCode.Replace("@", "").Replace("_", "");
+                tship.Pennant = indicies.Where(idx => idx.UnitId == tship.UnitId && idx.DisplayOrder == 40).FirstOrDefault()?.IndexCode.Replace("@", "").Replace("_", "");
+            }
             return View(tsships.ToList());
         }
 
@@ -83,23 +90,34 @@ namespace Liaison.Web.AspTS.Controllers
         // GET: Ships/Create
         public IActionResult Create()
         {
-            return View();
+            var newship = new Liaison.Web.AspTS.Models.New.NewShip();
+
+
+            ViewBag.ListShipPrefix = BLL.ShipPrefixBLL.GetShipPrefixes(_context);
+            ViewBag.ListShipClass = BLL.ShipClassBLL.GetShipClasses(_context, null);
+            ViewBag.ListAdminCorps = BLL.AdminCorpsBLL.GetAdminCorps(_context, "N/!/");
+            ViewBag.ListMissions = BLL.MissionBLL.GetMissions(_context, "N:HCS");
+
+
+            return View(newship);
         }
 
         // POST: Ships/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[Bind("UnitId,Name,HCS,HCSNumber,PennantCode,PennantNumber")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UnitId,Name,HCS,HCSNumber,PennantCode,PennantNumber")] TsShip ship)
+        public IActionResult Create(Models.New.NewShip ship)
         {
             if (ModelState.IsValid)
             {
-                //_context.Add(ship);
+                BLL.ShipBLL.CreateShip(_context, ship);
                 //await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(ship);
+            //return View(ship);
+            return RedirectToAction("Create");
         }
 
         // GET: Ships/Edit/5

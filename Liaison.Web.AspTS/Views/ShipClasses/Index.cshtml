@@ -13,13 +13,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model=>model.ShipClassId)
+                @Html.DisplayNameFor(model => model.ShipClassId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.ClassName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.HCS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShipCount)
             </th>
             <th></th>
         </tr>
@@ -31,10 +34,13 @@
                 @Html.DisplayFor(modelItem => item.ShipClassId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.ClassName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HCS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipCount)
             </td>
             <td>
                 <a asp-action="Mod" asp-route-id="@item.ShipClassId">Mod</a> |

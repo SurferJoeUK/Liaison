@@ -1,4 +1,4 @@
-﻿@model Liaison.Web.AspTS.Models.Ship
+﻿@model Liaison.Web.AspTS.Models.ShipClass
 
 @{
     ViewData["Title"] = "Edit";
@@ -12,11 +12,11 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="UnitId" />
+            <input type="hidden" asp-for="ShipClassId" />
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="ClassName" class="control-label"></label>
+                <input asp-for="ClassName" class="form-control" />
+                <span asp-validation-for="ClassName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="HCS" class="control-label"></label>
@@ -24,9 +24,9 @@
                 <span asp-validation-for="HCS" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Pennant" class="control-label"></label>
-                <input asp-for="Pennant" class="form-control" />
-                <span asp-validation-for="Pennant" class="text-danger"></span>
+                <label asp-for="HCSNumber" class="control-label"></label>
+                <input asp-for="HCSNumber" class="form-control" />
+                <span asp-validation-for="HCSNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

@@ -1,4 +1,4 @@
-﻿@model Liaison.Web.AspTS.Models.Ship
+﻿@model Liaison.Web.AspTS.Models.ShipClass
 
 @{
     ViewData["Title"] = "Delete";
@@ -12,10 +12,10 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.ClassName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.ClassName)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.HCS)
@@ -23,16 +23,10 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.HCS)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Pennant)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Pennant)
-        </dd>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="UnitId" />
+        <input type="hidden" asp-for="ShipClassId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

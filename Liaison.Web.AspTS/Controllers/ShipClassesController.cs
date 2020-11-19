@@ -27,7 +27,7 @@ namespace Liaison.Web.AspTS.Controllers
         // GET: ShipClasses
         public IActionResult Index()
         {
-            List<Data.SqlEFCore.Edmx.ShipClass> efShipClasses = _context.ShipClasses.ToList();
+            List<Data.SqlEFCore.Edmx.ShipClass> efShipClasses = _context.ShipClasses.Include(sc=>sc.ShipClassMembers).ToList();
             List<Data.SqlEFCore.Edmx.SortOrder> sortorder = _context.SortOrders.Where(so => so.SearchTerm.StartsWith("#")).OrderBy(so => so.SortOrderRank).ToList();
 
             List<TsShipClass> shipclasslist = new List<TsShipClass>();
@@ -45,11 +45,12 @@ namespace Liaison.Web.AspTS.Controllers
                     shipclasslist.Add(new TsShipClass
                     {
                         ShipClassId = hcsShipClass.ShipClassId,
-                        Name = sb.ToString(),
+                        ClassName = sb.ToString(),
                         HCS = hcsShipClass.ClassCodeHcs + "-" + hcsShipClass.ClassCodeNumber,
+                        ShipCount = hcsShipClass.ShipClassMembers.Count(),
                         IsMod = hcsShipClass.ModFrom != null,
                         Notes = hcsShipClass.Notes
-                    }); ;
+                    });
                 }
             }
 
@@ -87,12 +88,17 @@ namespace Liaison.Web.AspTS.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UnitId,Name,HCS,HCSNumber,PennantCode,PennantNumber")] TsShipClass shipClass)
+        public IActionResult Create([Bind("ClassName,HCS,HCSNumber,Notes")] TsShipClass shipClass)
         {
             if (ModelState.IsValid)
             {
-                //_context.Add(ship);
-                //await _context.SaveChangesAsync();
+                Data.SqlEFCore.Edmx.ShipClass edmx = new Data.SqlEFCore.Edmx.ShipClass();
+                edmx.ClassName = shipClass.ClassName;
+                edmx.ClassCodeHcs = shipClass.HCS;
+                edmx.ClassCodeNumber = shipClass.HCSNumber;
+
+                _context.Add(edmx);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             return View(shipClass);

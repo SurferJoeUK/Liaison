@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model=>model.ShipPrefix)
+                @Html.DisplayNameFor(model => model.ShipPrefix)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
@@ -21,17 +21,52 @@
             <th>
                 @Html.DisplayNameFor(model => model.HCS)
             </th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.Hcsnumber)
+        </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Pennant)
             </th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.PennantNumber)
+        </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.ShipClass)
+                @Html.DisplayNameFor(model => model.IsBase)
             </th>
-            <th></th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.AltName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AltHCS)
+        </th>*@
+            @*<th>
+            @Html.DisplayNameFor(model => model.AltHcsnumber)
+        </th>*@
+            @*<th>
+            @Html.DisplayNameFor(model => model.IsInactive)
+        </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.CommissioningDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DecommissioningDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShipClass.ClassName)
+            </th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.NewShip)
+        </th>*@
+
+            @*<th>
+                @Html.DisplayNameFor(model => model.Unit)
+            </th>
+            <th></th>*@
         </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model) {
+@foreach (var item in Model)
+{
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.ShipPrefix.Prefix)
@@ -42,18 +77,52 @@
             <td>
                 @Html.DisplayFor(modelItem => item.HCS)
             </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Hcsnumber)
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Pennant)
             </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.PennantNumber)
+            </td>*@
             <td>
-               
+                @Html.DisplayFor(modelItem => item.IsBase)
             </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.AltName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AltHcs)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AltHcsnumber)
+            </td>*@
+            @*<td>
+                @Html.DisplayFor(modelItem => item.IsInactive)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.CommissioningDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DecommissioningDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipClass.ClassName)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.NewShip.Name)
+            </td>*@
+
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Unit.RankSymbol)
+            </td>*@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.UnitId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.UnitId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.UnitId">Delete</a>
             </td>
         </tr>
-       }
+}
     </tbody>
 </table>
