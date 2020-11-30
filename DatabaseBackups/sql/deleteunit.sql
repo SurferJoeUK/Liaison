@@ -4,7 +4,7 @@ use liaison
 
 declare  @unitid int
 set @unitid = 
-102336
+103489
 --36715
 --36716
 --36717
@@ -15,6 +15,7 @@ set @unitid =
 delete FROM     Tennant WHERE  (UnitId = @unitid)
 
 delete from MissionUnit WHERE  (UnitId = @unitid)
+delete from Ship where (UnitId=@unitid)
 
 delete from EquipmentOwner where unitid=@unitid
 
