@@ -4,16 +4,20 @@ using System;
 
 namespace Liaison.Web.AspTS.Controllers.BLL
 {
+
     public class ShipBLL
-    {    
+    {
         internal static void CreateShip(LiaisonContext context, NewShip newship)
         {
             var prefix = ShipPrefixBLL.GetShipPrefixes(context, newship.ShipPrefixId);
             var vessel = new Unit
             {
                 UseOrdinal = false,
-                MissionName = newship.HCS + "-" + Liaison.Helper.Helper.GetIntWithUnderscores(newship.HCSNumber, false),
-                UniqueName = prefix.ShipPrefix1 + " " + newship.Name,
+                // MissionName = newship.HCS + "-" + Liaison.Helper.Helper.GetIntWithUnderscores(newship.HCSNumber, false),
+                MissionName = newship.HCS,
+                Number = newship.HCSNumber,
+                UniqueName = newship.Name,
+                CommandName = prefix.ShipPrefix1,
                 ServiceIdx = (int)Liaison.Helper.Enumerators.ServicesBll.Navy,
                 ServiceTypeIdx = (int)Helper.Enumerators.ServiceTypeBLL.Active,
                 UnitObject = "Liaison.BLL.Models.Unit.Vessel",
@@ -39,7 +43,7 @@ namespace Liaison.Web.AspTS.Controllers.BLL
                 IsBase = newship.IsBase,
                 AltName = newship.AltName,
                 AltHcs = newship.AltCode,
-                AltHcsnumber =  Int32.Parse (newship.AltCodeNumber),
+                AltHcsnumber = Int32.Parse(newship.AltCodeNumber),
                 IsInactive = false,
                 Commissioned = newship.CommissionedDate,
                 Decommissioned = newship.DecommissionedDate,
@@ -62,14 +66,15 @@ namespace Liaison.Web.AspTS.Controllers.BLL
             });
             context.ShipClassMembers.Add(new ShipClassMember
             {
-                IsLeadBoat=newship.ShipClassLeadBoat,
-                ShipClassId=newship.ShipClassId,
-                ShipId=ship.ShipId
-                
+                IsLeadBoat = newship.ShipClassLeadBoat,
+                ShipClassId = newship.ShipClassId,
+                ShipId = ship.ShipId
+
             });
             context.UnitIndices.Add(new UnitIndex
             {
-                IndexCode = newship.Index10,
+                //IndexCode = newship.Index10,
+                IndexCode = "#" + newship.HCS + "-" + Liaison.Helper.Helper.GetIntWithUnderscores(newship.HCSNumber, false),
                 UnitId = vessel.UnitId,
                 IsSortIndex = true,
                 IsDisplayIndex = true,
@@ -79,7 +84,7 @@ namespace Liaison.Web.AspTS.Controllers.BLL
             });
             context.UnitIndices.Add(new UnitIndex
             {
-                IndexCode = "@"+newship.Pennant+" " + Liaison.Helper.Helper.GetIntWithUnderscores(newship.PennantNumber, false),
+                IndexCode = "@" + newship.Pennant + " " + Liaison.Helper.Helper.GetIntWithUnderscores(newship.PennantNumber, false),
                 UnitId = vessel.UnitId,
                 IsSortIndex = false,
                 IsDisplayIndex = true,
@@ -99,7 +104,8 @@ namespace Liaison.Web.AspTS.Controllers.BLL
             });
             context.UnitIndices.Add(new UnitIndex
             {
-                IndexCode = newship.Index50,
+                //IndexCode = newship.Index50,
+                IndexCode = "~USN " + newship.HCS + "-" + Liaison.Helper.Helper.GetIntWithUnderscores(newship.HCSNumber, false),
                 UnitId = vessel.UnitId,
                 IsSortIndex = false,
                 IsDisplayIndex = true,

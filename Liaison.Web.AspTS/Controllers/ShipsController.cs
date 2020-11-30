@@ -13,17 +13,15 @@ namespace Liaison.Web.AspTS.Controllers
 {
     public class ShipsController : Controller
     {
-        // private readonly LiaisonWebAspTSContext _context;
+        
         private readonly Liaison.Data.SqlEFCore.Edmx.LiaisonContext _context;
-       // public ShipsController(LiaisonWebAspTSContext context)
+       
        public ShipsController()
         {
             if (_context==null)
             {
                 _context = new Liaison.Data.SqlEFCore.Edmx.LiaisonContext();
             }
-            //LiaisonEntities context
-            //_context = context;
         }
 
         // GET: Ships
@@ -113,8 +111,8 @@ namespace Liaison.Web.AspTS.Controllers
             if (ModelState.IsValid)
             {
                 BLL.ShipBLL.CreateShip(_context, ship);
-                //await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                return RedirectToAction(nameof(Create));
             }
             //return View(ship);
             return RedirectToAction("Create");

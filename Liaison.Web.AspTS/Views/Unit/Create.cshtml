@@ -1,0 +1,126 @@
+﻿@model Liaison.Web.AspTS.Models.New.NewUnitSimple
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Ship</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+            <label asp-for="UnitId" class="control-label"></label>
+            <select asp-for="UnitId" class ="form-control" asp-items="ViewBag.UnitId"></select>
+        </div>*@
+            <div class="form-group">
+                <label asp-for="AdminCorpsId" class="control-label"></label>
+                <select asp-for="AdminCorpsId" class="form-control" asp-items="Model.ListAdminCorps"></select>
+
+            </div>
+            <!--<div class="form-group">
+                <label asp-for="ShipClassId" class="control-label"></label>
+                <select asp-for="ShipClassId" class="form-control" asp-items="ViewBag.ListShipClass"></select>
+                <input asp-for="ShipClassLeadBoat" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="AdminCorpsId" class="control-label"></label>
+                <select asp-for="AdminCorpsId" class="form-control" asp-items="ViewBag.ListAdminCorps"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MissionId" class="control-label"></label>
+                <select asp-for="MissionId" class="form-control" asp-items="ViewBag.ListMissions"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HCS" class="control-label"></label>
+                <input asp-for="HCS" class="control25" /><input asp-for="HCSNumber" class="form-control75" />
+                <span asp-validation-for="HCS" class="text-danger"></span>
+                <span asp-validation-for="HCSNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Pennant" class="control-label"></label>
+                <input asp-for="Pennant" class="form-control" />
+                <span asp-validation-for="Pennant" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PennantNumber" class="control-label"></label>
+                <input asp-for="PennantNumber" class="form-control" />
+                <span asp-validation-for="PennantNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsBase" />
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="AltName" class="control-label"></label>
+                <input asp-for="AltName" class="form-control" />
+                <span asp-validation-for="AltName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AltCode" class="control-label"></label>
+                <input asp-for="AltCode" class="form-control" />
+                <span asp-validation-for="AltCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AltCodeNumber" class="control-label"></label>
+                <input asp-for="AltCodeNumber" class="form-control" />
+                <span asp-validation-for="AltCodeNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParentUnitId" class="control-label"></label>
+                <input asp-for="ParentUnitId" class="form-control" />
+                <span asp-validation-for="ParentUnitId" class="text-danger"></span>
+            </div>-->
+            @*<div class="form-group">
+            <label asp-for="NewShipId" class="control-label"></label>
+            <select asp-for="NewShipId" class ="form-control" asp-items="ViewBag.NewShipId"></select>
+        </div>*@
+            <!--<div class="form-group">
+                <label asp-for="RankSymbol" class="control-label"></label>
+                <input asp-for="RankSymbol" class="form-control" />
+                <span asp-validation-for="RankSymbol" class="text-danger"></span>
+            </div>-->
+            @*<div class="form-group">
+                <label asp-for="CommissionedDate" class="control-label"></label>
+                <input asp-for="CommissionedDate" class="form-control" />
+                <span asp-validation-for="CommissionedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DecommissionedDate" class="control-label"></label>
+                <input asp-for="DecommissionedDate" class="form-control" />
+                <span asp-validation-for="DecommissionedDate" class="text-danger"></span>
+            </div>*@
+            @*<div class="form-group">
+                <label asp-for="Index10" class="control-label"></label>
+                <input asp-for="Index10" class="form-control" />
+                <span asp-validation-for="Index10" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Index50" class="control-label"></label>
+                <input asp-for="Index50" class="form-control" />
+                <span asp-validation-for="Index50" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

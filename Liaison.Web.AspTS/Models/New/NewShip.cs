@@ -27,8 +27,8 @@ namespace Liaison.Web.AspTS.Models.New
         public DateTime? DecommissionedDate { get; set; }
         public int AdminCorps { get; set; }
         public int MissionId { get; set; }
-        public string Index10 { get; set; }
-        public string Index50 { get; set; }
+        //public string Index10 { get; set; }
+        //public string Index50 { get; set; }
         public int ShipClassId { get; set; }
         public bool ShipClassLeadBoat { get; set; }
         public int AdminCorpsId { get; set; }
