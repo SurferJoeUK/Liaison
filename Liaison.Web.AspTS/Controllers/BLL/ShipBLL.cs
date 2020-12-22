@@ -56,7 +56,7 @@ namespace Liaison.Web.AspTS.Controllers.BLL
                 RelFromUnitId = newship.ParentUnitId,
                 RelToUnitId = vessel.UnitId,
             });
-            context.MissionUnits.Add(new Data.SqlEFCore.MissionUnit
+            context.MissionUnits.Add(new MissionUnit
             {
                 IsAssociate = false,
                 MissionId = newship.MissionId,

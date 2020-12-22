@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Liaison.Data.SqlEFCore.Edmx;
+using System;
 using System.Collections.Generic;
 
 #nullable disable

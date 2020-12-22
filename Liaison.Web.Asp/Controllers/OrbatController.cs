@@ -50,13 +50,16 @@ namespace Liaison.Web.Asp.Controllers
         {
             NewThing nn = new NewThing
             {
-                //ServiceTypeOptions = new List<SelectListItem>
-                //{
-                //    new SelectListItem {Value = "1", Text = "Active"},
-                //    new SelectListItem {Value = "3", Text = "Reserve"},
-                //    new SelectListItem {Value = "4", Text = "Volunteer"},
-                //    new SelectListItem {Value = "5", Text = "State Volunteer"}
-                //},
+                ServiceTypeOptions = new List<SelectListItem>
+                {
+                    new SelectListItem {Value = "1", Text = "Active"},
+                   new SelectListItem {Value = "2", Text = "Integrated"},
+                    new SelectListItem {Value = "3", Text = "Reserve"},
+                    new SelectListItem {Value = "4", Text = "Volunteer"},
+                    new SelectListItem {Value = "5", Text = "State Volunteer"},
+new SelectListItem {Value = "6", Text = "Expeditionary"},
+new SelectListItem {Value = "7", Text = "Reinforced"}
+                },
 
                 Things = new List<NewWing>
                 {

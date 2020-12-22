@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace Liaison.Data.SqlEFCore
+namespace Liaison.Data.SqlEFCore.Edmx
 {
     public partial class MissionUnit
     {

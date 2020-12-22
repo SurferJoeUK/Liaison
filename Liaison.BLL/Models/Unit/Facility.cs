@@ -16,6 +16,8 @@ namespace Liaison.BLL.Models.Unit
             this.UnitGuid = sqlUnit.UnitGuid;
             this.MissionName = sqlUnit.MissionName;
             this.CommandName = sqlUnit.CommandName;
+            this.Number = sqlUnit.Number;
+            this.UseOrdinal = sqlUnit.UseOrdinal;
             if (sqlUnit.Ships.Any())
                 this.Vessel = new Vessel(sqlUnit.Ships.First());
             this.Service = (ServicesBll)sqlUnit.ServiceIdx;
@@ -51,6 +53,7 @@ namespace Liaison.BLL.Models.Unit
             return "";
         }
         public string CommandName { get; set; }
+        public bool UseOrdinal { get; }
 
         public string GetName()
         {
@@ -61,6 +64,20 @@ namespace Liaison.BLL.Models.Unit
             if (this.Vessel != null)
             {
                 sb.Append(this.Vessel.Prefix + " " + this.Vessel.ShipName + " (");
+            }
+            else
+            {
+                if (this.Number!=null)
+                {
+                    if (this.UseOrdinal)
+                    {
+                        sb.Append(this.Number.ToOrdinal(this.UseOrdinal) + " ");
+                    }
+                    else
+                    {
+                        sb.Append("No. " + this.Number + " ");
+                    }
+                }
             }
 
             sb.Append(this.MissionName + " " + this.CommandName);

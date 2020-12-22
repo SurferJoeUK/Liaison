@@ -3,27 +3,24 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Liaison.Web.AspTS.Controllers
 {
-
-    public class JointGroupController : Controller
+    public class NavalSquadronController:Controller
     {
         private readonly Liaison.Data.SqlEFCore.Edmx.LiaisonContext _context;
-        private readonly string jointgroup = typeof(Liaison.BLL.Models.Unit.JointGroup).FullName;
-        public JointGroupController()
+        private readonly string navalsquadron = typeof(Liaison.BLL.Models.Unit.NavalSquadron).FullName;
+
+        public NavalSquadronController()
         {
             if (_context == null)
             {
                 _context = new Liaison.Data.SqlEFCore.Edmx.LiaisonContext();
             }
         }
-        // GET: UnitController
         public ActionResult Index()
         {
-            return View(); 
+            return View();
         }
 
         // GET: UnitController/Details/5
@@ -35,12 +32,12 @@ namespace Liaison.Web.AspTS.Controllers
         // GET: UnitController/Create
         public IActionResult Create()
         {
-        //   const string jointgroup = "Liaison.BLL.Models.Unit.JointGroup";
+            //   const string jointgroup = "Liaison.BLL.Models.Unit.JointGroup";
             var newsimpleUnit = new Models.New.NewUnitSimple();
-            newsimpleUnit.ListAdminCorps = BLL.UnitBLL.GetAdminCorpsWithUnitType(_context, jointgroup);
-            newsimpleUnit.ListRankSymbols = BLL.UnitBLL.GetRanksWithUnitType(_context, jointgroup);//.GetObviousRanks();
-            newsimpleUnit.ListServices = BLL.UnitBLL.GetServices(_context, jointgroup);
-            newsimpleUnit.ListServiceTypes = BLL.UnitBLL.GetServiceTypes();            
+            newsimpleUnit.ListAdminCorps = BLL.UnitBLL.GetAdminCorpsWithUnitType(_context, navalsquadron);
+            newsimpleUnit.ListRankSymbols = BLL.UnitBLL.GetRanksWithUnitType(_context, navalsquadron);//.GetObviousRanks();
+            newsimpleUnit.ListServices = BLL.UnitBLL.GetServices(_context, navalsquadron);
+            newsimpleUnit.ListServiceTypes = BLL.UnitBLL.GetServiceTypes();
 
             return View("../Unit/Create", newsimpleUnit);
         }
@@ -54,13 +51,14 @@ namespace Liaison.Web.AspTS.Controllers
         [HttpPost]
         public ActionResult GetMissionText(string ranksymbol, string admincorpsid, string missionid)
         {
-            string missiontext = BLL.UnitBLL.GetUnitMissionName(_context, jointgroup, ranksymbol, Int32.Parse(admincorpsid), Int32.Parse(missionid));
+            string missiontext = BLL.UnitBLL.GetUnitMissionName(_context, navalsquadron, ranksymbol, Int32.Parse(admincorpsid), Int32.Parse(missionid));
             return Json(missiontext);
         }
+
         [HttpPost]
         public ActionResult GetUnitIndexes(string ranksymbol, string admincorpsid, string missionid)
         {
-            string[] indexes = BLL.UnitBLL.GetUnitIndexes(_context, jointgroup, ranksymbol, Int32.Parse(admincorpsid), Int32.Parse(missionid));
+            string[] indexes = BLL.UnitBLL.GetUnitIndexes(_context, navalsquadron, ranksymbol, Int32.Parse(admincorpsid), Int32.Parse(missionid));
             return Json(indexes);
         }
         // POST: UnitController/Create
@@ -70,11 +68,11 @@ namespace Liaison.Web.AspTS.Controllers
         {
             try
             {
-                simple.UnitObject = jointgroup;
+                simple.UnitObject = navalsquadron;
                 BLL.UnitBLL.CreateUnit(_context, simple);
                 return RedirectToAction(nameof(Index), "Unit");
             }
-            catch
+            catch (Exception e)
             {
                 return View();
             }

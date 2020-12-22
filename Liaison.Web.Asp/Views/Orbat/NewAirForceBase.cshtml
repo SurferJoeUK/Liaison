@@ -30,7 +30,7 @@
                 </td>
                 <td>
                     @Html.LabelFor(m=>m.ServiceType)
-                    @Html.DropDownListFor(m=>m.ServiceType, Model.ServiceTypeOptions)
+                    @Html.DropDownListFor(m=>m.ServiceType, new SelectList(Model.ServiceTypeOptions, "Value", "Text"))
                 </td>
                 <td>
                     @Html.LabelFor(m=>m.TerritorialDesignation)

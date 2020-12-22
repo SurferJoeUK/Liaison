@@ -231,6 +231,10 @@ namespace Liaison.BLL.Models.Unit.Abstracts
             var isTaskForce = rt.Unit.IsTaskForce;
             var numbRl = rt.Unit.GetRankLevel();
             var name = rt.Unit.GetName();
+            if (name == "No. 1 Mobile Tactical Operations Centre")
+            {
+                string a = "b;";
+            }
             var relationships = rt?.RelationshipType?.RelationshipTypeId == 9 ?
                 new List<RelationshipTracker>() : unit.GetRelationships();
             string taskforceMainName = "";
