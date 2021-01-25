@@ -57,7 +57,8 @@ namespace Liaison.Data.Sql
         {
             using (var context = new LiaisonEntities())
             {
-                return context.ConfigSettings.First(m => m.ConfigSetting1 == "JointGroupMissionNames").ConfigValue.Split(',').ToList();
+                // return context.ConfigSettings.First(m => m.ConfigSetting1 == ).ConfigValue.Split(',').ToList();
+                return context.Configuerations.Where(v => v.ConfigSetting == "JointGroupMissionNames").Select(v => v.ConfigValue).ToList();
             }
         }
 
@@ -65,7 +66,7 @@ namespace Liaison.Data.Sql
         {
             using (var context = new LiaisonEntities())
             {
-                return context.ConfigSettings.First(m => m.ConfigSetting1== "NavalSquadronMissionNames").ConfigValue.Split(',').ToList();
+                return context.Configuerations.Where(m => m.ConfigSetting == "NavalSquadronMissionNames").Select(v => v.ConfigValue).ToList();
             }
               
         }
@@ -73,7 +74,7 @@ namespace Liaison.Data.Sql
         {
             using (var context = new LiaisonEntities())
             {
-                return context.ConfigSettings.First(m=>m.ConfigSetting1== "FacilityMissionNames").ConfigValue.Split(',').ToList();
+                return context.Configuerations.Where(m=>m.ConfigSetting == "FacilityMissionNames").Select(v => v.ConfigValue).ToList();
             }
         }
 
@@ -81,7 +82,7 @@ namespace Liaison.Data.Sql
         {
             using (var context = new LiaisonEntities())
             {
-                return context.ConfigSettings.First(m => m.ConfigSetting1 == input).ConfigValue.Split(',').ToList().Select(int.Parse).ToList();
+                return context.Configuerations.Where(m => m.ConfigSetting == input).Select(v => v.ConfigValue).ToList().Select(int.Parse).ToList();
             }
         }
 
@@ -89,7 +90,7 @@ namespace Liaison.Data.Sql
         {
             using (var context = new LiaisonEntities())
             {
-                return context.ConfigSettings.First(m => m.ConfigSetting1 == "BattalionNoBracketMissionNames").ConfigValue.Split(',').ToList();
+                return context.Configuerations.Where(m => m.ConfigSetting == "BattalionNoBracketMissionNames").Select(v => v.ConfigValue).ToList();
             }
         }
 
@@ -147,6 +148,22 @@ namespace Liaison.Data.Sql
 
                 return dictionary;
             }
+        }
+
+        public static List<KeyValuePair<string, string>> GetConfigSettingsValues(LiaisonEntities le)
+        {
+            //var configs = le.ConfigSettings.ToList();
+            var dictionary = new List<KeyValuePair<string, string>>();
+            //foreach (var data in configs)
+            //{
+            //    string[] values = data.ConfigValue.Split(',');
+            //    foreach (var value in values)
+            //    {
+            //        dictionary.Add(new KeyValuePair<string, string>(data.ConfigSetting1, value));
+            //    }
+            //}
+
+            return dictionary;
         }
     }
 }

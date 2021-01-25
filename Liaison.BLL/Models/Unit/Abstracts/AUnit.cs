@@ -231,10 +231,7 @@ namespace Liaison.BLL.Models.Unit.Abstracts
             var isTaskForce = rt.Unit.IsTaskForce;
             var numbRl = rt.Unit.GetRankLevel();
             var name = rt.Unit.GetName();
-            if (name == "No. 1 Mobile Tactical Operations Centre")
-            {
-                string a = "b;";
-            }
+
             var relationships = rt?.RelationshipType?.RelationshipTypeId == 9 ?
                 new List<RelationshipTracker>() : unit.GetRelationships();
             string taskforceMainName = "";
@@ -278,6 +275,11 @@ namespace Liaison.BLL.Models.Unit.Abstracts
                     case (int)HigherHqType.Organic:
                         {
                             relSymbol = "() ";
+                            break;
+                        }
+                    case (int)HigherHqType.Attached:
+                        {
+                            relSymbol = "}~ ";
                             break;
                         }
                     case (int)HigherHqType.OPCON:
@@ -342,7 +344,16 @@ namespace Liaison.BLL.Models.Unit.Abstracts
             string unitAdminCorps = unit.GetAdminCorps();
 
             string unitIdDisplay = showUnitId ? "(" + unitid + ") " : "(" + unitid.ToString("D5") + ") ";
+            //string unitIdDisplay = showUnitId ? "" : "(" + unitid.ToString("D5") + ") ";
 
+            int thisUnitRank = unit.GetRankLevel();
+            int[] childtypes = { 1, 2, 3, 4, 6, 9 };
+            bool samerankchilds = relationshipTrackers.Any(r => r.Unit.GetRankLevel() == thisUnitRank && childtypes.Contains(r.RelationshipType.RelationshipTypeId));
+
+            if (samerankchilds)
+            {
+                name = "<u>" + name + "</u>";
+            }
 
             sb.Append(sbIndent.ToString() + relSymbol);
             sb.Append("<span class='lzRankStar'>" + unit.GetRankStar() + "</span>");
@@ -417,7 +428,7 @@ namespace Liaison.BLL.Models.Unit.Abstracts
             //var rels = unit.GetId() == 74143 ? relationshipTrackers : SortRelationships(relationshipTrackers);
             var rels =  SortRelationships(relationshipTrackers);
 
-            int[] types = { 1, 2, 4, 6, 9 };
+            int[] types = { 1, 2, 3, 4, 6, 9 };
             var stuff = rels.Where(r =>
                 types.Contains(r.RelationshipType.RelationshipTypeId));
             foreach (RelationshipTracker childunit in stuff)

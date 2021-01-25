@@ -21,6 +21,10 @@ namespace Liaison.BLL.Models.Equipment
             {
                 return new EquipmentContainer(equipment[0].GetEquipmentString().Replace("_", ""));
             }
+            else if (equipment.Count == 2)
+            {
+                return new EquipmentContainer(equipment[0].GetEquipmentString().Replace("_", "") + ", " + equipment[1].GetEquipmentString().Replace("_", ""));
+            }
 
             StringBuilder sb = new StringBuilder();
 
@@ -37,12 +41,16 @@ namespace Liaison.BLL.Models.Equipment
                 }
 
                 thing.GetEquipmentString().Replace("_", "");
-                if (thing.GetType() == typeof(BLLGroundEquipment))
+                //if (thing.GetType() == typeof(BLLGroundEquipment))
+                //{
+                if (thing is BLLGroundEquipment ground)
                 {
-                    if (thing is BLLGroundEquipment ground)
-                    {
-                        sb.Append(ground.GetEquipmentString());
-                    }
+                    sb.Append(ground.GetEquipmentString());
+                }
+                // }
+                else if (thing is BLLAircraft aircraft)
+                {
+                    sb.Append(aircraft.GetEquipmentString());
                 }
 
                 sb.Append(ResourceStrings.Seperator);

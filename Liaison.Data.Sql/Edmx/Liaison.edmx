@@ -84,12 +84,15 @@
           <Property Name="City" Type="nvarchar" MaxLength="255" />
           <Property Name="ISO3166" Type="nvarchar" MaxLength="10" />
         </EntityType>
-        <EntityType Name="ConfigSettings">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Liaison.dbo.ConfigSettings' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Configuerations">
           <Key>
             <PropertyRef Name="ConfigSetting" />
+            <PropertyRef Name="ConfigValue" />
           </Key>
-          <Property Name="ConfigSetting" Type="nvarchar" MaxLength="255" Nullable="false" />
-          <Property Name="ConfigValue" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ConfigSetting" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConfigValue" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <EntityType Name="Dictionary">
           <Key>
@@ -163,6 +166,13 @@
           <Property Name="Notes" Type="nvarchar(max)" />
           <Property Name="DoNotUse" Type="bit" />
         </EntityType>
+        <EntityType Name="GroundEquipmentType">
+          <Key>
+            <PropertyRef Name="GroundEquipmentTypeCode" />
+          </Key>
+          <Property Name="GroundEquipmentTypeCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
         <EntityType Name="Mission">
           <Key>
             <PropertyRef Name="MissionId" />
@@ -188,6 +198,19 @@
           <Property Name="IsAssociate" Type="bit" Nullable="false" />
           <Property Name="MissionVariant" Type="nvarchar" MaxLength="255" />
           <Property Name="Notes" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Organisation">
+          <Key>
+            <PropertyRef Name="OrganisationId" />
+          </Key>
+          <Property Name="OrganisationId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Navy" Type="bit" Nullable="false" />
+          <Property Name="Army" Type="bit" Nullable="false" />
+          <Property Name="AirForce" Type="bit" Nullable="false" />
+          <Property Name="Marines" Type="bit" Nullable="false" />
+          <Property Name="Joint" Type="bit" Nullable="false" />
+          <Property Name="Rank" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Rank">
           <Key>
@@ -481,6 +504,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_GroundEquipment_GroundEquipment">
+          <End Role="GroundEquipmentType" Type="Self.GroundEquipmentType" Multiplicity="0..1" />
+          <End Role="GroundEquipment" Type="Self.GroundEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroundEquipmentType">
+              <PropertyRef Name="GroundEquipmentTypeCode" />
+            </Principal>
+            <Dependent Role="GroundEquipment">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_MissionUnit_Mission">
           <End Role="Mission" Type="Self.Mission" Multiplicity="1" />
           <End Role="MissionUnit" Type="Self.MissionUnit" Multiplicity="*" />
@@ -679,15 +714,17 @@
           <EntitySet Name="Aircraft" EntityType="Self.Aircraft" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AltCode" EntityType="Self.AltCode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Base" EntityType="Self.Base" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ConfigSettings" EntityType="Self.ConfigSettings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Configuerations" EntityType="Self.Configuerations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dictionary" EntityType="Self.Dictionary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Document" EntityType="Self.Document" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DocumentLink" EntityType="Self.DocumentLink" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DocumentReference" EntityType="Self.DocumentReference" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EquipmentOwner" EntityType="Self.EquipmentOwner" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GroundEquipment" EntityType="Self.GroundEquipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroundEquipmentType" EntityType="Self.GroundEquipmentType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Mission" EntityType="Self.Mission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MissionUnit" EntityType="Self.MissionUnit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Organisation" EntityType="Self.Organisation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rank" EntityType="Self.Rank" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Relationship" EntityType="Self.Relationship" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RelationshipType" EntityType="Self.RelationshipType" Schema="dbo" store:Type="Tables" />
@@ -734,6 +771,10 @@
           <AssociationSet Name="FK_EquipmentOwner_Unit" Association="Self.FK_EquipmentOwner_Unit">
             <End Role="Unit" EntitySet="Unit" />
             <End Role="EquipmentOwner" EntitySet="EquipmentOwner" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroundEquipment_GroundEquipment" Association="Self.FK_GroundEquipment_GroundEquipment">
+            <End Role="GroundEquipmentType" EntitySet="GroundEquipmentType" />
+            <End Role="GroundEquipment" EntitySet="GroundEquipment" />
           </AssociationSet>
           <AssociationSet Name="FK_MissionUnit_Mission" Association="Self.FK_MissionUnit_Mission">
             <End Role="Mission" EntitySet="Mission" />
@@ -913,7 +954,6 @@
             <End Role="ShipClass" EntitySet="ShipClasses" />
             <End Role="ShipClassMember" EntitySet="ShipClassMembers" />
           </AssociationSet>
-          <EntitySet Name="ConfigSettings" EntityType="LiaisonModel.ConfigSetting" />
           <AssociationSet Name="FK_Base_Ship" Association="LiaisonModel.FK_Base_Ship">
             <End Role="Ship" EntitySet="Ships" />
             <End Role="Base" EntitySet="Bases" />
@@ -956,6 +996,13 @@
           <AssociationSet Name="FK_AdminCorpsUnits_Unit" Association="LiaisonModel.FK_AdminCorpsUnits_Unit">
             <End Role="Unit" EntitySet="Units" />
             <End Role="AdminCorpsUnit" EntitySet="AdminCorpsUnits" />
+          </AssociationSet>
+          <EntitySet Name="Configuerations" EntityType="LiaisonModel.Configueration" />
+          <EntitySet Name="GroundEquipmentTypes" EntityType="LiaisonModel.GroundEquipmentType" />
+          <EntitySet Name="Organisations" EntityType="LiaisonModel.Organisation" />
+          <AssociationSet Name="FK_GroundEquipment_GroundEquipment" Association="LiaisonModel.FK_GroundEquipment_GroundEquipment">
+            <End Role="GroundEquipmentType" EntitySet="GroundEquipmentTypes" />
+            <End Role="GroundEquipment" EntitySet="GroundEquipments" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="RelationshipType">
@@ -1451,13 +1498,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ConfigSetting">
-          <Key>
-            <PropertyRef Name="ConfigSetting1" />
-          </Key>
-          <Property Name="ConfigSetting1" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="ConfigValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
         <Association Name="FK_Base_Ship">
           <End Type="LiaisonModel.Ship" Role="Ship" Multiplicity="0..1" />
           <End Type="LiaisonModel.Base" Role="Base" Multiplicity="*" />
@@ -1569,6 +1609,7 @@
           <NavigationProperty Name="EquipmentOwners" Relationship="LiaisonModel.FK_EquipmentOwner_GroundEquipment" FromRole="GroundEquipment" ToRole="EquipmentOwner" />
           <Property Name="PrintName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GroundEquipmentType" Relationship="LiaisonModel.FK_GroundEquipment_GroundEquipment" FromRole="GroundEquipment" ToRole="GroundEquipmentType" />
         </EntityType>
         <Association Name="FK_EquipmentOwner_GroundEquipment">
           <End Type="LiaisonModel.GroundEquipment" Role="GroundEquipment" Multiplicity="0..1" />
@@ -1698,6 +1739,47 @@
             </Principal>
             <Dependent Role="AdminCorpsUnit">
               <PropertyRef Name="UnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Configueration">
+          <Key>
+            <PropertyRef Name="ConfigSetting" />
+            <PropertyRef Name="ConfigValue" />
+          </Key>
+          <Property Name="ConfigSetting" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ConfigValue" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="GroundEquipmentType">
+          <Key>
+            <PropertyRef Name="GroundEquipmentTypeCode" />
+          </Key>
+          <Property Name="GroundEquipmentTypeCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GroundEquipments" Relationship="LiaisonModel.FK_GroundEquipment_GroundEquipment" FromRole="GroundEquipmentType" ToRole="GroundEquipment" />
+        </EntityType>
+        <EntityType Name="Organisation">
+          <Key>
+            <PropertyRef Name="OrganisationId" />
+          </Key>
+          <Property Name="OrganisationId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Navy" Type="Boolean" Nullable="false" />
+          <Property Name="Army" Type="Boolean" Nullable="false" />
+          <Property Name="AirForce" Type="Boolean" Nullable="false" />
+          <Property Name="Marines" Type="Boolean" Nullable="false" />
+          <Property Name="Joint" Type="Boolean" Nullable="false" />
+          <Property Name="Rank" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_GroundEquipment_GroundEquipment">
+          <End Type="LiaisonModel.GroundEquipmentType" Role="GroundEquipmentType" Multiplicity="0..1" />
+          <End Type="LiaisonModel.GroundEquipment" Role="GroundEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroundEquipmentType">
+              <PropertyRef Name="GroundEquipmentTypeCode" />
+            </Principal>
+            <Dependent Role="GroundEquipment">
+              <PropertyRef Name="Type" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1956,14 +2038,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ConfigSettings">
-            <EntityTypeMapping TypeName="LiaisonModel.ConfigSetting">
-              <MappingFragment StoreEntitySet="ConfigSettings">
-                <ScalarProperty Name="ConfigValue" ColumnName="ConfigValue" />
-                <ScalarProperty Name="ConfigSetting1" ColumnName="ConfigSetting" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="AltCodes">
             <EntityTypeMapping TypeName="LiaisonModel.AltCode">
               <MappingFragment StoreEntitySet="AltCode">
@@ -2105,6 +2179,36 @@
                 <ScalarProperty Name="Translation1" ColumnName="Translation" />
                 <ScalarProperty Name="English" ColumnName="English" />
                 <ScalarProperty Name="TranslationId" ColumnName="TranslationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Configuerations">
+            <EntityTypeMapping TypeName="LiaisonModel.Configueration">
+              <MappingFragment StoreEntitySet="Configuerations">
+                <ScalarProperty Name="ConfigValue" ColumnName="ConfigValue" />
+                <ScalarProperty Name="ConfigSetting" ColumnName="ConfigSetting" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroundEquipmentTypes">
+            <EntityTypeMapping TypeName="LiaisonModel.GroundEquipmentType">
+              <MappingFragment StoreEntitySet="GroundEquipmentType">
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="GroundEquipmentTypeCode" ColumnName="GroundEquipmentTypeCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Organisations">
+            <EntityTypeMapping TypeName="LiaisonModel.Organisation">
+              <MappingFragment StoreEntitySet="Organisation">
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+                <ScalarProperty Name="Joint" ColumnName="Joint" />
+                <ScalarProperty Name="Marines" ColumnName="Marines" />
+                <ScalarProperty Name="AirForce" ColumnName="AirForce" />
+                <ScalarProperty Name="Army" ColumnName="Army" />
+                <ScalarProperty Name="Navy" ColumnName="Navy" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="OrganisationId" ColumnName="OrganisationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

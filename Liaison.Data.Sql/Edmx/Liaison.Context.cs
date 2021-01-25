@@ -42,7 +42,6 @@ namespace Liaison.Data.Sql.Edmx
         public virtual DbSet<Ship> Ships { get; set; }
         public virtual DbSet<ShipClassMember> ShipClassMembers { get; set; }
         public virtual DbSet<ShipClass> ShipClasses { get; set; }
-        public virtual DbSet<ConfigSetting> ConfigSettings { get; set; }
         public virtual DbSet<AltCode> AltCodes { get; set; }
         public virtual DbSet<Dictionary> Dictionaries { get; set; }
         public virtual DbSet<Aircraft> Aircraft { get; set; }
@@ -54,5 +53,8 @@ namespace Liaison.Data.Sql.Edmx
         public virtual DbSet<DocumentLink> DocumentLinks { get; set; }
         public virtual DbSet<DocumentReference> DocumentReferences { get; set; }
         public virtual DbSet<Translation> Translations { get; set; }
+        public virtual DbSet<Configueration> Configuerations { get; set; }
+        public virtual DbSet<GroundEquipmentType> GroundEquipmentTypes { get; set; }
+        public virtual DbSet<Organisation> Organisations { get; set; }
     }
 }

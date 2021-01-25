@@ -36,5 +36,6 @@ namespace Liaison.Data.Sql.Edmx
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EquipmentOwner> EquipmentOwners { get; set; }
+        public virtual GroundEquipmentType GroundEquipmentType { get; set; }
     }
 }

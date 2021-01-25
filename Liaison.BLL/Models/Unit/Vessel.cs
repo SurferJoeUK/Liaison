@@ -13,6 +13,7 @@ namespace Liaison.BLL.Models.Unit
 	public class Vessel : AUnit, IUnit
     {
         public DateTime? DecommissioningDate { get; set; }
+        public DateTime? CommissionDate { get; set; }
         public string HasBecome { get; set; }
         public string WasPreviously { get; set; }
         public string GetAdminCorps()
@@ -41,6 +42,7 @@ namespace Liaison.BLL.Models.Unit
             this.Relationships = new BLLRelationships(sqlUnit.UnitId, relt);
             this.UnitObject = sqlUnit.UnitObject;
             this.Decommissioned = sqlUnit.Decommissioned ?? false;
+
             if (string.IsNullOrWhiteSpace(sqlUnit.UnitObject))
             {
                 Liaison.Data.Sql.GetStuff.SetUnitObject(sqlUnit.UnitId, this.GetType().ToString());
@@ -50,8 +52,8 @@ namespace Liaison.BLL.Models.Unit
             if (sqlUnit.Ships != null && sqlUnit.Ships.Count() > 0)
             {
                 Ship ship = sqlUnit.Ships.First();
-                this.Prefix = ship.ShipPrefix.ShipPrefix1;
-                this.ShipName = ship.Name;
+                this.Prefix = ship.ShipPrefix.ShipPrefix1;                
+                    this.ShipName = ship.Name;
                 this.HCS = new HCS(ship.HCS, ship.HCSNumber, HCS.HCSType.HCS);
                 this.PennantNumber = new HCS(ship.PennantCode, ship.PennantNumber, HCS.HCSType.Pennant);
                 if (ship.IsNow != null)
@@ -59,12 +61,12 @@ namespace Liaison.BLL.Models.Unit
                     Ship hasbecome = ship.IsNow;
                     this.HasBecome = " -->-- " + hasbecome.ShipPrefix.ShipPrefix1 + " " + hasbecome.Name + " (" + hasbecome.PennantCode + " " + hasbecome.PennantNumber + ")";
                 }
-                if (ship.UsedToBe.Count>0)
+                if (ship.UsedToBe.Count > 0)
                 {
                     Ship waspreviously = ship.UsedToBe.First();
                     this.WasPreviously = " ex " + waspreviously.ShipPrefix.ShipPrefix1 + " " + waspreviously.Name + " (" + waspreviously.PennantCode + " " + waspreviously.PennantNumber + ")";
                 }
-                
+
 
                 if (ship.ShipClassMembers.Any())
                 {
@@ -75,8 +77,9 @@ namespace Liaison.BLL.Models.Unit
                     this.ShipClass = new VesselClass(ship.ShipClassMembers.First().ShipClass, ship.ShipClassMembers.First().IsLeadBoat);
                 }
 
-                if (ship.Decommissioned < DateTime.Now)
-                { this.DecommissioningDate = ship.Decommissioned; }
+                this.DecommissioningDate = ship.Decommissioned;
+                this.CommissionDate = ship.Commissioned;
+
             }
         }
 
@@ -105,13 +108,37 @@ namespace Liaison.BLL.Models.Unit
           StringBuilder sb = new StringBuilder();
 
             var unitDecom = IsDecommissioned();
-            var shipDecom = DecommissioningDate != null && DecommissioningDate < DateTime.Now;
+            //var shipDecom = DecommissioningDate != null && DecommissioningDate < DateTime.Now;
 
-            if (unitDecom ^ shipDecom)
+            if (this.CommissionDate == null)
+            {
+                sb.Append("ccc ");
+            }
+
+
+            bool useprefix = true;
+
+            if (this.CommissionDate != null && this.CommissionDate.Value > DateTime.Now)
+            {
+                sb.Append("PCU ");
+                useprefix = false;
+            }
+            if (this.DecommissioningDate != null && this.DecommissioningDate.Value < DateTime.Now)
             {
                 sb.Append("ex-");
+                //useprefix = false;
             }
-            sb.Append(this.Prefix+" ");
+            
+
+
+            //if (unitDecom ^ shipDecom)
+            //{
+            //    sb.Append("ex-");
+            //}
+            if (useprefix)
+            {
+                sb.Append(this.Prefix + " ");
+            }
             sb.Append(this.ShipName);
             sb.Append(" (" + this.HCS.ToStringy() + " / " + this.PennantNumber.ToStringy() + ")");
             if (!string.IsNullOrWhiteSpace(this.WasPreviously))

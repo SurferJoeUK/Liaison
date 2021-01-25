@@ -1,5 +1,5 @@
 
-begin tran tran1
+--begin tran tran1
 
 use Liaison 
 go
@@ -13,20 +13,15 @@ declare @missionid int
 declare @hcs nvarchar(255)
 declare @missionname nvarchar(10)
 set @shipPrefix = 'HMS'
-set @pennantcode = 'D'
-set @hcs = 'DDGH'
-set @shipclassId=18
-set @missionid=107
+set @pennantcode = 'G'
+set @hcs = 'LCS'
+set @shipclassId=24
+set @missionid=109
 insert @listOfIDs(id) values
-(95371)
-,(95372)
-,(95373)
-,(95374)
-,(95375)
-,(95376)
-,(95378)
---,(103345)
---,(103346)
+(106593)
+,(106594)
+,(106595)
+,(106596)
 --,(103347)
 --,(103348)
 --,(103349)
@@ -35,7 +30,7 @@ insert @listOfIDs(id) values
 
 
 
-set @shipprefixid = (select ShipPrefixId from ShipPrefix where ShipPrefix.ShipPrefix = @shipPrefix)
+--set @shipprefixid = (select ShipPrefixId from ShipPrefix where ShipPrefix.ShipPrefix = @shipPrefix)
 
 --select @shipprefixid
 ---------------------------------------------
@@ -52,44 +47,44 @@ set @shipprefixid = (select ShipPrefixId from ShipPrefix where ShipPrefix.ShipPr
 
 --select * from ship where UnitId in (select id from @listOfIDs) order by unitid
 ------------------------------------------
-insert into ShipClassMember (ShipId, ShipClassId, IsLeadBoat)
-select ShipId, @ShipClassId, 0 from Ship where unitid in (select id from @listofIds)
+--insert into ShipClassMember (ShipId, ShipClassId, IsLeadBoat)
+--select ShipId, @ShipClassId, 0 from Ship where unitid in (select id from @listofIds)
 
 
-select * from shipclassmember where shipid in (select shipid from ship where unitid in (select id from @listofIds))
+--select * from shipclassmember where shipid in (select shipid from ship where unitid in (select id from @listofIds))
 
 --------------------------------------------- 
 
 
-insert into MissionUnit (MissionId, UnitId, IsAssociate)
-select @missionid, id, 0 from  @listofIds
+--insert into MissionUnit (MissionId, UnitId, IsAssociate)
+--select @missionid, id, 0 from  @listofIds
 
-select * from missionunit where unitid in (select id from @listOfIDs)
+--select * from missionunit where unitid in (select id from @listOfIDs)
 
 ----------------------------------------------
 
 	
-	select id, (select missionname from unit where unitid= id) as missionname  
-	into #tmpIdMissionname
+	select id, (select number from unit where unitid= id) as missionname  
+	into #tmpIdMissionname4
 	from @listOfIDs
 
 
 	insert into UnitIndex (IndexCode, UnitId, IsSortIndex, IsDisplayIndex, IsAlt, IsPlaceholder, DisplayOrder)
 	--select '#'+missionname, id, 1,1, 0,0,10
-	select '#DD'+' ' +[dbo].[udfGetOnlyNumericAndUS](missionname), id, 1,1, 0,0,10
-	from #tmpIdMissionname
+	select '#LCS'+'-___' +[dbo].[udfGetOnlyNumericAndUS](missionname), id, 1,1, 0,0,10
+	from #tmpIdMissionname4
 	
 	insert into UnitIndex (IndexCode, UnitId, IsSortIndex, IsDisplayIndex, IsAlt, IsPlaceholder, DisplayOrder)
-	select '@'+@pennantcode+' ' +[dbo].[udfGetOnlyNumericAndUS](missionname),	id, 0,1,0,0,40
-	from #tmpIdMissionname
+	select '@'+@pennantcode+' ___' +[dbo].[udfGetOnlyNumericAndUS](missionname),	id, 0,1,0,0,40
+	from #tmpIdMissionname4
 
 		insert into UnitIndex (IndexCode, UnitId, IsSortIndex, IsDisplayIndex, IsAlt, IsPlaceholder, DisplayOrder)
-	select '@DDGH-'+[dbo].[udfGetOnlyNumericAndUS](missionname),	id, 0,1,0,0,41
-	from #tmpIdMissionname
+	select '@LCS-___'+[dbo].[udfGetOnlyNumericAndUS](missionname),	id, 0,1,0,0,41
+	from #tmpIdMissionname4
 
 			insert into UnitIndex (IndexCode, UnitId, IsSortIndex, IsDisplayIndex, IsAlt, IsPlaceholder, DisplayOrder)
-	select '~USN '+ missionname,										id, 0, 1,1,0,50
-	from #tmpIdMissionname
+	select '~USN ___'+ [dbo].[udfGetOnlyNumericAndUS](missionname),						id, 0, 1,1,0,50
+	from #tmpIdMissionname4
 
 
 
@@ -99,4 +94,4 @@ select * from unitindex where   unitid in (select id from @listOfIDs)
 
 
 
-rollback tran tran1
+--rollback tran tran1

@@ -110,9 +110,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AzureSql", "AzureSql", "{60
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Liaison.Import.SqlToMongo", "Liaison.Import.SqlToMongo\Liaison.Import.SqlToMongo.csproj", "{0FF14781-44F0-44DE-90B9-ADA384FDC994}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Liaison.Web.AspTS", "Liaison.Web.AspTS\Liaison.Web.AspTS.csproj", "{C0EA6CA6-1BB1-4E85-8113-3CC303881F10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Liaison.Web.AspTS", "Liaison.Web.AspTS\Liaison.Web.AspTS.csproj", "{C0EA6CA6-1BB1-4E85-8113-3CC303881F10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Liaison.Data.SqlEFCore", "Liaison.Data.SqlEFCore\Liaison.Data.SqlEFCore.csproj", "{2D037AA1-9734-4278-BC4D-A030D68F128F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Liaison.Data.SqlEFCore", "Liaison.Data.SqlEFCore\Liaison.Data.SqlEFCore.csproj", "{2D037AA1-9734-4278-BC4D-A030D68F128F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Liaison.Beta.Reconfiger2", "Liaison.Beta.Reconfiger2\Liaison.Beta.Reconfiger2.csproj", "{46E12D5A-8016-44AA-A061-CDDEFED78C50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -196,6 +198,10 @@ Global
 		{2D037AA1-9734-4278-BC4D-A030D68F128F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D037AA1-9734-4278-BC4D-A030D68F128F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D037AA1-9734-4278-BC4D-A030D68F128F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46E12D5A-8016-44AA-A061-CDDEFED78C50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46E12D5A-8016-44AA-A061-CDDEFED78C50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46E12D5A-8016-44AA-A061-CDDEFED78C50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46E12D5A-8016-44AA-A061-CDDEFED78C50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -229,6 +235,7 @@ Global
 		{0FF14781-44F0-44DE-90B9-ADA384FDC994} = {A34BFAB8-B690-45A1-B949-A75FD40A2B08}
 		{C0EA6CA6-1BB1-4E85-8113-3CC303881F10} = {AAFC93AB-7FE4-4535-9C92-EAFCE1FF4924}
 		{2D037AA1-9734-4278-BC4D-A030D68F128F} = {5F781E03-5666-4609-8C01-10E24EFBD94A}
+		{46E12D5A-8016-44AA-A061-CDDEFED78C50} = {7A679C8A-6C66-454D-839F-C9F751699C85}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4066C976-993D-4F44-90C6-36C10CCD72B3}

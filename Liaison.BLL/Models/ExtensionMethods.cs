@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Liaison.BLL.Models.Equipment;
 using Liaison.BLL.Models.Unit;
 using Liaison.BLL.Models.Unit.Interfaces;
@@ -36,8 +37,8 @@ namespace Liaison.BLL.Models
 
             return (int) input.Value;
         }
-        public static List<IEquipment> ToEquipmentList(this ICollection<Liaison.Data.Sql.Edmx.EquipmentOwner> eolist)
-        {
+        public static List<IEquipment> ToEquipmentList(this ICollection<EquipmentOwner> eolist)
+        {          
             var returnable = new List<IEquipment>();
             foreach (var eo in eolist)
             {
@@ -46,6 +47,22 @@ namespace Liaison.BLL.Models
                     returnable.Add(new BLLAircraft(eo));
                 }
                 if (eo.GroundEquipment!=null)
+                {
+                    returnable.Add(new BLLGroundEquipment(eo));
+                }
+            }
+            return returnable;
+        }
+        public static List<IEquipment> ToEquipmentList(this IOrderedEnumerable<EquipmentOwner> eolist)
+        {
+            var returnable = new List<IEquipment>();
+            foreach (var eo in eolist)
+            {
+                if (eo.Aircraft != null)
+                {
+                    returnable.Add(new BLLAircraft(eo));
+                }
+                if (eo.GroundEquipment != null)
                 {
                     returnable.Add(new BLLGroundEquipment(eo));
                 }

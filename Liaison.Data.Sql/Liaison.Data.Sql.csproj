@@ -68,7 +68,7 @@
     <Compile Include="Edmx\Base.cs">
       <DependentUpon>Liaison.tt</DependentUpon>
     </Compile>
-    <Compile Include="Edmx\ConfigSetting.cs">
+    <Compile Include="Edmx\Configueration.cs">
       <DependentUpon>Liaison.tt</DependentUpon>
     </Compile>
     <Compile Include="Edmx\Dictionary.cs">
@@ -87,6 +87,9 @@
       <DependentUpon>Liaison.tt</DependentUpon>
     </Compile>
     <Compile Include="Edmx\GroundEquipment.cs">
+      <DependentUpon>Liaison.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edmx\GroundEquipmentType.cs">
       <DependentUpon>Liaison.tt</DependentUpon>
     </Compile>
     <Compile Include="Edmx\Liaison.Context.cs">
@@ -108,6 +111,9 @@
       <DependentUpon>Liaison.tt</DependentUpon>
     </Compile>
     <Compile Include="Edmx\MissionUnit.cs">
+      <DependentUpon>Liaison.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Edmx\Organisation.cs">
       <DependentUpon>Liaison.tt</DependentUpon>
     </Compile>
     <Compile Include="Edmx\Rank.cs">

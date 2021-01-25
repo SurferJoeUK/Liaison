@@ -1202,5 +1202,27 @@ namespace Liaison.BLL.Translators
 
             return r.Value;
         }
+
+        public void GetConfigs()
+        {
+            using (var le = new LiaisonEntities())
+            {
+                List<KeyValuePair<string, string>> dict = Liaison.Data.Sql.GetStuff.GetConfigSettingsValues(le);
+
+                foreach   (var d in dict)
+                {
+                    var config = new Configueration
+                    {
+                        ConfigSetting = d.Key,
+                        ConfigValue = d.Value
+                    };
+                    le.Configuerations.Add(config);
+                    le.SaveChanges();
+                }
+
+                //return dict;
+                                 }
+
+        }
     }
 }

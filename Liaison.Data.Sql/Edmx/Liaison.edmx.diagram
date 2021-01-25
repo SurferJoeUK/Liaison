@@ -41,7 +41,6 @@
         <EntityTypeShape EntityType="LiaisonModel.ShipClass" Width="1.5" PointX="11.125" PointY="18.5" />
         <AssociationConnector Association="LiaisonModel.FK_ShipClass_Mod" />
         <AssociationConnector Association="LiaisonModel.FK_ShipClassMember_ShipClass" />
-        <EntityTypeShape EntityType="LiaisonModel.ConfigSetting" Width="1.5" PointX="14.125" PointY="10.625" />
         <AssociationConnector Association="LiaisonModel.FK_Base_Ship" />
         <EntityTypeShape EntityType="LiaisonModel.AltCode" Width="1.5" PointX="12.375" PointY="0.75" />
         <EntityTypeShape EntityType="LiaisonModel.Dictionary" Width="1.5" PointX="7.875" PointY="1.25" />
@@ -61,6 +60,10 @@
         <EntityTypeShape EntityType="LiaisonModel.Translation" Width="1.5" PointX="16.375" PointY="0.75" />
         <AssociationConnector Association="LiaisonModel.FK_AdminCorpsUnits_AdminCorps" />
         <AssociationConnector Association="LiaisonModel.FK_AdminCorpsUnits_Unit" />
+        <EntityTypeShape EntityType="LiaisonModel.Configueration" Width="1.5" PointX="15.875" PointY="10.625" />
+        <EntityTypeShape EntityType="LiaisonModel.GroundEquipmentType" Width="1.5" PointX="5.625" PointY="29.5" />
+        <EntityTypeShape EntityType="LiaisonModel.Organisation" Width="1.5" PointX="15.875" PointY="17.625" />
+        <AssociationConnector Association="LiaisonModel.FK_GroundEquipment_GroundEquipment" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
