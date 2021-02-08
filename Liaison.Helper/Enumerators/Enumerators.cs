@@ -69,6 +69,7 @@ namespace Liaison.Helper.Enumerators
 
     public enum AdminCorps
     {
+        AllAdminRegiments = 41398,
         //G/CA/AVN
         DGArmyAviation = 80,
         ArmyAirCorps = 1195,

@@ -24,7 +24,7 @@ namespace Liaison.BLL.Models.Unit
             this.RankSymbol = sqlUnit.RankSymbol.ToCharArray()[0];
             this.Equipment = sqlUnit.EquipmentOwners.ToEquipmentList();
             this.Decommissioned = sqlUnit.Decommissioned ?? false;
-
+            this.AdminCorps = new BLLAdminCorps(sqlUnit.AdminCorp, this.UnitId);
             this.Mission = new BllMissions(sqlUnit.MissionUnits);
             this.Base = new BLLBase(sqlUnit.Bases.FirstOrDefault());
             this.Indices = sqlUnit.UnitIndexes.OrderBy(x => x.DisplayOrder).Where(x => x.IsDisplayIndex).Select(x => x.IndexCode).ToList();
@@ -52,6 +52,11 @@ namespace Liaison.BLL.Models.Unit
             sb.Append(" "+this.MissionName);
             sb.Append(" Squadron");
             //sb.Append(", RN");
+
+            if (!string.IsNullOrWhiteSpace(this.AdminCorps?.Code))
+            {
+                sb.Append(ResourceStrings.Seperator + this.AdminCorps.UnitDisplayName);
+            }
             return sb.ToString();
         }
 

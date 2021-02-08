@@ -450,6 +450,11 @@ namespace Liaison.BLL.Translators
                     {
                         return new NavalGroup(sqlUnit);
                     }
+
+                    if (sqlUnit.AdminCorp?.Code == "FAA" || sqlUnit.AdminCorp?.Code == "NAv")
+                    {
+                        return new AirGroup(sqlUnit); //, includeParent);
+                    }
                     return new Flotilla(sqlUnit);
                 }
 
@@ -548,10 +553,11 @@ namespace Liaison.BLL.Translators
                         return new AirWing(sqlUnit);
                     }
                     if (sqlUnit.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.RoyalMarineLogistics ||
+                        sqlUnit.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.AllAdminRegiments ||
                         sqlUnit.AdminCorp.ParentAdminCorpsId == (int)Helper.Enumerators.AdminCorps.RoyalMarineLogistics ||
                         sqlUnit.AdminCorp.ParentAdminCorpsId == (int)Helper.Enumerators.AdminCorps.RoyalMarinesReserveLogistics||
                         sqlUnit.AdminCorp.ParentAdminCorpsId == (int)Helper.Enumerators.AdminCorps.RoyalMarineArtillery ||
-                        sqlUnit.AdminCorp.ParentAdminCorpsId == (int)Helper.Enumerators.AdminCorps.RoyalMarineLightInfantry
+                        sqlUnit.AdminCorp.ParentAdminCorpsId == (int)Helper.Enumerators.AdminCorps.RoyalMarineLightInfantry 
                     )
                     {
                         return new Regiment(sqlUnit);
@@ -575,7 +581,7 @@ namespace Liaison.BLL.Translators
                         return new JointGroup(sqlUnit);
                     }
 
-                    throw new Exception("Marine Corps not processed");
+                    throw new Exception("Marine Corps not processed + AdminCorps Id: " + sqlUnit.AdminCorp.AdminCorpsId);
                 }
             }
             else if (sqlUnit.RankSymbol == "@")

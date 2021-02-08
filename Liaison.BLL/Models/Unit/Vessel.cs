@@ -16,6 +16,7 @@ namespace Liaison.BLL.Models.Unit
         public DateTime? CommissionDate { get; set; }
         public string HasBecome { get; set; }
         public string WasPreviously { get; set; }
+        public string Notes { get; set; }
         public string GetAdminCorps()
         {
             return "";
@@ -37,16 +38,18 @@ namespace Liaison.BLL.Models.Unit
 
             var relMain = sqlUnit.RelationshipsFrom.ToList();
             var relt = sqlUnit.RelationshipsTo.ToList();
-
+        
             relMain.AddRange(relt);
+
+            this.Notes = sqlUnit.Notes;
             this.Relationships = new BLLRelationships(sqlUnit.UnitId, relt);
             this.UnitObject = sqlUnit.UnitObject;
-            this.Decommissioned = sqlUnit.Decommissioned ?? false;
 
             if (string.IsNullOrWhiteSpace(sqlUnit.UnitObject))
             {
                 Liaison.Data.Sql.GetStuff.SetUnitObject(sqlUnit.UnitId, this.GetType().ToString());
             }
+            this.Decommissioned = sqlUnit.Decommissioned ?? false;
 
 
             if (sqlUnit.Ships != null && sqlUnit.Ships.Count() > 0)
@@ -112,7 +115,7 @@ namespace Liaison.BLL.Models.Unit
 
             if (this.CommissionDate == null)
             {
-                sb.Append("ccc ");
+                sb.Append("plnd ");
             }
 
 
@@ -140,6 +143,10 @@ namespace Liaison.BLL.Models.Unit
                 sb.Append(this.Prefix + " ");
             }
             sb.Append(this.ShipName);
+            if (!string.IsNullOrWhiteSpace(this.Notes))
+            {
+                sb.Append(" <i>" + this.Notes + "</i> ");
+            }
             sb.Append(" (" + this.HCS.ToStringy() + " / " + this.PennantNumber.ToStringy() + ")");
             if (!string.IsNullOrWhiteSpace(this.WasPreviously))
             {
