@@ -288,10 +288,10 @@ namespace Liaison.BLL.Models.Unit.Abstracts
 
 
                             var x = (HigherHqType)rt.RelationshipType.RelationshipTypeId;
-                            //var relSix1 = rt.Unit.GetParents(unit.GetId(), x);
-                            //var relSix2 = relSix1.Where(r =>
-                            //    r.RelationshipType.RelationshipTypeId == (int) HigherHqType.ADCON);
-                            //var relSix3 = relSix2.Select(r => r.Unit.GetName());
+                            var relSix1 = rt.Unit.GetParents(unit.GetId(), x);
+                            var relSix2 = relSix1.Where(r =>
+                                r.RelationshipType.RelationshipTypeId == (int)HigherHqType.ADCON);
+                            var relSix3 = relSix2.Select(r => r.Unit.GetName());
 
 
                             List<string> relSix = rt.Unit.GetParents(unit.GetId(), x)

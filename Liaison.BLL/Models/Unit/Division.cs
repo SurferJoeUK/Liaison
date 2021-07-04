@@ -132,10 +132,12 @@ namespace Liaison.BLL.Models.Unit
                 this.AdminCorps.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.DGSpecialForces ||
                 this.AdminCorps.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.CivilAffairsCommand ||
                 this.AdminCorps.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.EngineerInChief ||
+                this.AdminCorps.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.SignalCommands ||
                 this.AdminCorps.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.DGArmyIntelligence ||
                 this.AdminCorps.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.SignalCommands ||
                 this.AdminCorps.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.ArmySustainmentCommands ||
                 this.AdminCorps.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.ProvostMarshalGeneral ||
+                this.AdminCorps.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.MilitaryPoliceCommands ||
                 this.AdminCorps.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.ArmyLogistics ||
                 this.AdminCorps.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.ArmyMedicalServices ||
                 this.AdminCorps.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.ArmyTrainingCommands)

@@ -59,13 +59,29 @@ namespace Liaison.BLL.Models.Unit
             }
 
             //sb.Append("Naval ");
-            sb.Append(this.MissionName + " ");
+            if (this.ServiceType==ServiceTypeBLL.Reserve)
+            {
+                sb.Append("(R) ");
+            }
+            else if (this.ServiceType==ServiceTypeBLL.Volunteer)
+            {
+                sb.Append("(Aux.) ");
+            }
+            else if (this.ServiceType==ServiceTypeBLL.Expeditionary)
+            {
+                sb.Append("(Exp.) ");
+            }
+            
             if (this.Service == ServicesBll.AirForce)
             {
-                if (!string.IsNullOrWhiteSpace(this.CommandName))
+                if (!string.IsNullOrWhiteSpace(this.MissionName))
                 {
-                    sb.Append("(" + this.CommandName + ") Group");
+                    sb.Append("(" + this.MissionName + ") ");
                 }
+            }
+            else if (this.Service==ServicesBll.Marines)
+            {
+                sb.Append(this.MissionName + " ");
             }
             else if (this.Service == ServicesBll.Navy)
             {

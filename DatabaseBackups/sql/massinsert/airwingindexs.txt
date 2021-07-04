@@ -10,7 +10,7 @@ declare @oss int
 declare @amxs int 
 declare @mos int 
 declare @mxs int
-declare @emxs int
+declare @EMs int
 declare @ces int
 declare @coms int
 declare @cons int
@@ -26,7 +26,7 @@ set @oss =5833
 set @amxs = 5821
 set @mos = 5823
 set @mxs = 5824
-set @emxs = 5825
+set @EMs = 5825
 set @ces =5831
 set @coms = 5830
 set @cons = 5829
@@ -45,7 +45,7 @@ values
 , (Concat('AIR@AMX',@spacer,@number), @amxs, 0,1,1,0, 50)
 --, (Concat('AIR@MO',@spacer,@number), @mos, 0,1,1,0, 50)
 --, (Concat('AIR@MX',@spacer,@number), @mxs, 0,1,1,0, 50)
---, (Concat('AIR@EMX',@spacer,@number), @emxs, 0,1,1,0, 50)
+--, (Concat('AIR@EM',@spacer,@number), @EMs, 0,1,1,0, 50)
 --, (Concat('AIR@CE',@spacer,@number), @ces, 0,1,1,0, 50)
 --, (Concat('AIR@COM',@spacer,@number), @coms, 0,1,1,0, 50)
 --, (Concat('AIR@CON',@spacer,@number), @cons, 0,1,1,0, 50)

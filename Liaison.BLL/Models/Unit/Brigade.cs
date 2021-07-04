@@ -100,7 +100,7 @@ namespace Liaison.BLL.Models.Unit
             {
                 sb.Append(this.MissionName + " ");
             }
-            if (this.MissionName == "Troop")
+            if (this.MissionName == "Troop"|| this.MissionName == "Information Operations")
             {
                 sb.Append("Command");
             }

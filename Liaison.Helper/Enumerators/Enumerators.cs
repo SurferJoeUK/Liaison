@@ -115,6 +115,7 @@ namespace Liaison.Helper.Enumerators
 
         //G/CSSA/AGS/PMG
         ProvostMarshalGeneral = 1207,
+        MilitaryPoliceCommands= 73432,
 
         //G/CSSA/LOG
         ArmyLogistics = 118,

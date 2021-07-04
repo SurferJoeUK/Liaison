@@ -141,7 +141,20 @@ namespace Liaison.BLL.Models.Unit
                 || this.AdminCorps?.AdminCorpsId == (int) Helper.Enumerators.AdminCorps.SpecialAirService)
             {
                 sb.Append(this.Number.ToOrdinal(this.UseOrdinal) + " ");
+                
                 sb.Append(this.UniqueName);
+                if (this.AdminCorps?.AdminCorpsId == (int)Helper.Enumerators.AdminCorps.SpecialAirService)
+                {
+                    if (this.ServiceType == ServiceTypeBLL.Reserve)
+                    {
+                        sb.Append(" (R)");
+                    }
+
+                    if (this.ServiceType == ServiceTypeBLL.Volunteer)
+                    {
+                        sb.Append(" (V) (" + this.TerritorialDesignation + ") ");
+                    }
+                }
                 isAcceptable = true;
             }
             else if (!string.IsNullOrWhiteSpace(this.UniqueName))

@@ -83,7 +83,7 @@ namespace Liaison.BLL.Models.Unit
         public string GetName()
         {
 
-            return this.MissionName;
+            return "(DIR) " + this.MissionName;
         }
 
         public string PrintTree()

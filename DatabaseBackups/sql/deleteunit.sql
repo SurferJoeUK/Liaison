@@ -4,13 +4,12 @@ use liaison
 
 declare  @unitid int
 set @unitid = 
-113592
---36715
---36716
---36717
---36718
---36719
---36720
+
+
+--136931
+--136932
+--136933
+137064
 
 delete FROM     Tennant WHERE  (UnitId = @unitid)
 

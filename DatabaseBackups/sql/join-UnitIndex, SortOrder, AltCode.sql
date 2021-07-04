@@ -7,7 +7,13 @@ set @airmod='AIR*'
 select IndexCodeListItem, SortOrderId, SearchTerm, SortOrderRank, Description, --Notes, 
 COALESCE(AltCodesBase.IndexCode10, AltCodesWing.IndexCode10, AltCodesSqn.IndexCode10, AltCodesFlt.IndexCode10) as IndexCode10,
 COALESCE(AltCodesBase.IndexCode20, AltCodesWing.IndexCode20, AltCodesSqn.IndexCode20, AltCodesFlt.IndexCode20) as IndexCode20,
-COALESCE(AltCodesBase.Name, AltCodesWing.Name, AltCodesSqn.Name, AltCodesFlt.Name) as Name
+COALESCE(AltCodesBase.Name, AltCodesWing.Name, AltCodesSqn.Name, AltCodesFlt.Name) as Name,
+case 
+	when IndexCodeListItem like 'AIR/%' then (CONCAT(COALESCE(AltCodesBase.IndexCode20, AltCodesWing.IndexCode20, AltCodesSqn.IndexCode20, AltCodesFlt.IndexCode20),'W')) 
+	when IndexCodeListItem like 'AIR@%' then (CONCAT(COALESCE(AltCodesBase.IndexCode20, AltCodesWing.IndexCode20, AltCodesSqn.IndexCode20, AltCodesFlt.IndexCode20),'S')) 
+	when IndexCodeListItem like 'AIR|%' then (CONCAT(COALESCE(AltCodesBase.IndexCode20, AltCodesWing.IndexCode20, AltCodesSqn.IndexCode20, AltCodesFlt.IndexCode20),'F')) 
+End as DictionaryLookup,
+Dict.Value as DictValue
 
 from (
 select 
@@ -51,6 +57,16 @@ select indexcode10, indexcode20, name from AltCode) AltCodesFlt
 
 on IC.IndexCodeListItem = 'AIR|'+AltCodesFlt.indexcode10
 
+full outer join
+(select [Key], [Value] from Dictionary) Dict on 
+case 
+	when IndexCodeListItem like 'AIR/%' then (CONCAT(COALESCE(AltCodesBase.IndexCode20, AltCodesWing.IndexCode20, AltCodesSqn.IndexCode20, AltCodesFlt.IndexCode20),'W')) 
+	when IndexCodeListItem like 'AIR@%' then (CONCAT(COALESCE(AltCodesBase.IndexCode20, AltCodesWing.IndexCode20, AltCodesSqn.IndexCode20, AltCodesFlt.IndexCode20),'S')) 
+	when IndexCodeListItem like 'AIR|%' then (CONCAT(COALESCE(AltCodesBase.IndexCode20, AltCodesWing.IndexCode20, AltCodesSqn.IndexCode20, AltCodesFlt.IndexCode20),'F')) 
+End = Dict.[Key]
 
---where IndexCodeListItem is not null and SortOrderId is not null
+
+where IndexCodeListItem is not null 
+--and SortOrderId is not null
+
 order by IndexCodeListItem

@@ -143,6 +143,7 @@
     <Compile Include="Models\Unit\NumberedFleet.cs" />
     <Compile Include="Models\Unit\Abstracts\OneBar.cs" />
     <Compile Include="Models\Unit\Abstracts\OneStar.cs" />
+    <Compile Include="Models\Unit\OperatingLocation.cs" />
     <Compile Include="Models\Unit\Platoon.cs" />
     <Compile Include="Models\Unit\Regiment.cs" />
     <Compile Include="Models\Unit\TacticalAirForce.cs" />

@@ -111,7 +111,13 @@ namespace Liaison.BLL.Models.Unit
 				this.RankLevel = ThreeBlobTab;
 				this.RankStar = ThreeBlob;
 			}
-			else if (this.CommandName.EndsWith("Coy."))
+            else if (this.CommandName.Contains("Sqn.") &&
+                this.CommandName.Contains("SAS")) //&& this.CommandName.Contains("Bn.")
+            {
+                this.RankLevel = ThreeBlobTab;
+                this.RankStar = ThreeBlob;
+            }
+            else if (this.CommandName.EndsWith("Coy."))
 			{
 				this.RankLevel = ThreeBlobTab;
 				this.RankStar = ThreeBlob;

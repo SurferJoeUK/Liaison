@@ -798,6 +798,13 @@ namespace Liaison.BLL.Translators
                     return new Flight(sqlUnit);
                 }
             }
+            else if (sqlUnit.RankSymbol=="=")
+            {
+                if (sqlUnit.ServiceIdx==(int)Helper.Enumerators.ServicesBll.AirForce)
+                {
+                    return new OperatingLocation(sqlUnit);
+                }
+            }
             else if (sqlUnit.RankSymbol == "^")
             {
                 return new TaskForceBll(sqlUnit); //, includeParent);
@@ -826,13 +833,36 @@ namespace Liaison.BLL.Translators
 
                     var lookupcode = newThing.MissionCode.StartsWith("A:") ? "A" : newThing.MissionCode;
 
+                    var activesuffix = "RAF";
+                    var reservesuffix = "RAFR";
+                    var auxsuffix = "RAuxAF";
+                    string componentdesignator = "";
+
+                    string thissuffix;
+                    switch (Int32.Parse(newThing.ServiceType))
+                    {
+                        case (int)Helper.Enumerators.ServiceTypeBLL.Reserve:
+                            thissuffix = reservesuffix;
+                            componentdesignator = " (R)";
+                            break;
+                        case (int)Helper.Enumerators.ServiceTypeBLL.Volunteer:
+                            thissuffix = auxsuffix;
+                            componentdesignator = " (V)";
+                            break;
+                        default:
+                            thissuffix = activesuffix;
+                            componentdesignator = "";
+                            break;
+                    }
+
+
 
                     var lookup = x.Code == "OPS" ? lookupcode : x.Code;
                     if (lookup == "MXD") { lookup = "FLY"; }
 
-                    var wingAdminActive = le.AdminCorps.First(a => a.Lookup == lookup && a.UnitDisplayName == "RAF") ?? throw new ArgumentNullException("le.AdminCorps.Where(a => a.Code == x.Code).First() a.UnitDisplayName == RAF");
-                    var wingAdminReserve = le.AdminCorps.First(a => a.Lookup == lookup && a.UnitDisplayName == "RAFR") ?? throw new ArgumentNullException("le.AdminCorps.Where(a => a.Code == x.Code).First()  a.UnitDisplayName == RAFR");
-                    var wingAdminAux = le.AdminCorps.First(a => a.Lookup == lookup && a.UnitDisplayName == "RAuxAF") ?? throw new ArgumentNullException("le.AdminCorps.Where(a => a.Code == x.Code).First()  a.UnitDisplayName == RAuxAF");
+                    var wingAdminActive = le.AdminCorps.First(a => a.Lookup == lookup && a.UnitDisplayName == activesuffix) ?? throw new ArgumentNullException("le.AdminCorps.Where(a => a.Code == x.Code).First() a.UnitDisplayName == RAF");
+                    var wingAdminReserve = le.AdminCorps.First(a => a.Lookup == lookup && a.UnitDisplayName == reservesuffix) ?? throw new ArgumentNullException("le.AdminCorps.Where(a => a.Code == x.Code).First()  a.UnitDisplayName == RAFR");
+                    var wingAdminAux = le.AdminCorps.First(a => a.Lookup == lookup && a.UnitDisplayName == auxsuffix) ?? throw new ArgumentNullException("le.AdminCorps.Where(a => a.Code == x.Code).First()  a.UnitDisplayName == RAuxAF");
 
 
                     var unit = new Unit
@@ -890,7 +920,7 @@ namespace Liaison.BLL.Translators
 
                     unitIndex = new UnitIndex
                     {
-                        IndexCode = under + " " + x.Code + "W/RAF",
+                        IndexCode = under + " " + x.Code + "W/"+ thissuffix,
                         UnitId = unit.UnitId,
                         IsSortIndex = false,
                         IsDisplayIndex = true,
@@ -901,7 +931,7 @@ namespace Liaison.BLL.Translators
                     le.SaveChanges();
 
                     unitIndex = new UnitIndex();
-                    unitIndex.IndexCode = under+ " "+GetLongCode(unitindices, x.Code + "W") + ", RAF";
+                    unitIndex.IndexCode = under + componentdesignator + " " + GetLongCode(unitindices, x.Code + "W") + ", " + thissuffix;
                     unitIndex.UnitId = unit.UnitId;
                     unitIndex.IsSortIndex = false;
                     unitIndex.IsDisplayIndex = true;
@@ -995,7 +1025,11 @@ namespace Liaison.BLL.Translators
 
                         if (missionSqn == null)
                         {
-                            throw new Exception("no mission: x.Code: " + usecode + ", newthing: " + newThing.MissionCode);
+                            missionSqn = le.Missions.FirstOrDefault(m => m.Structure.EndsWith(":" + usecode + ":@"));
+                            if (missionSqn == null)
+                            {
+                                throw new Exception("no mission: x.Code: " + usecode + ", newthing: " + newThing.MissionCode);
+                            }
                         }
 
                         MissionUnit mu = new MissionUnit();
@@ -1016,7 +1050,7 @@ namespace Liaison.BLL.Translators
                         le.SaveChanges();
 
                         var uiSqn2 = new UnitIndex();
-                        uiSqn2.IndexCode = under + " " + y.Code + "S/RAF";
+                        uiSqn2.IndexCode = under + " " + y.Code + "S/"+thissuffix;
                         uiSqn2.UnitId = sqn.UnitId;
                         uiSqn2.IsSortIndex = false;
                         uiSqn2.IsDisplayIndex = true;
@@ -1029,7 +1063,7 @@ namespace Liaison.BLL.Translators
                         if (!excludes.Contains(y.Code))
                         {
                             var uiSqn2A = new UnitIndex();
-                            uiSqn2A.IndexCode = under + " " + GetLongCode(unitindices, y.Code + "S") + ", RAF";
+                            uiSqn2A.IndexCode = under +componentdesignator+" " + GetLongCode(unitindices, y.Code + "S") + ", " + thissuffix;
                             uiSqn2A.UnitId = sqn.UnitId;
                             uiSqn2A.IsSortIndex = false;
                             uiSqn2A.IsDisplayIndex = true;
@@ -1050,7 +1084,7 @@ namespace Liaison.BLL.Translators
                         le.SaveChanges();
 
                         var rel = new Relationship();
-                        rel.RelTypeIdx = (int) Helper.Enumerators.RelationshipTypeBll.Organic;
+                        rel.RelTypeIdx = (int) Helper.Enumerators.RelationshipTypeBll.Assigned;
                         rel.RelationshipGuid = Guid.NewGuid();
                         rel.RelationshipsFrom = unit;
                         rel.RelationshipsTo = sqn;
@@ -1083,6 +1117,14 @@ namespace Liaison.BLL.Translators
                             le.Units.Add(rgtflt);
                             le.SaveChanges();
 
+                            Mission missionRgtFlt = le.Missions.FirstOrDefault(m => m.Structure.EndsWith(usecode + ":" + "FP:" + newThing.MissionCode + ":|"));
+                            MissionUnit muRgtFlt = new MissionUnit();
+                            muRgtFlt.MissionId = missionRgtFlt.MissionId;
+                            muRgtFlt.UnitId = rgtflt.UnitId;
+                            muRgtFlt.IsAssociate = false;
+                            le.MissionUnits.Add(muRgtFlt);
+                            le.SaveChanges();
+
                             var uiRgtFlt = new UnitIndex();
                             uiRgtFlt.IndexCode = "RAFRGT|" + under;
                             uiRgtFlt.UnitId = rgtflt.UnitId;
@@ -1094,7 +1136,7 @@ namespace Liaison.BLL.Translators
                             le.SaveChanges();
 
                             var uiRgtFlt2 = new UnitIndex();
-                            uiRgtFlt2.IndexCode = under + " FLT., RAF RGT.";
+                            uiRgtFlt2.IndexCode = under + " FLT., " + thissuffix + " RGT.";
                             uiRgtFlt2.UnitId = uiRgtFlt.UnitId;
                             uiRgtFlt2.IsSortIndex = false;
                             uiRgtFlt2.IsDisplayIndex = true;
@@ -1105,7 +1147,7 @@ namespace Liaison.BLL.Translators
 
                             var relRgtFlt = new Relationship();
                             relRgtFlt.RelationshipGuid = Guid.NewGuid();
-                            relRgtFlt.RelTypeIdx = (int) Helper.Enumerators.RelationshipTypeBll.Organic;
+                            relRgtFlt.RelTypeIdx = (int) Helper.Enumerators.RelationshipTypeBll.Assigned;
                             relRgtFlt.RelFromUnitId = sqn.UnitId;
                             relRgtFlt.RelToUnitId = rgtflt.UnitId;
                             le.Relationships.Add(relRgtFlt);
@@ -1135,6 +1177,14 @@ namespace Liaison.BLL.Translators
                             le.Units.Add(polflt);
                             le.SaveChanges();
 
+                            Mission missionPoliceFlt = le.Missions.FirstOrDefault(m => m.Structure.EndsWith(usecode + ":" + "POL:" + newThing.MissionCode + ":|"));
+                            MissionUnit muPolFlt = new MissionUnit();
+                            muPolFlt.MissionId = missionPoliceFlt.MissionId;
+                            muPolFlt.UnitId = polflt.UnitId;
+                            muPolFlt.IsAssociate = false;
+                            le.MissionUnits.Add(muPolFlt);
+                            le.SaveChanges();
+
                             var uiPolFlt = new UnitIndex();
                             uiPolFlt.IndexCode = "RAFP|" + under;
                             uiPolFlt.UnitId = polflt.UnitId;
@@ -1142,21 +1192,23 @@ namespace Liaison.BLL.Translators
                             uiPolFlt.IsDisplayIndex = true;
                             uiPolFlt.IsAlt = false;
                             le.UnitIndexes.Add(uiPolFlt);
+                            uiRgtFlt.DisplayOrder = 10;
                             le.SaveChanges();
 
                             var uiPolFlt2 = new UnitIndex();
-                            uiPolFlt2.IndexCode = under + " FLT., RAFP";
+                            uiPolFlt2.IndexCode = under + " FLT., " + thissuffix + "P";
                             uiPolFlt2.UnitId = polflt.UnitId;
                             uiPolFlt2.IsSortIndex = false;
                             uiPolFlt2.IsDisplayIndex = true;
                             uiPolFlt2.IsAlt = false;
+                            uiRgtFlt2.DisplayOrder = 20;
                             le.UnitIndexes.Add(uiPolFlt2);
                             le.SaveChanges();
 
                             var relPolFlt = new Relationship
                             {
                                 RelationshipGuid = Guid.NewGuid(),
-                                RelTypeIdx = (int)Helper.Enumerators.RelationshipTypeBll.Organic,
+                                RelTypeIdx = (int)Helper.Enumerators.RelationshipTypeBll.Assigned,
                                 RelFromUnitId = sqn.UnitId,
                                 RelToUnitId = polflt.UnitId
                             };

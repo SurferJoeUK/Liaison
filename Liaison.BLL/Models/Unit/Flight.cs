@@ -136,7 +136,11 @@ namespace Liaison.BLL.Models.Unit
             }
             else
             {
-                if (this.MissionName != null)
+                if (this.MissionName == null)
+                {
+                    sb.Append("Flt.");
+                }
+                else
                 {
                     if (!this.MissionName.EndsWith("Clinic"))
                     {
